@@ -14,48 +14,78 @@ use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
 use rocket::{Data, Outcome::*, Request};
 use std::io::Read;
-use crate::hello::bindings::SayHelloSoapEnvelope;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
 
-mod hello;
+mod weather;
 
-struct PostStr{ }
-
-struct Action1<'a> {
-    pub contents: &'a str,
+struct PostStr {
+    pub action: GetCityForecastByZIP,
 }
 
-impl<'a> Action1<'a> {
-    pub fn new(contents: &str) -> Result<hello::types::HelloRequest, String> {
-        let envelope: Result<SayHelloSoapEnvelope, std::string::String> = from_str(&contents);
+struct GetCityForecastByZIP {
+    pub parameters: weather::types::GetCityForecastByZIP,
+}
+
+impl GetCityForecastByZIP {
+    pub fn new(contents: &str) -> Result<Self, String> {
+        let envelope: Result<weather::bindings::GetCityForecastByZIPSoapInSoapEnvelope, std::string::String> = from_str(&contents);
         match envelope {
             Err(e) => Err(e),
-            Ok(v) => Ok(v.body.body.parameters.hello_request)
+            Ok(v) => Ok(GetCityForecastByZIP{parameters: v.body.body.parameters})
         }
     }
-}
 
-impl PostStr {
-    fn response(self) -> String{
-        let response = hello::bindings::SayHelloResponseSoapEnvelope {
+    fn wrap_response(&self, contents: weather::types::GetCityForecastByZIPResponse)
+    -> weather::bindings::GetCityForecastByZIPSoapOutSoapEnvelope {
+        weather::bindings::GetCityForecastByZIPSoapOutSoapEnvelope {
             tnsattr: None,
             urnattr: None,
             xsiattr: None,
             header: None,
-            encoding_style: "utf-8".to_string(),
-            body: hello::bindings::SoapSayHelloResponse{
-                body: hello::messages::SayHelloResponse{
-                    parameters: hello::types::SayHelloResponse{
-                        hello_response: hello::types::HelloResponse{
-                            message: "Finallyyyyyy!".to_string()
-                        }
-                    }
+            encoding_style: weather::SOAP_ENCODING.to_string(),
+            body: weather::bindings::SoapGetCityForecastByZIPSoapOut{
+                body: weather::messages::GetCityForecastByZIPSoapOut{
+                    parameters: contents,
                 },
                 fault: None,
             }
-        };
-        to_string(&response).expect("aaa")
+        }
+    }
+
+    pub fn execute(&self) -> Result<String, String> {
+        println!("{:?}", self.parameters.zip);
+
+        let response = self.wrap_response(weather::types::GetCityForecastByZIPResponse {
+            get_city_forecast_by_zip_result: Some(weather::types::ForecastReturn {
+                city: Some("Geneva".to_string()),
+                forecast_result: Some(weather::types::ArrayOfForecast {
+                    forecast: vec!(weather::types::Forecast{
+                        date: "today".to_string(),
+                        desciption: Some("Long description".to_string()),
+                        probability_of_precipiation: weather::types::Pop {
+                            nighttime: Some("95%".to_string()),
+                            daytime: Some("45%".to_string())
+                        },
+                        weather_id: 42,
+                        temperatures: weather::types::Temp {
+                            daytime_high: Some("12".to_string()),
+                            morning_low: Some("34".to_string())},
+                    })
+                }),
+                response_text: Some("All good".to_string()),
+                state: Some("Arizona".to_string()),
+                success: true,
+                weather_station_city: Some("Milan".to_string())
+            }),
+        });
+        to_string(&response)
+    }
+}
+
+impl PostStr {
+    fn response(&self) -> Result<String, String>{
+        self.action.execute()
     }
 }
 
@@ -74,10 +104,10 @@ impl FromDataSimple for PostStr {
             Err(e) => return Failure((Status::BadRequest, e.to_string())),
         };
 
-        let action1 = Action1::new(&contents);
-        match action1 {
-            Ok(v) => println!("{}", v.name),
-            Err(e) => {},
+        let action = GetCityForecastByZIP::new(&contents);
+        match action {
+            Ok(v) => Success(PostStr{action: v}),
+            Err(e) => Failure((Status::BadRequest, e.to_string())),
         }
 
         // let action = req.headers().get("soapaction").collect::<String>();
@@ -99,14 +129,14 @@ impl FromDataSimple for PostStr {
             // return Failure((Status::InternalServerError, format!("{:?}", e)));
         // }
 
-        Success(PostStr {})
+        // Success(PostStr {})
     }
 }
 
 #[post("/hello", format = "text/xml", data = "<input>")]
 fn server_post(input: PostStr) -> String {
     // println!("{}", input.contents);
-    input.response()
+    input.response().expect("aaaa")
 }
 
 fn main() {
