@@ -9,98 +9,22 @@ extern crate yaserde;
 extern crate yaserde_derive;
 extern crate gps_lib;
 
+mod action;
+mod create_card;
 
 use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
 use rocket::{Data, Outcome::*, Request};
 use std::io::Read;
-use yaserde::de::from_str;
-use yaserde::ser::to_string;
 
-fn extract_action_name(action: &str) -> Result<&str, String> {
-    let ns = "http://www.globalprocessing.ae/HyperionWeb";
-    let re = format!("^\"{}/(\\w+)\"$", ns);
-    let re = regex::Regex::new(&re[..]).unwrap();
-    match re.captures(action) {
-        None => Err(format!("{} is not a valid action", action)),
-        Some(caps) => Ok(caps.get(1).unwrap().as_str()),
-    }
-}
+use action::Action;
+use create_card::CreateCard;
 
-pub trait Action {
-    fn new(contents: &str) -> Result<Self, String> where Self: Sized;
-    fn execute(&self) -> Result<String, String>;
-}
 
 struct PostStr {
-    pub action: Box<dyn Action>,
+    pub action: Box<dyn action::Action>,
 }
 
-struct CreateCard {
-    pub parameters: gps_lib::types::WsCreateCard,
-}
-
-impl CreateCard { 
-    fn wrap_response(
-        &self,
-        contents: gps_lib::types::WsCreateCardResponse,
-    ) -> gps_lib::bindings::WsCreateCardSoapOutSoapEnvelope {
-        gps_lib::bindings::WsCreateCardSoapOutSoapEnvelope {
-            tnsattr: None,
-            urnattr: None,
-            xsiattr: None,
-            header: None,
-            encoding_style: gps_lib::SOAP_ENCODING.to_string(),
-            body: gps_lib::bindings::SoapWsCreateCardSoapOut {
-                body: gps_lib::messages::WsCreateCardSoapOut {
-                    parameters: contents,
-                },
-                fault: None,
-            },
-        }
-    }
-}
-
-impl Action for CreateCard {
-    fn new(contents: &str) -> Result<Self, String> {
-        let envelope: Result<gps_lib::bindings::WsCreateCardSoapInSoapEnvelope, std::string::String> =
-            from_str(&contents);
-        match envelope {
-            Err(e) => Err(e),
-            Ok(v) => Ok(CreateCard {
-                parameters: v.body.body.parameters,
-            }),
-        }
-    }
-
-    fn execute(&self) -> Result<String, String> {
-        println!("{:?}", self.parameters);
-
-        let response = self.wrap_response(gps_lib::types::WsCreateCardResponse {
-            ws_create_card_result: gps_lib::types::VirtualCards {
-                wsid: self.parameters.wsid,
-                iss_code: Some("CRCD".to_string()),
-                txn_code: Some("15?".to_string()),
-                public_token: Some("000000001".to_string()),
-                external_ref: Some("External ref".to_string()),
-                loc_date: Some("2020-11-21".to_string()),
-                loc_time: Some("21:41".to_string()),
-                item_id: 1,
-                client_code: Some("Client code".to_string()),
-                sys_date: Some("2020 11 21".to_string()),
-                action_code: Some("000".to_string()),
-                load_value: 0.00,
-                is_live: false,
-                start_date: Some("2020".to_string()),
-                exp_date: Some("2028".to_string()),
-                cvv: Some("123".to_string()),
-                masked_pan: Some("123-456-789-456".to_string()),
-                image: None,
-            },
-        });
-        to_string(&response)
-    }
-}
 
 impl PostStr {
     fn response(&self) -> Result<String, String> {
@@ -156,7 +80,7 @@ impl FromDataSimple for PostStr {
         };
 
         println!("Action: {}", action);
-        match extract_action_name(action) {
+        match action::extract_name(action) {
             Ok("Ws_CreateCard") => {
                 match CreateCard::new(&contents) {
                     Ok(v) => Success(PostStr { action: Box::new(v) }),
@@ -171,7 +95,6 @@ impl FromDataSimple for PostStr {
 
 #[post("/hello", format = "text/xml", data = "<input>")]
 fn server_post(input: PostStr) -> String {
-    // println!("{}", input.contents);
     input.response().expect("aaaa")
 }
 
