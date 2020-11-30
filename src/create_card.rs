@@ -1,7 +1,13 @@
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
+use rusty_money::{money, Money, Currency};
+use rusty_money::Iso::*;
+use std::sync::atomic::Ordering;
+use chrono::prelude::*;
+use rand::Rng;
 
-use crate::action::Action;
+use crate::types;
+use crate::action;
 
 
 pub struct CreateCard {
@@ -29,43 +35,73 @@ impl CreateCard {
     }
 }
 
-impl Action for CreateCard {
-    fn new(contents: &str) -> Result<Self, String> {
+impl action::Action for CreateCard {
+    fn new(contents: &str) -> Result<Self, types::GpsError> {
         let envelope: Result<gps_lib::bindings::WsCreateCardSoapInSoapEnvelope, std::string::String> =
             from_str(&contents);
         match envelope {
-            Err(e) => Err(e),
+            Err(e) => Err(types::GpsError::RequestData(e)),
             Ok(v) => Ok(CreateCard {
                 parameters: v.body.body.parameters,
             }),
         }
     }
 
-    fn execute(&self) -> Result<String, String> {
+    fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         println!("{:?}", self.parameters);
+        let parameters = &self.parameters;
+        let public_token = state.next_public_token.fetch_add(1, Ordering::SeqCst);
+        let public_token = public_token.to_string();
+            
+        // TODO: Currencies are usually taken from products, so we will not have proper currency support until
+        // we implement product support. For now, if a currency is not specified, we assume EUR.
+        let currency = Currency::find(parameters.cur_code.as_ref().map_or("EUR", |x|{x.as_str()}))?;
+
+        let mut rng = rand::thread_rng();
+        let card = types::Card {
+            wsid: parameters.wsid,
+            public_token: public_token,
+            external_ref: parameters.external_ref.clone(),
+            start_date: Utc::now(), 
+            exp_date: Utc::now(),
+            balance: money!(0, EUR),
+            currency: currency,
+            is_live: false,
+            pan: format!("{:>016}",rng.gen_range(0, 9999_9999_9999_9999 + 1 as i64)),
+            cvv: format!("{:>03}", rng.gen_range(0, 999 + 1)),
+            stat_code: format!("0"),
+            transactions: vec![],
+        };
+        
 
         let response = self.wrap_response(gps_lib::types::WsCreateCardResponse {
             ws_create_card_result: gps_lib::types::VirtualCards {
-                wsid: self.parameters.wsid,
-                iss_code: Some("CRCD".to_string()),
-                txn_code: Some("15?".to_string()),
-                public_token: Some("000000001".to_string()),
-                external_ref: Some("External ref".to_string()),
+                wsid: parameters.wsid,
+                iss_code: parameters.iss_code.clone(),
+                txn_code: parameters.txn_code.clone(),
+                public_token: Some(card.public_token.clone()),
+                external_ref: card.external_ref.clone(),
                 loc_date: Some("2020-11-21".to_string()),
                 loc_time: Some("21:41".to_string()),
-                item_id: 1,
-                client_code: Some("Client code".to_string()),
+                item_id: 0, // TODO: Check what this is
+                client_code: parameters.client_code.clone(),
                 sys_date: Some("2020 11 21".to_string()),
                 action_code: Some("000".to_string()),
                 load_value: 0.00,
                 is_live: false,
                 start_date: Some("2020".to_string()),
                 exp_date: Some("2028".to_string()),
-                cvv: Some("123".to_string()),
-                masked_pan: Some("123-456-789-456".to_string()),
+                cvv: Some(card.cvv.clone()), 
+                masked_pan: Some(card.pan.clone()),
                 image: None,
             },
         });
-        to_string(&response)
+
+        state.public_tokens.write().expect("Public tokens lock poisoned").insert(card.public_token.clone(), card);
+
+        match to_string(&response) {
+            Err(e) => Err(types::GpsError::Serialization(e)),
+            Ok(v) => Ok(v),
+        }
     }
 }
