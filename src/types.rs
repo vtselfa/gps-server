@@ -30,6 +30,9 @@ pub enum GpsError {
 
     #[error(transparent)]
     MoneyError(#[from] rusty_money::MoneyError),
+
+    #[error("action code '{num:?}': {msg:?}")]
+    ActionCode{num: i32, msg: String},
 }
 
 
