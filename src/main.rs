@@ -11,9 +11,11 @@ extern crate gps_lib;
 extern crate chrono;
 extern crate rusty_money;
 extern crate thiserror;
+extern crate rust_decimal;
 
 mod action;
 mod create_card;
+mod balance_adjustment;
 mod types;
 
 use rocket::data::{self, FromDataSimple};
@@ -23,6 +25,7 @@ use std::io::Read;
 
 use action::Action;
 use create_card::CreateCard;
+use balance_adjustment::BalanceAdjustment;
 use types::GpsError;
 
 
@@ -37,7 +40,7 @@ impl PostStr {
 
     fn from_data_impl(req: &Request, data: Data) -> Result<Self, types::GpsError> {
         println!("{:?}", req.headers());
-        
+
         const MAX_SIZE: usize = 4096;
 
         match req.headers().get("Content-Length").next() {
@@ -73,6 +76,7 @@ impl PostStr {
 
         match action::extract_name(action)? {
             "Ws_CreateCard" => Ok(PostStr{action: Box::new(CreateCard::new(&contents)?)}),
+            "Ws_BalanceAdjustment" => Ok(PostStr{action: Box::new(BalanceAdjustment::new(&contents)?)}),
             _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
         }
     }
