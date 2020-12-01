@@ -1,9 +1,11 @@
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
-use rusty_money::{money, Money, Currency};
+use rusty_money::{Money, Currency};
 use std::sync::atomic::Ordering;
 use chrono::prelude::*;
 use rand::Rng;
+use rust_decimal::prelude::*;
+
 
 use crate::types;
 use crate::types::GpsError;
@@ -14,7 +16,7 @@ pub struct CreateCard {
     pub parameters: gps_lib::types::WsCreateCard,
 }
 
-impl CreateCard { 
+impl CreateCard {
     fn wrap_response(
         &self,
         contents: gps_lib::types::WsCreateCardResponse,
@@ -53,20 +55,28 @@ impl action::Action for CreateCard {
         let utc: DateTime<Utc> = Utc::now();
         let public_token = state.next_public_token.fetch_add(1, Ordering::SeqCst);
         let public_token = format!("{:>09}", public_token);
-            
+
         // TODO: Groups
-        
+
         // TODO: Currencies are usually taken from products, so we will not have proper currency support until
         // we implement product support. For now, if a currency is not specified, we assume EUR.
         let currency = Currency::find(parameters.cur_code.as_ref().map_or("EUR", |x|{x.as_str()}))?;
+
+        // TODO: Create a transaction in the card if a load amount is provided and record the
+        // item_id
+        let load_value = Decimal::from_str(&parameters.load_value.to_string())?;
+        if load_value.is_sign_negative() {
+            return Err(GpsError::ActionCode{num: 999, msg: format!("Negative load value")});
+        }
+
         let mut rng = rand::thread_rng();
         let card = types::Card {
             wsid: parameters.wsid,
             public_token: public_token,
             external_ref: parameters.external_ref.clone(),
-            start_date: utc, 
+            start_date: utc,
             exp_date: utc.with_year(utc.year() + 3).unwrap(), // TODO: Use provided expiration date if available
-            balance: money!(parameters.load_value, currency),
+            balance: Money::from_decimal(load_value, currency),
             currency: currency,
             is_live: match parameters.activate_now {
                 0 => false,
@@ -78,7 +88,7 @@ impl action::Action for CreateCard {
             stat_code: format!("0"),
             transactions: vec![],
         };
-        
+
         let response = self.wrap_response(gps_lib::types::WsCreateCardResponse {
             ws_create_card_result: gps_lib::types::VirtualCards {
                 wsid: parameters.wsid,
@@ -88,15 +98,15 @@ impl action::Action for CreateCard {
                 external_ref: card.external_ref.clone(),
                 loc_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
                 loc_time: Some(format!("{}", utc.format("%H%M%S"))),
-                item_id: 0, // TODO: Check what this is
+                item_id: 0, // TODO: transaction id for the load operation if we load the card
                 client_code: parameters.client_code.clone(),
                 sys_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
                 action_code: Some("000".to_string()),
-                load_value: format!("{}", card.balance),
+                load_value: format!("{}", card.balance.amount()),
                 is_live: card.is_live,
                 start_date: Some(format!("{}", card.start_date.format("%m/%y"))),
                 exp_date: Some(format!("{}", card.exp_date.format("%m/%y"))),
-                cvv: Some(card.cvv.clone()), 
+                cvv: Some(card.cvv.clone()),
                 masked_pan: Some(card.pan.clone()),
                 image: None,
             },
