@@ -1,7 +1,6 @@
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
 use rusty_money::{money, Money, Currency};
-use rusty_money::Iso::*;
 use std::sync::atomic::Ordering;
 use chrono::prelude::*;
 use rand::Rng;
@@ -55,10 +54,11 @@ impl action::Action for CreateCard {
         let public_token = state.next_public_token.fetch_add(1, Ordering::SeqCst);
         let public_token = format!("{:>09}", public_token);
             
+        // TODO: Groups
+        
         // TODO: Currencies are usually taken from products, so we will not have proper currency support until
         // we implement product support. For now, if a currency is not specified, we assume EUR.
         let currency = Currency::find(parameters.cur_code.as_ref().map_or("EUR", |x|{x.as_str()}))?;
-
         let mut rng = rand::thread_rng();
         let card = types::Card {
             wsid: parameters.wsid,
@@ -66,7 +66,7 @@ impl action::Action for CreateCard {
             external_ref: parameters.external_ref.clone(),
             start_date: utc, 
             exp_date: utc.with_year(utc.year() + 3).unwrap(), // TODO: Use provided expiration date if available
-            balance: money!(0, currency), // TODO: Use creation balance, if provided
+            balance: money!(parameters.load_value, currency),
             currency: currency,
             is_live: match parameters.activate_now {
                 0 => false,
