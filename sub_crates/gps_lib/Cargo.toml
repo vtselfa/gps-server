@@ -1,0 +1,15 @@
+[package]
+name = "gps_lib"
+version = "0.1.0"
+authors = ["Vicent Selfa <vtselfa@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde-xml-rs = "0.4.0"
+roxmltree = "^0.10.0"
+log = "^0.4.8"
+yaserde = "^0.4.2"
+yaserde_derive = "^0.4.2"
+xml-rs = "^0.8.0"
