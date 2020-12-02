@@ -16,6 +16,7 @@ extern crate rust_decimal;
 mod action;
 mod create_card;
 mod balance_adjustment;
+mod load;
 mod types;
 
 use rocket::data::{self, FromDataSimple};
@@ -26,6 +27,7 @@ use std::io::Read;
 use action::Action;
 use create_card::CreateCard;
 use balance_adjustment::BalanceAdjustment;
+use load::Load;
 use types::GpsError;
 
 
@@ -77,6 +79,7 @@ impl PostStr {
         match action::extract_name(action)? {
             "Ws_CreateCard" => Ok(PostStr{action: Box::new(CreateCard::new(&contents)?)}),
             "Ws_BalanceAdjustment" => Ok(PostStr{action: Box::new(BalanceAdjustment::new(&contents)?)}),
+            "Ws_Load" => Ok(PostStr{action: Box::new(Load::new(&contents)?)}),
             _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
         }
     }
