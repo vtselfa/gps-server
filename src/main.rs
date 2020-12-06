@@ -17,7 +17,9 @@ mod action;
 mod create_card;
 mod balance_adjustment;
 mod load;
+mod unload;
 mod types;
+mod utils;
 
 use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
@@ -28,6 +30,7 @@ use action::Action;
 use create_card::CreateCard;
 use balance_adjustment::BalanceAdjustment;
 use load::Load;
+use unload::Unload;
 use types::GpsError;
 
 
@@ -80,6 +83,7 @@ impl PostStr {
             "Ws_CreateCard" => Ok(PostStr{action: Box::new(CreateCard::new(&contents)?)}),
             "Ws_BalanceAdjustment" => Ok(PostStr{action: Box::new(BalanceAdjustment::new(&contents)?)}),
             "Ws_Load" => Ok(PostStr{action: Box::new(Load::new(&contents)?)}),
+            "Ws_Unload" => Ok(PostStr{action: Box::new(Unload::new(&contents)?)}),
             _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
         }
     }
