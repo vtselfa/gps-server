@@ -4674,9 +4674,9 @@ pub mod types {
         #[yaserde(rename = "ActionCode", prefix = "tns", default)]
         pub action_code: Option<String>,
         #[yaserde(rename = "AvlBal", prefix = "tns", default)]
-        pub avl_bal: f64,
+        pub avl_bal: String,
         #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
-        pub blk_amt: f64,
+        pub blk_amt: String,
         #[yaserde(rename = "ItemID", prefix = "tns", default)]
         pub item_id: i64,
         #[yaserde(rename = "CurCode", prefix = "tns", default)]
