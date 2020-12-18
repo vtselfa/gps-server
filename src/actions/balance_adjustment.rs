@@ -4,36 +4,19 @@ use rusty_money::{Money,Currency};
 use std::sync::atomic::Ordering;
 use chrono::prelude::*;
 use rust_decimal::prelude::*;
+use paste::paste;
 
 use crate::types;
 use crate::types::GpsError;
 use crate::action;
+use crate::impl_wrap_response;
 
 
 pub struct BalanceAdjustment {
     pub parameters: gps_lib::types::WsBalanceAdjustment,
 }
 
-impl BalanceAdjustment {
-    fn wrap_response(
-        &self,
-        contents: gps_lib::types::WsBalanceAdjustmentResponse,
-    ) -> gps_lib::bindings::WsBalanceAdjustmentSoapOutSoapEnvelope {
-        gps_lib::bindings::WsBalanceAdjustmentSoapOutSoapEnvelope {
-            tnsattr: None,
-            urnattr: None,
-            xsiattr: None,
-            header: None,
-            encoding_style: gps_lib::SOAP_ENCODING.to_string(),
-            body: gps_lib::bindings::SoapWsBalanceAdjustmentSoapOut {
-                body: gps_lib::messages::WsBalanceAdjustmentSoapOut {
-                    parameters: contents,
-                },
-                fault: None,
-            },
-        }
-    }
-}
+impl_wrap_response!(BalanceAdjustment);
 
 impl action::Action for BalanceAdjustment {
     fn new(contents: &str) -> Result<Self, types::GpsError> {

@@ -5,37 +5,20 @@ use std::sync::atomic::Ordering;
 use chrono::prelude::*;
 use rand::Rng;
 use rust_decimal::prelude::*;
+use paste::paste;
 
 
 use crate::types;
 use crate::types::GpsError;
 use crate::action;
+use crate::impl_wrap_response;
 
 
 pub struct CreateCard {
     pub parameters: gps_lib::types::WsCreateCard,
 }
 
-impl CreateCard {
-    fn wrap_response(
-        &self,
-        contents: gps_lib::types::WsCreateCardResponse,
-    ) -> gps_lib::bindings::WsCreateCardSoapOutSoapEnvelope {
-        gps_lib::bindings::WsCreateCardSoapOutSoapEnvelope {
-            tnsattr: None,
-            urnattr: None,
-            xsiattr: None,
-            header: None,
-            encoding_style: gps_lib::SOAP_ENCODING.to_string(),
-            body: gps_lib::bindings::SoapWsCreateCardSoapOut {
-                body: gps_lib::messages::WsCreateCardSoapOut {
-                    parameters: contents,
-                },
-                fault: None,
-            },
-        }
-    }
-}
+impl_wrap_response!(CreateCard);
 
 impl action::Action for CreateCard {
     fn new(contents: &str) -> Result<Self, types::GpsError> {

@@ -4,36 +4,19 @@ use rusty_money::{Money,Currency};
 use std::sync::atomic::Ordering;
 use chrono::prelude::*;
 use rust_decimal::prelude::*;
+use paste::paste;
 
 use crate::types;
 use crate::types::GpsError;
 use crate::action;
+use crate::impl_wrap_response;
 
 
 pub struct Load {
     pub parameters: gps_lib::types::WsLoad,
 }
 
-impl Load {
-    fn wrap_response(
-        &self,
-        contents: gps_lib::types::WsLoadResponse,
-    ) -> gps_lib::bindings::WsLoadSoapOutSoapEnvelope {
-        gps_lib::bindings::WsLoadSoapOutSoapEnvelope {
-            tnsattr: None,
-            urnattr: None,
-            xsiattr: None,
-            header: None,
-            encoding_style: gps_lib::SOAP_ENCODING.to_string(),
-            body: gps_lib::bindings::SoapWsLoadSoapOut {
-                body: gps_lib::messages::WsLoadSoapOut {
-                    parameters: contents,
-                },
-                fault: None,
-            },
-        }
-    }
-}
+impl_wrap_response!(Load);
 
 impl action::Action for Load {
     fn new(contents: &str) -> Result<Self, types::GpsError> {

@@ -22,20 +22,31 @@ pub fn extract_name(action: &str) -> Result<&str, types::GpsError> {
 #[macro_export]
 macro_rules! impl_wrap_response {
     ($name:ident) => {
+        crate::impl_wrap_response_internal!($name, $name);
+    };
+
+    // In case we don't want to use the GPS name for our struct
+    ($name:ident, $gps_name:ident) => {
+        crate::impl_wrap_response_internal!($name, $gps_name);
+    }
+}
+#[macro_export]
+macro_rules! impl_wrap_response_internal {
+    ($struct_name:ident, $gps_name:ident) => {
         paste! {
-            impl $name {
+            impl $struct_name {
                 fn wrap_response(
                     &self,
-                    contents: gps_lib::types::[<Ws $name Response>],
-                ) -> gps_lib::bindings::[<Ws $name SoapOutSoapEnvelope>] {
-                    gps_lib::bindings::[<Ws $name SoapOutSoapEnvelope>] {
+                    contents: gps_lib::types::[<Ws $gps_name Response>],
+                ) -> gps_lib::bindings::[<Ws $gps_name SoapOutSoapEnvelope>] {
+                    gps_lib::bindings::[<Ws $gps_name SoapOutSoapEnvelope>] {
                         tnsattr: None,
                         urnattr: None,
                         xsiattr: None,
                         header: None,
                         encoding_style: gps_lib::SOAP_ENCODING.to_string(),
-                        body: gps_lib::bindings::[<SoapWs $name SoapOut>] {
-                            body: gps_lib::messages::[<Ws $name SoapOut>] {
+                        body: gps_lib::bindings::[<SoapWs $gps_name SoapOut>] {
+                            body: gps_lib::messages::[<Ws $gps_name SoapOut>] {
                                 parameters: contents,
                             },
                             fault: None,

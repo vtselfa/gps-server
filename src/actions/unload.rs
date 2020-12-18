@@ -2,39 +2,21 @@ use yaserde::de::from_str;
 use yaserde::ser::to_string;
 use std::sync::atomic::Ordering;
 use chrono::prelude::*;
+use paste::paste;
 
 use crate::types;
 use crate::utils;
 use crate::get_mut_card;
 use crate::types::GpsError;
 use crate::action;
+use crate::impl_wrap_response;
 
 
 pub struct Unload {
     pub parameters: gps_lib::types::WsUnLoad,
 }
 
-impl Unload {
-    fn wrap_response(
-        &self,
-        contents: gps_lib::types::WsUnLoadResponse,
-    ) -> gps_lib::bindings::WsUnLoadSoapOutSoapEnvelope {
-        gps_lib::bindings::WsUnLoadSoapOutSoapEnvelope {
-            tnsattr: None,
-            urnattr: None,
-            xsiattr: None,
-            header: None,
-            encoding_style: gps_lib::SOAP_ENCODING.to_string(),
-            body: gps_lib::bindings::SoapWsUnLoadSoapOut {
-                body: gps_lib::messages::WsUnLoadSoapOut {
-                    parameters: contents,
-                },
-                fault: None,
-            },
-        }
-    }
-}
-
+impl_wrap_response!(Unload, UnLoad); // Our name is different than the GPS one
 
 impl action::Action for Unload {
     fn new(contents: &str) -> Result<Self, types::GpsError> {

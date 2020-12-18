@@ -1,5 +1,6 @@
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
+use paste::paste;
 
 use crate::types;
 use crate::utils;
@@ -8,7 +9,6 @@ use crate::impl_wrap_response;
 use crate::types::GpsError;
 use crate::action;
 
-use paste::paste;
 
 pub struct BalanceEnquiry {
     pub parameters: gps_lib::types::WsBalanceEnquiry,
