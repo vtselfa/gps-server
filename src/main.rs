@@ -20,6 +20,7 @@ mod load;
 mod unload;
 mod types;
 mod utils;
+mod actions;
 
 use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
@@ -31,6 +32,7 @@ use create_card::CreateCard;
 use balance_adjustment::BalanceAdjustment;
 use load::Load;
 use unload::Unload;
+use actions::balance_enquiry::BalanceEnquiry;
 use types::GpsError;
 
 
@@ -80,10 +82,11 @@ impl PostStr {
         println!("Action: {}", action);
 
         match action::extract_name(action)? {
-            "Ws_CreateCard" => Ok(PostStr{action: Box::new(CreateCard::new(&contents)?)}),
+            "Ws_CreateCard"        => Ok(PostStr{action: Box::new(CreateCard::new(&contents)?)}),
             "Ws_BalanceAdjustment" => Ok(PostStr{action: Box::new(BalanceAdjustment::new(&contents)?)}),
-            "Ws_Load" => Ok(PostStr{action: Box::new(Load::new(&contents)?)}),
-            "Ws_Unload" => Ok(PostStr{action: Box::new(Unload::new(&contents)?)}),
+            "Ws_Load"              => Ok(PostStr{action: Box::new(Load::new(&contents)?)}),
+            "Ws_Unload"            => Ok(PostStr{action: Box::new(Unload::new(&contents)?)}),
+            "Ws_Balance_Enquiry"   => Ok(PostStr{action: Box::new(BalanceEnquiry::new(&contents)?)}),
             _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
         }
     }

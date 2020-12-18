@@ -1,3 +1,4 @@
+use chrono::prelude::*;
 use rusty_money::{Money,Currency};
 use rust_decimal::prelude::*;
 
@@ -16,6 +17,21 @@ macro_rules! get_mut_card {
         // Get the card, with a write mutex
         let mut $cards_map = $state.public_tokens.write().expect("Poisoned write lock");
         let $card = $cards_map.get_mut($param.as_ref().unwrap()).ok_or(
+            GpsError::ActionCode{num: 999, msg: format!("Public token not found")})?;
+    };
+}
+
+// Given a Option<String> representing a public token and the global state, this macro declares two
+// variables: the first one contains the card (ref), the second one the map of public tokens to cards.
+#[macro_export]
+macro_rules! get_card {
+    ($param:expr, $state:expr, $card:ident, $cards_map:ident) => {
+        // Ensure the public_token passed as a parameter it's not None
+        $param.as_ref().ok_or(GpsError::ActionCode{num: 999, msg: format!("Missing public_token")})?;
+
+        // Get the card, with a read mutex
+        let mut $cards_map = $state.public_tokens.read().expect("Poisoned read lock");
+        let $card = $cards_map.get($param.as_ref().unwrap()).ok_or(
             GpsError::ActionCode{num: 999, msg: format!("Public token not found")})?;
     };
 }
@@ -41,4 +57,22 @@ pub fn get_amount(amount: &str, currency: &'static Currency) -> Result<Money, ty
         return Err(GpsError::ActionCode{num: 999, msg: format!("Unload amount has to be greater than zero")});
     }
     Ok(amount)
+}
+
+// Format the local date as GPS does
+pub fn sys_date() -> String {
+    let utc: DateTime<Utc> = Utc::now();
+    format!("{}", utc.format("%Y-%m-%d"))
+}
+
+// Format the local date as GPS does
+pub fn loc_date() -> String {
+    let utc: DateTime<Utc> = Utc::now();
+    format!("{}", utc.format("%Y-%m-%d"))
+}
+
+// Format the local time as GPS does
+pub fn loc_time() -> String {
+    let utc: DateTime<Utc> = Utc::now();
+    format!("{}", utc.format("%H%M%S"))
 }

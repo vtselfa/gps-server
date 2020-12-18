@@ -376,6 +376,7 @@ dependencies = [
  "gps_lib",
  "log 0.4.11",
  "log4rs",
+ "paste",
  "rand",
  "regex",
  "rocket",
