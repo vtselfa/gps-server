@@ -14,10 +14,6 @@ extern crate thiserror;
 extern crate rust_decimal;
 
 mod action;
-mod create_card;
-mod balance_adjustment;
-mod load;
-mod unload;
 mod types;
 mod utils;
 mod actions;
@@ -28,10 +24,10 @@ use rocket::{Data, Outcome::*, Request};
 use std::io::Read;
 
 use action::Action;
-use create_card::CreateCard;
-use balance_adjustment::BalanceAdjustment;
-use load::Load;
-use unload::Unload;
+use actions::create_card::CreateCard;
+use actions::balance_adjustment::BalanceAdjustment;
+use actions::load::Load;
+use actions::unload::Unload;
 use actions::balance_enquiry::BalanceEnquiry;
 use types::GpsError;
 
