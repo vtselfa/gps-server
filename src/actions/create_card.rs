@@ -9,6 +9,7 @@ use paste::paste;
 
 
 use crate::types;
+use crate::utils;
 use crate::types::GpsError;
 use crate::action;
 use crate::impl_wrap_response;
@@ -33,7 +34,6 @@ impl action::Action for CreateCard {
     }
 
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
-        println!("{:?}", self.parameters);
         let parameters = &self.parameters;
         let utc: DateTime<Utc> = Utc::now();
         let public_token = state.next_public_token.fetch_add(1, Ordering::SeqCst);
@@ -79,11 +79,11 @@ impl action::Action for CreateCard {
                 txn_code: parameters.txn_code.clone(),
                 public_token: Some(card.public_token.clone()),
                 external_ref: card.external_ref.clone(),
-                loc_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
-                loc_time: Some(format!("{}", utc.format("%H%M%S"))),
+                loc_date: Some(utils::loc_date()),
+                loc_time: Some(utils::loc_time()),
                 item_id: 0, // TODO: transaction id for the load operation if we load the card
                 client_code: parameters.client_code.clone(),
-                sys_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
+                sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
                 load_value: format!("{}", card.balance.amount()),
                 is_live: card.is_live,
