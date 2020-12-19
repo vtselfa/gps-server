@@ -1,15 +1,15 @@
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
-use rusty_money::{Money,Currency};
 use std::sync::atomic::Ordering;
 use chrono::prelude::*;
-use rust_decimal::prelude::*;
 use paste::paste;
 
 use crate::types;
 use crate::types::GpsError;
 use crate::action;
 use crate::impl_wrap_response;
+use crate::utils;
+use crate::get_mut_card;
 
 
 pub struct Load {
@@ -34,39 +34,9 @@ impl action::Action for Load {
         let parameters = &self.parameters;
         let utc: DateTime<Utc> = Utc::now();
 
-        // Get the public token
-        let public_token = match parameters.public_token.as_ref() {
-            None => return Err(GpsError::ActionCode{num: 999, msg: format!("Missing public_token")}), // TODO: support other ways to get the card
-            Some(v) => v,
-        };
-
-        // Get the card, with a write mutex
-        let mut public_tokens = state.public_tokens.write().expect("Poisoned read lock");
-        let card = match public_tokens.get_mut(public_token) {
-            None => return Err(GpsError::ActionCode{num: 999, msg: format!("Public token not found")}),
-            Some(card) => card,
-        };
-
-        // We do not support a load with a currency different than the one in the
-        // card. Not sure if GPS does.
-        match parameters.curr_code.as_ref().map(String::as_str) {
-            None => (),
-            Some(v) =>  {
-                let currency = Currency::find(v)?;
-                if currency != card.currency {
-                    return Err(GpsError::ActionCode{num: 999, msg: format!("Currency missmatch")});
-                }
-            }
-        };
-
-        // Get the amount as a string because that's what Money expects
-        // GPS expect the amount to be >= 0, so we too
-        let amount = parameters.load_value.to_string();
-        let amount = Decimal::from_str(&amount)?;
-        let amount = Money::from_decimal(amount, card.currency);
-        if amount.amount().is_sign_negative() || amount.amount().is_zero() {
-            return Err(GpsError::ActionCode{num: 999, msg: format!("Load amount has to be greater than zero")});
-        }
+        get_mut_card!(self.parameters.public_token, state, card, cards_map);
+        utils::check_currency(&parameters.curr_code, card)?;
+        let amount = utils::get_amount(&parameters.load_value.to_string(), &card.currency)?;
 
         // TODO: Use the tx_code to load or reload
         card.balance = card.balance.clone() + amount.clone();
@@ -89,12 +59,12 @@ impl action::Action for Load {
                 wsid: parameters.wsid,
                 iss_code: parameters.iss_code.clone(),
                 txn_code: parameters.txn_code.clone(),
-                public_token: Some(public_token.clone()),
-                loc_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
-                loc_time: Some(format!("{}", utc.format("%H%M%S"))),
+                public_token: Some(card.public_token.clone()),
+                loc_date: Some(utils::loc_date()),
+                loc_time: Some(utils::loc_time()),
                 item_id: transaction.item_id as i64, // GPS transaction ID, every time a different type...
                 client_code: parameters.client_code.clone(),
-                sys_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
+                sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
             },
         });
