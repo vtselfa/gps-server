@@ -66,10 +66,16 @@ impl action::Action for CreateCard {
                 1 => true,
                 _ => return Err(GpsError::ActionCode{num: 999, msg: format!("Invalid activate_now value")})  // Actually, GPS does not check this
             },
+            status: types::CardStatus::AllGood, // GPS returns this no matter if activated or not...
             pan: format!("{:>016}",rng.gen_range(0, 9999_9999_9999_9999 + 1 as i64)),
             cvv: format!("{:>03}", rng.gen_range(0, 999 + 1)),
             stat_code: format!("0"),
             transactions: vec![],
+            owner: types::Consumer {
+                title: parameters.title.unwrap_or(format!("")),
+                first_name: parameters.first_name.unwrap_or(format!("")),
+                last_name: parameters.last_name.unwrap_or(format!("")),
+            }
         };
 
         let response = self.wrap_response(gps_lib::types::WsCreateCardResponse {

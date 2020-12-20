@@ -48,6 +48,12 @@ pub struct State {
     pub transactions: RwLock<Vec<Transaction>>,
 }
 
+pub struct Consumer {
+    title: String,
+    first_name: String,
+    last_name: String,
+}
+
 pub struct Card {
     pub wsid: i64,
     pub public_token: String,
@@ -61,7 +67,26 @@ pub struct Card {
     pub cvv: String,
     pub stat_code: String, 
     pub transactions: Vec<Transaction>,
+    pub status: CardStatus,
+    pub owner: Consumer,
     // TODO: Groups
+}
+
+pub enum CardStatus {
+    AllGood = 0,
+    ReferToCardIssuer = 1, // Retired, do not use
+    NotYetActivated = 2, // GPS does not seem to use it. A card created without activating it is in AllGood. Classic GPS.
+    DoNotHonor = 5,
+    Lost = 41,
+    Stolen = 43,
+    Expired = 54,
+    Restricted = 62,
+    SecurityViolation = 63,
+    CardholderToContactIssuer = 70,
+    PinRetriesExceeded = 75,
+    Destroyed = 83,
+    Refunded = 98,
+    Voided = 99,
 }
 
 pub struct Transaction {
@@ -73,4 +98,38 @@ pub struct Transaction {
     pub fixed_fee: Option<Money>,
     pub rate_fee: Option<Money>,
     pub note: Option<String>,
+}
+
+impl Card {
+    pub fn get_start_date(&self) -> String {
+        format!("{}", self.start_date.format("%m/%Y"))
+    }
+
+    pub fn get_exp_date(&self) -> String {
+        format!("{}", self.exp_date.format("%Y-%m-%d"))
+    }
+
+    // The end date is the exp date in a different format
+    pub fn get_end_date(&self) -> String {
+        format!("{}", self.exp_date.format("%m/%Y"))
+    }
+
+    pub fn get_status_code(&self) -> String {
+        format!("{:01}", self.status as i32)
+    }
+
+    pub fn get_emboss_name(&self) -> String {
+        format!("{} {} {}", self.owner.title, self.owner.first_name, self.owner.last_name)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_status_code() {
+        let card: Card;
+        assert_eq!(card.get_status_code(), "00");
+    }
 }
