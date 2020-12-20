@@ -29,6 +29,7 @@ use actions::balance_adjustment::BalanceAdjustment;
 use actions::load::Load;
 use actions::unload::Unload;
 use actions::balance_enquiry::BalanceEnquiry;
+use actions::enquiry::Enquiry;
 use types::GpsError;
 
 
