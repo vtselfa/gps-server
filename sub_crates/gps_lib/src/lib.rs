@@ -23,7 +23,7 @@ pub struct Header {}
 #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
 #[yaserde(
     rename = "Fault",
-    namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+    namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
     prefix = "soapenv"
 )]
 pub struct SoapFault {
@@ -4860,9 +4860,9 @@ pub mod types {
         #[yaserde(rename = "EmbossName", prefix = "tns", default)]
         pub emboss_name: Option<String>,
         #[yaserde(rename = "AvlBal", prefix = "tns", default)]
-        pub avl_bal: f64,
+        pub avl_bal: String,
         #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
-        pub blk_amt: f64,
+        pub blk_amt: String,
         #[yaserde(rename = "CurCode", prefix = "tns", default)]
         pub cur_code: Option<String>,
         #[yaserde(rename = "ClientCode", prefix = "tns", default)]
@@ -5100,9 +5100,9 @@ pub mod types {
         #[yaserde(rename = "LocTime", prefix = "tns", default)]
         pub loc_time: Option<String>,
         #[yaserde(rename = "AvlBal", prefix = "tns", default)]
-        pub avl_bal: f64,
+        pub avl_bal: String,
         #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
-        pub blk_amt: f64,
+        pub blk_amt: String,
         #[yaserde(rename = "CurCode", prefix = "tns", default)]
         pub cur_code: Option<String>,
         #[yaserde(rename = "ClientCode", prefix = "tns", default)]
@@ -5325,9 +5325,9 @@ pub mod types {
         #[yaserde(rename = "LocTime", prefix = "tns", default)]
         pub loc_time: Option<String>,
         #[yaserde(rename = "AvlBal", prefix = "tns", default)]
-        pub avl_bal: f64,
+        pub avl_bal: String,
         #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
-        pub blk_amt: f64,
+        pub blk_amt: String,
         #[yaserde(rename = "CurCode", prefix = "tns", default)]
         pub cur_code: Option<String>,
         #[yaserde(rename = "ClientCode", prefix = "tns", default)]
@@ -13716,7 +13716,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingUpdateBankingEnabledCardSoapInSoapEnvelope {
@@ -13757,7 +13757,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingUpdateBankingEnabledCardSoapOutSoapEnvelope {
@@ -13798,7 +13798,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingStatusQueryBankingEnabledCardSoapInSoapEnvelope {
@@ -13839,7 +13839,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingStatusQueryBankingEnabledCardSoapOutSoapEnvelope {
@@ -13880,7 +13880,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingCreateCustomerSoapInSoapEnvelope {
@@ -13921,7 +13921,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingCreateCustomerSoapOutSoapEnvelope {
@@ -13962,7 +13962,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingRegisterNotificationSoapInSoapEnvelope {
@@ -14003,7 +14003,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingRegisterNotificationSoapOutSoapEnvelope {
@@ -14044,7 +14044,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingAccountModulusCheckSoapInSoapEnvelope {
@@ -14085,7 +14085,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingAccountModulusCheckSoapOutSoapEnvelope {
@@ -14129,7 +14129,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapInSoapEnvelope {
@@ -14173,7 +14173,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOutSoapEnvelope {
@@ -14214,7 +14214,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingCancelDirectDebitBankingEnabledCardSoapInSoapEnvelope {
@@ -14258,7 +14258,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingCancelDirectDebitBankingEnabledCardSoapOutSoapEnvelope {
@@ -14299,7 +14299,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingGetPendingDirectDebitsSoapInSoapEnvelope {
@@ -14340,7 +14340,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingGetPendingDirectDebitsSoapOutSoapEnvelope {
@@ -14381,7 +14381,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingCardStatementV2SoapInSoapEnvelope {
@@ -14422,7 +14422,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingCardStatementV2SoapOutSoapEnvelope {
@@ -14463,7 +14463,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsInsert3DSecureDetailsSoapInSoapEnvelope {
@@ -14504,7 +14504,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsInsert3DSecureDetailsSoapOutSoapEnvelope {
@@ -14545,7 +14545,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdate3DSecureDetailsSoapInSoapEnvelope {
@@ -14586,7 +14586,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdate3DSecureDetailsSoapOutSoapEnvelope {
@@ -14627,7 +14627,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdateLastModifiedTypeSoapInSoapEnvelope {
@@ -14668,7 +14668,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdateLastModifiedTypeSoapOutSoapEnvelope {
@@ -14709,7 +14709,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsDelete3DSecureDetailsSoapInSoapEnvelope {
@@ -14750,7 +14750,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsDelete3DSecureDetailsSoapOutSoapEnvelope {
@@ -14791,7 +14791,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsQuery3DSecureDetailsSoapInSoapEnvelope {
@@ -14832,7 +14832,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsQuery3DSecureDetailsSoapOutSoapEnvelope {
@@ -14873,7 +14873,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGPSLockUnlockSoapInSoapEnvelope {
@@ -14914,7 +14914,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGPSLockUnlockSoapOutSoapEnvelope {
@@ -14955,7 +14955,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsVerificationRequestSoapInSoapEnvelope {
@@ -14996,7 +14996,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsVerificationRequestSoapOutSoapEnvelope {
@@ -15037,7 +15037,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsAddUpDelCredentialsSoapInSoapEnvelope {
@@ -15078,7 +15078,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsAddUpDelCredentialsSoapOutSoapEnvelope {
@@ -15119,7 +15119,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct Ws3DSAddUpDelDetailsSoapInSoapEnvelope {
@@ -15160,7 +15160,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct Ws3DSAddUpDelDetailsSoapOutSoapEnvelope {
@@ -15201,7 +15201,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceUpdateSoapInSoapEnvelope {
@@ -15242,7 +15242,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceUpdateSoapOutSoapEnvelope {
@@ -15283,7 +15283,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPaymentTokenGetSoapInSoapEnvelope {
@@ -15324,7 +15324,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPaymentTokenGetSoapOutSoapEnvelope {
@@ -15365,7 +15365,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPaymentTokenStatusChangeSoapInSoapEnvelope {
@@ -15406,7 +15406,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPaymentTokenStatusChangeSoapOutSoapEnvelope {
@@ -15447,7 +15447,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsActivateSoapInSoapEnvelope {
@@ -15488,7 +15488,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsActivateSoapOutSoapEnvelope {
@@ -15529,7 +15529,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsLoadSoapInSoapEnvelope {
@@ -15570,7 +15570,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsLoadSoapOutSoapEnvelope {
@@ -15611,7 +15611,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUnLoadSoapInSoapEnvelope {
@@ -15652,7 +15652,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUnLoadSoapOutSoapEnvelope {
@@ -15693,7 +15693,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsStatusChangeSoapInSoapEnvelope {
@@ -15734,7 +15734,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsStatusChangeSoapOutSoapEnvelope {
@@ -15775,7 +15775,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsEnquirySoapInSoapEnvelope {
@@ -15816,7 +15816,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsEnquirySoapOutSoapEnvelope {
@@ -15857,7 +15857,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceTransferSoapInSoapEnvelope {
@@ -15898,7 +15898,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceTransferSoapOutSoapEnvelope {
@@ -15939,7 +15939,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceEnquirySoapInSoapEnvelope {
@@ -15980,7 +15980,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceEnquirySoapOutSoapEnvelope {
@@ -16021,7 +16021,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceEnquiryRepSoapInSoapEnvelope {
@@ -16062,7 +16062,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceEnquiryRepSoapOutSoapEnvelope {
@@ -16103,7 +16103,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceEnquiryV2SoapInSoapEnvelope {
@@ -16144,7 +16144,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceEnquiryV2SoapOutSoapEnvelope {
@@ -16185,7 +16185,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceEnquiryWalletSoapInSoapEnvelope {
@@ -16226,7 +16226,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceEnquiryWalletSoapOutSoapEnvelope {
@@ -16267,7 +16267,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardStatementSoapInSoapEnvelope {
@@ -16308,7 +16308,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardStatementSoapOutSoapEnvelope {
@@ -16349,7 +16349,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardStatementRepSoapInSoapEnvelope {
@@ -16390,7 +16390,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardStatementRepSoapOutSoapEnvelope {
@@ -16431,7 +16431,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCustomerEnquirySoapInSoapEnvelope {
@@ -16472,7 +16472,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCustomerEnquirySoapOutSoapEnvelope {
@@ -16513,7 +16513,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCustomerEnquiryV2SoapInSoapEnvelope {
@@ -16554,7 +16554,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCustomerEnquiryV2SoapOutSoapEnvelope {
@@ -16595,7 +16595,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdateCardholderDetailsSoapInSoapEnvelope {
@@ -16636,7 +16636,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdateCardholderDetailsSoapOutSoapEnvelope {
@@ -16677,7 +16677,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUnLoadStatusChangeSoapInSoapEnvelope {
@@ -16718,7 +16718,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUnLoadStatusChangeSoapOutSoapEnvelope {
@@ -16759,7 +16759,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsActivateLoadSoapInSoapEnvelope {
@@ -16800,7 +16800,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsActivateLoadSoapOutSoapEnvelope {
@@ -16841,7 +16841,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceAdjustmentSoapInSoapEnvelope {
@@ -16882,7 +16882,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBalanceAdjustmentSoapOutSoapEnvelope {
@@ -16923,7 +16923,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsExtendExpirySoapInSoapEnvelope {
@@ -16964,7 +16964,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsExtendExpirySoapOutSoapEnvelope {
@@ -17005,7 +17005,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsTransactionVoidSoapInSoapEnvelope {
@@ -17046,7 +17046,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsTransactionVoidSoapOutSoapEnvelope {
@@ -17087,7 +17087,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardHolderDetailsEnquirySoapInSoapEnvelope {
@@ -17128,7 +17128,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardHolderDetailsEnquirySoapOutSoapEnvelope {
@@ -17169,7 +17169,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardHolderDetailsEnquiryV2SoapInSoapEnvelope {
@@ -17210,7 +17210,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardHolderDetailsEnquiryV2SoapOutSoapEnvelope {
@@ -17251,7 +17251,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPhoneActivationSoapInSoapEnvelope {
@@ -17292,7 +17292,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPhoneActivationSoapOutSoapEnvelope {
@@ -17333,7 +17333,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBulkCreationSoapInSoapEnvelope {
@@ -17374,7 +17374,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBulkCreationSoapOutSoapEnvelope {
@@ -17415,7 +17415,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBulkWalletCreationSoapInSoapEnvelope {
@@ -17456,7 +17456,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBulkWalletCreationSoapOutSoapEnvelope {
@@ -17497,7 +17497,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsWebServiceResultSoapInSoapEnvelope {
@@ -17538,7 +17538,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsWebServiceResultSoapOutSoapEnvelope {
@@ -17579,7 +17579,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGenericFeesSoapInSoapEnvelope {
@@ -17620,7 +17620,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGenericFeesSoapOutSoapEnvelope {
@@ -17661,7 +17661,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardBalEnqSoapInSoapEnvelope {
@@ -17702,7 +17702,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardBalEnqSoapOutSoapEnvelope {
@@ -17743,7 +17743,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPinControlSoapInSoapEnvelope {
@@ -17784,7 +17784,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPinControlSoapOutSoapEnvelope {
@@ -17825,7 +17825,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCreateCardSoapInSoapEnvelope {
@@ -17866,7 +17866,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCreateCardSoapOutSoapEnvelope {
@@ -17907,7 +17907,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCreateWalletSoapInSoapEnvelope {
@@ -17948,7 +17948,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCreateWalletSoapOutSoapEnvelope {
@@ -17989,7 +17989,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsRegenerateSoapInSoapEnvelope {
@@ -18030,7 +18030,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsRegenerateSoapOutSoapEnvelope {
@@ -18071,7 +18071,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsConvertCardSoapInSoapEnvelope {
@@ -18112,7 +18112,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsConvertCardSoapOutSoapEnvelope {
@@ -18153,7 +18153,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsChangeGroupsSoapInSoapEnvelope {
@@ -18194,7 +18194,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsChangeGroupsSoapOutSoapEnvelope {
@@ -18235,7 +18235,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCheckSoapInSoapEnvelope {
@@ -18276,7 +18276,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCheckSoapOutSoapEnvelope {
@@ -18317,7 +18317,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSimpleCheckSoapInSoapEnvelope {
@@ -18358,7 +18358,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSimpleCheckSoapOutSoapEnvelope {
@@ -18399,7 +18399,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsClientFxSoapInSoapEnvelope {
@@ -18440,7 +18440,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsClientFxSoapOutSoapEnvelope {
@@ -18481,7 +18481,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsLinkCardsSoapInSoapEnvelope {
@@ -18522,7 +18522,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsLinkCardsSoapOutSoapEnvelope {
@@ -18563,7 +18563,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListGroupSoapInSoapEnvelope {
@@ -18604,7 +18604,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListGroupSoapOutSoapEnvelope {
@@ -18645,7 +18645,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListProductsSoapInSoapEnvelope {
@@ -18686,7 +18686,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListProductsSoapOutSoapEnvelope {
@@ -18727,7 +18727,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGetCardRequestSoapInSoapEnvelope {
@@ -18768,7 +18768,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGetCardRequestSoapOutSoapEnvelope {
@@ -18809,7 +18809,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGetCardRequestStatusSoapInSoapEnvelope {
@@ -18850,7 +18850,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGetCardRequestStatusSoapOutSoapEnvelope {
@@ -18891,7 +18891,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardAcceptorWhiteListSoapInSoapEnvelope {
@@ -18932,7 +18932,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardAcceptorWhiteListSoapOutSoapEnvelope {
@@ -18973,7 +18973,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardAcceptorBlackListSoapInSoapEnvelope {
@@ -19014,7 +19014,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardAcceptorBlackListSoapOutSoapEnvelope {
@@ -19055,7 +19055,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSendMessageSoapInSoapEnvelope {
@@ -19096,7 +19096,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSendMessageSoapOutSoapEnvelope {
@@ -19137,7 +19137,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsMVCLoadSoapInSoapEnvelope {
@@ -19178,7 +19178,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsMVCLoadSoapOutSoapEnvelope {
@@ -19219,7 +19219,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListPendingFeesSoapInSoapEnvelope {
@@ -19260,7 +19260,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListPendingFeesSoapOutSoapEnvelope {
@@ -19301,7 +19301,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsWebServiceResultV2SoapInSoapEnvelope {
@@ -19342,7 +19342,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsWebServiceResultV2SoapOutSoapEnvelope {
@@ -19383,7 +19383,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGetPasscodeSoapInSoapEnvelope {
@@ -19424,7 +19424,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGetPasscodeSoapOutSoapEnvelope {
@@ -19465,7 +19465,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGetCardExpireSoonSoapInSoapEnvelope {
@@ -19506,7 +19506,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGetCardExpireSoonSoapOutSoapEnvelope {
@@ -19547,7 +19547,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSendCardFilesSoapInSoapEnvelope {
@@ -19588,7 +19588,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSendCardFilesSoapOutSoapEnvelope {
@@ -19629,7 +19629,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSafeReportsSoapInSoapEnvelope {
@@ -19670,7 +19670,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSafeReportsSoapOutSoapEnvelope {
@@ -19711,7 +19711,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsRegenerateWalletSoapInSoapEnvelope {
@@ -19752,7 +19752,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsRegenerateWalletSoapOutSoapEnvelope {
@@ -19793,7 +19793,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdateLoadSourceSoapInSoapEnvelope {
@@ -19834,7 +19834,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdateLoadSourceSoapOutSoapEnvelope {
@@ -19875,7 +19875,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsMVCUnloadSoapInSoapEnvelope {
@@ -19916,7 +19916,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsMVCUnloadSoapOutSoapEnvelope {
@@ -19957,7 +19957,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsActivateMVCLoadSoapInSoapEnvelope {
@@ -19998,7 +19998,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsActivateMVCLoadSoapOutSoapEnvelope {
@@ -20039,7 +20039,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsRenewCardSoapInSoapEnvelope {
@@ -20080,7 +20080,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsRenewCardSoapOutSoapEnvelope {
@@ -20121,7 +20121,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsResetAccumulatorSoapInSoapEnvelope {
@@ -20162,7 +20162,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsResetAccumulatorSoapOutSoapEnvelope {
@@ -20203,7 +20203,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsEnrolSoapInSoapEnvelope {
@@ -20244,7 +20244,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsEnrolSoapOutSoapEnvelope {
@@ -20285,7 +20285,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardActivateSoapInSoapEnvelope {
@@ -20326,7 +20326,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardActivateSoapOutSoapEnvelope {
@@ -20367,7 +20367,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardLoadSoapInSoapEnvelope {
@@ -20408,7 +20408,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardLoadSoapOutSoapEnvelope {
@@ -20449,7 +20449,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardUnLoadSoapInSoapEnvelope {
@@ -20490,7 +20490,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardUnLoadSoapOutSoapEnvelope {
@@ -20531,7 +20531,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardStatusChangeSoapInSoapEnvelope {
@@ -20572,7 +20572,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardStatusChangeSoapOutSoapEnvelope {
@@ -20613,7 +20613,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardEnquirySoapInSoapEnvelope {
@@ -20654,7 +20654,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardEnquirySoapOutSoapEnvelope {
@@ -20695,7 +20695,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardBalanceTransferSoapInSoapEnvelope {
@@ -20736,7 +20736,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardBalanceTransferSoapOutSoapEnvelope {
@@ -20777,7 +20777,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardBalanceEnquirySoapInSoapEnvelope {
@@ -20818,7 +20818,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardBalanceEnquirySoapOutSoapEnvelope {
@@ -20859,7 +20859,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardCardStatementSoapInSoapEnvelope {
@@ -20900,7 +20900,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardCardStatementSoapOutSoapEnvelope {
@@ -20941,7 +20941,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardUpdateCardholderDetailsSoapInSoapEnvelope {
@@ -20982,7 +20982,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardUpdateCardholderDetailsSoapOutSoapEnvelope {
@@ -21023,7 +21023,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardUnLoadStatusChangeSoapInSoapEnvelope {
@@ -21064,7 +21064,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardUnLoadStatusChangeSoapOutSoapEnvelope {
@@ -21105,7 +21105,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardActivateLoadSoapInSoapEnvelope {
@@ -21146,7 +21146,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardActivateLoadSoapOutSoapEnvelope {
@@ -21187,7 +21187,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardBalanceAdjustmentSoapInSoapEnvelope {
@@ -21228,7 +21228,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardBalanceAdjustmentSoapOutSoapEnvelope {
@@ -21269,7 +21269,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardExtendExpirySoapInSoapEnvelope {
@@ -21310,7 +21310,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardExtendExpirySoapOutSoapEnvelope {
@@ -21351,7 +21351,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardTransactionVoidSoapInSoapEnvelope {
@@ -21392,7 +21392,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardTransactionVoidSoapOutSoapEnvelope {
@@ -21433,7 +21433,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardCardHolderDetailsEnquirySoapInSoapEnvelope {
@@ -21474,7 +21474,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardCardHolderDetailsEnquirySoapOutSoapEnvelope {
@@ -21515,7 +21515,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardPhoneActivationSoapInSoapEnvelope {
@@ -21556,7 +21556,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardPhoneActivationSoapOutSoapEnvelope {
@@ -21597,7 +21597,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardBulkCreationSoapInSoapEnvelope {
@@ -21638,7 +21638,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardBulkCreationSoapOutSoapEnvelope {
@@ -21679,7 +21679,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardWebServiceResultSoapInSoapEnvelope {
@@ -21720,7 +21720,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardWebServiceResultSoapOutSoapEnvelope {
@@ -21761,7 +21761,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardGenericFeesSoapInSoapEnvelope {
@@ -21802,7 +21802,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardGenericFeesSoapOutSoapEnvelope {
@@ -21843,7 +21843,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardPinControlSoapInSoapEnvelope {
@@ -21884,7 +21884,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardPinControlSoapOutSoapEnvelope {
@@ -21925,7 +21925,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardUpdateLoadSourceSoapInSoapEnvelope {
@@ -21966,7 +21966,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardUpdateLoadSourceSoapOutSoapEnvelope {
@@ -22007,7 +22007,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardActivateLoadProductTpyeCPSoapInSoapEnvelope {
@@ -22048,7 +22048,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsGiftCardActivateLoadProductTpyeCPSoapOutSoapEnvelope {
@@ -22089,7 +22089,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardTransactionXMLSoapInSoapEnvelope {
@@ -22130,7 +22130,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardTransactionXMLSoapOutSoapEnvelope {
@@ -22171,7 +22171,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardChangeGroupsSoapInSoapEnvelope {
@@ -22212,7 +22212,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardChangeGroupsSoapOutSoapEnvelope {
@@ -22253,7 +22253,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardChangeCardacceptorListSoapInSoapEnvelope {
@@ -22294,7 +22294,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCardChangeCardacceptorListSoapOutSoapEnvelope {
@@ -22335,7 +22335,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsChangeCardacceptorListSoapInSoapEnvelope {
@@ -22376,7 +22376,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsChangeCardacceptorListSoapOutSoapEnvelope {
@@ -22417,7 +22417,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsAddressMatchCheckingSoapInSoapEnvelope {
@@ -22458,7 +22458,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsAddressMatchCheckingSoapOutSoapEnvelope {
@@ -22499,7 +22499,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsLicenseVerificationSoapInSoapEnvelope {
@@ -22540,7 +22540,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsLicenseVerificationSoapOutSoapEnvelope {
@@ -22581,7 +22581,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPassportVerificationSoapInSoapEnvelope {
@@ -22622,7 +22622,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsPassportVerificationSoapOutSoapEnvelope {
@@ -22663,7 +22663,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSanctionsPEPCheckSoapInSoapEnvelope {
@@ -22704,7 +22704,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSanctionsPEPCheckSoapOutSoapEnvelope {
@@ -22745,7 +22745,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSanctionsPEPCheckV2SoapInSoapEnvelope {
@@ -22786,7 +22786,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsSanctionsPEPCheckV2SoapOutSoapEnvelope {
@@ -22827,7 +22827,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListSanctionsPEPSoapInSoapEnvelope {
@@ -22868,7 +22868,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListSanctionsPEPSoapOutSoapEnvelope {
@@ -22909,7 +22909,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListSanctionsPEPMatchesSoapInSoapEnvelope {
@@ -22950,7 +22950,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsListSanctionsPEPMatchesSoapOutSoapEnvelope {
@@ -22991,7 +22991,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdateSanctionsPEPMatchesSoapInSoapEnvelope {
@@ -23032,7 +23032,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsUpdateSanctionsPEPMatchesSoapOutSoapEnvelope {
@@ -23073,7 +23073,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCreateCardV2SoapInSoapEnvelope {
@@ -23114,7 +23114,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsCreateCardV2SoapOutSoapEnvelope {
@@ -23155,7 +23155,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingReturnBankDetailsFromTokenSoapInSoapEnvelope {
@@ -23196,7 +23196,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingReturnBankDetailsFromTokenSoapOutSoapEnvelope {
@@ -23237,7 +23237,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingChangeAccountBankingFeaturesStatusSoapInSoapEnvelope {
@@ -23278,7 +23278,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingChangeAccountBankingFeaturesStatusSoapOutSoapEnvelope {
@@ -23319,7 +23319,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingTransferFundsSoapInSoapEnvelope {
@@ -23360,7 +23360,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://schemas.xmlsoap.org/soap/envelope/",
+        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
         prefix = "soapenv"
     )]
     pub struct WsBankingTransferFundsSoapOutSoapEnvelope {
