@@ -27,12 +27,12 @@ macro_rules! get_mut_card {
 macro_rules! get_card {
     ($param:expr, $state:expr, $card:ident, $cards_map:ident) => {
         // Ensure the public_token passed as a parameter it's not None
-        $param.as_ref().ok_or(GpsError::ActionCode{num: 999, msg: format!("Missing public_token")})?;
+        $param.as_ref().ok_or(GpsError::ActionCode{num: 118, msg: format!("Missing public token")})?;
 
         // Get the card, with a read mutex
         let $cards_map = $state.public_tokens.read().expect("Poisoned read lock");
         let $card = $cards_map.get($param.as_ref().unwrap()).ok_or(
-            GpsError::ActionCode{num: 999, msg: format!("Public token not found")})?;
+            GpsError::ActionCode{num: 118, msg: format!("Public token not found")})?;
     };
 }
 
