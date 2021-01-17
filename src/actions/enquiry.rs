@@ -30,7 +30,7 @@ impl action::Action for Enquiry {
 
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
-        
+
         get_card!(self.parameters.public_token, state, card, cards_map);
 
         let response = self.wrap_response(gps_lib::types::WsEnquiryResponse {
@@ -44,18 +44,18 @@ impl action::Action for Enquiry {
                 client_code: parameters.client_code.clone(),
                 sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
-                avl_bal: format!("{}", card.balance.amount()),
+                avl_bal: format!("{}", card.balance.amount),
                 blk_amt: format!("0.0"), // TODO: Implement blocked balances in cards
-                cur_code: Some(card.currency.iso_numeric_code.to_string()),
+                cur_code: Some(card.get_currency_info().iso_numeric_code),
                 start_date: Some(card.get_start_date()),
                 end_date: Some(card.get_end_date()),
                 exp_date: Some(card.get_exp_date()),
                 stat_code: Some(card.get_status_code()),
                 emboss_name: Some(card.get_emboss_name()),
                 is_live: card.is_live,
-                scheme: None, // TODO: We use it 
+                scheme: None, // TODO: We use it
                 product: None, // TODO: We use it
-                masked_pan: Some(card.pan),
+                masked_pan: Some(card.pan.clone()),
                 limit_group: None, // TODO: We use it
                 mcc_group: None,
                 perms_group: None, // TODO: We use it

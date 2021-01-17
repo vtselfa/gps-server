@@ -1,8 +1,8 @@
 use chrono::prelude::*;
-use rusty_money::{Money,Currency};
 use rust_decimal::prelude::*;
 
 use crate::types;
+use crate::currency;
 use crate::types::GpsError;
 
 
@@ -30,7 +30,7 @@ macro_rules! get_card {
         $param.as_ref().ok_or(GpsError::ActionCode{num: 999, msg: format!("Missing public_token")})?;
 
         // Get the card, with a read mutex
-        let mut $cards_map = $state.public_tokens.read().expect("Poisoned read lock");
+        let $cards_map = $state.public_tokens.read().expect("Poisoned read lock");
         let $card = $cards_map.get($param.as_ref().unwrap()).ok_or(
             GpsError::ActionCode{num: 999, msg: format!("Public token not found")})?;
     };
@@ -40,20 +40,18 @@ macro_rules! get_card {
 // card. Not sure if GPS does.
 pub fn check_currency(param: &Option<String>, card: &types::Card) -> Result<(), types::GpsError> {
     if let Some(v) = param.as_ref().map(String::as_str) {
-        let currency = Currency::find(v)?;
-        if currency != card.currency {
+        let currency = currency::find_by_alpha_code(v)?;
+        if currency != card.balance.currency {
             return Err(GpsError::ActionCode{num: 999, msg: format!("Currency missmatch")});
         }
     }
     Ok(())
 }
 
-pub fn get_amount(amount: &str, currency: &'static Currency) -> Result<Money, types::GpsError> {
-    // Get the amount as a string because that's what Money expects
+pub fn get_strictly_positive_amount(amount: &str) -> Result<Decimal, types::GpsError> {
     // GPS expect the amount to be >= 0, so we too
     let amount = Decimal::from_str(amount)?;
-    let amount = Money::from_decimal(amount, currency);
-    if amount.amount().is_sign_negative() || amount.amount().is_zero() {
+    if amount.is_sign_negative() || amount.is_zero() {
         return Err(GpsError::ActionCode{num: 999, msg: format!("Unload amount has to be greater than zero")});
     }
     Ok(amount)

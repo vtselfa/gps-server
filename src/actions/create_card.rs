@@ -1,18 +1,18 @@
-use yaserde::de::from_str;
-use yaserde::ser::to_string;
-use rusty_money::{Money, Currency};
-use std::sync::atomic::Ordering;
 use chrono::prelude::*;
+use paste::paste;
 use rand::Rng;
 use rust_decimal::prelude::*;
-use paste::paste;
+use std::sync::atomic::Ordering;
+use yaserde::de::from_str;
+use yaserde::ser::to_string;
 
-
+use crate::action;
+use crate::currency;
+use crate::impl_wrap_response;
+use crate::money;
+use crate::types::GpsError;
 use crate::types;
 use crate::utils;
-use crate::types::GpsError;
-use crate::action;
-use crate::impl_wrap_response;
 
 
 pub struct CreateCard {
@@ -43,7 +43,7 @@ impl action::Action for CreateCard {
 
         // TODO: Currencies are usually taken from products, so we will not have proper currency support until
         // we implement product support. For now, if a currency is not specified, we assume EUR.
-        let currency = Currency::find(parameters.cur_code.as_ref().map_or("EUR", |x|{x.as_str()}))?;
+        let currency = currency::find_by_alpha_code(parameters.cur_code.as_ref().map_or("EUR", |x|{x.as_str()}))?;
 
         // TODO: Create a transaction in the card if a load amount is provided and record the
         // item_id
@@ -55,12 +55,11 @@ impl action::Action for CreateCard {
         let mut rng = rand::thread_rng();
         let card = types::Card {
             wsid: parameters.wsid,
-            public_token: public_token,
+            public_token,
             external_ref: parameters.external_ref.clone(),
             start_date: utc,
             exp_date: utc.with_year(utc.year() + 3).unwrap(), // TODO: Use provided expiration date if available
-            balance: Money::from_decimal(load_value, currency),
-            currency: currency,
+            balance: money::Money::new(load_value, currency),
             is_live: match parameters.activate_now {
                 0 => false,
                 1 => true,
@@ -69,12 +68,11 @@ impl action::Action for CreateCard {
             status: types::CardStatus::AllGood, // GPS returns this no matter if activated or not...
             pan: format!("{:>016}",rng.gen_range(0, 9999_9999_9999_9999 + 1 as i64)),
             cvv: format!("{:>03}", rng.gen_range(0, 999 + 1)),
-            stat_code: format!("0"),
             transactions: vec![],
             owner: types::Consumer {
-                title: parameters.title.unwrap_or(format!("")),
-                first_name: parameters.first_name.unwrap_or(format!("")),
-                last_name: parameters.last_name.unwrap_or(format!("")),
+                title: parameters.title.clone().unwrap_or(format!("")),
+                first_name: parameters.first_name.clone().unwrap_or(format!("")),
+                last_name: parameters.last_name.clone().unwrap_or(format!("")),
             }
         };
 
@@ -91,7 +89,7 @@ impl action::Action for CreateCard {
                 client_code: parameters.client_code.clone(),
                 sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
-                load_value: format!("{}", card.balance.amount()),
+                load_value: format!("{}", card.balance.amount),
                 is_live: card.is_live,
                 start_date: Some(format!("{}", card.start_date.format("%m/%y"))),
                 exp_date: Some(format!("{}", card.exp_date.format("%m/%y"))),

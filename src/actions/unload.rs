@@ -1,15 +1,16 @@
-use yaserde::de::from_str;
-use yaserde::ser::to_string;
-use std::sync::atomic::Ordering;
 use chrono::prelude::*;
 use paste::paste;
+use std::sync::atomic::Ordering;
+use yaserde::de::from_str;
+use yaserde::ser::to_string;
 
+use crate::action;
+use crate::get_mut_card;
+use crate::impl_wrap_response;
+use crate::money;
+use crate::types::GpsError;
 use crate::types;
 use crate::utils;
-use crate::get_mut_card;
-use crate::types::GpsError;
-use crate::action;
-use crate::impl_wrap_response;
 
 
 pub struct Unload {
@@ -33,15 +34,15 @@ impl action::Action for Unload {
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
         let utc: DateTime<Utc> = Utc::now();
-        
+
         get_mut_card!(self.parameters.public_token, state, card, cards_map);
         utils::check_currency(&parameters.curr_code, card)?;
-        let amount = utils::get_amount(&parameters.amt_un_load.to_string(), &card.currency)?;
+        let amount = utils::get_strictly_positive_amount(&parameters.amt_un_load.to_string())?;
 
-        if card.balance < amount {
+        if card.balance.amount < amount {
             return Err(GpsError::ActionCode{num: 999, msg: format!("Unload amount is greater than the current balance")});
         }
-        card.balance = card.balance.clone() - amount.clone();
+        card.balance.amount -= amount;
 
         // Record the transaction in the card structure
         let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);
@@ -49,8 +50,8 @@ impl action::Action for Unload {
             item_id: item_id as u64, // GPS transaction ID
             txn_date: utc,
             post_date: utc,
-            amt_bill: amount.clone(),
-            amt_txn: amount,
+            amt_bill: money::Money::new(amount, card.get_currency()),
+            amt_txn: money::Money::new(amount, card.get_currency()), // TODO: Currency conversion support?
             fixed_fee: None, // Unloads have no fees attached
             rate_fee: None, // Same as with the fixed fee
             note: parameters.description.clone(),
@@ -69,8 +70,8 @@ impl action::Action for Unload {
                 sys_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
                 action_code: Some("000".to_string()),
                 amt_un_load: parameters.amt_un_load,
-                avl_bal: format!("{}", card.balance.amount()),
-                cur_code: Some(card.currency.iso_numeric_code.to_string()),
+                avl_bal: format!("{}", card.balance.amount),
+                cur_code: Some(card.get_currency_info().iso_numeric_code),
                 blk_amt: format!("0.0"), // TODO: Implement blocked balances in cards
             },
         });

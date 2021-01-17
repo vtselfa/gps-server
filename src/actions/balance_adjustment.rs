@@ -1,6 +1,5 @@
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
-use rusty_money::{Money,Currency};
 use std::sync::atomic::Ordering;
 use chrono::prelude::*;
 use rust_decimal::prelude::*;
@@ -10,6 +9,8 @@ use crate::types;
 use crate::types::GpsError;
 use crate::action;
 use crate::impl_wrap_response;
+use crate::currency;
+use crate::money;
 
 
 pub struct BalanceAdjustment {
@@ -52,8 +53,8 @@ impl action::Action for BalanceAdjustment {
         match parameters.cur_code.as_ref().map(String::as_str) {
             None => (),
             Some(v) =>  {
-                let currency = Currency::find(v)?;
-                if currency != card.currency {
+                let currency = currency::find_by_alpha_code(v)?;
+                if currency != card.get_currency() {
                     return Err(GpsError::ActionCode{num: 999, msg: format!("Currency missmatch")});
                 }
             }
@@ -66,9 +67,9 @@ impl action::Action for BalanceAdjustment {
             _ => return Err(GpsError::ActionCode{num: 999, msg: format!("Invalid deb_or_cred")}),
         };
         let amount = Decimal::from_str(&amount)?;
-        let amount = Money::from_decimal(amount, card.currency);
+        let amount = money::Money::new(amount, card.get_currency());
 
-        card.balance = card.balance.clone() + amount.clone();
+        card.balance = (card.balance + amount)?;
 
         // Record the transaction in the card structure
         let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);
@@ -76,7 +77,7 @@ impl action::Action for BalanceAdjustment {
             item_id: item_id as u64, // GPS transaction ID
             txn_date: utc,
             post_date: utc,
-            amt_bill: amount.clone(),
+            amt_bill: amount,
             amt_txn: amount,
             fixed_fee: None,
             rate_fee: None,
@@ -95,8 +96,8 @@ impl action::Action for BalanceAdjustment {
                 client_code: parameters.client_code.clone(),
                 sys_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
                 action_code: Some("000".to_string()),
-                avl_bal: format!("{}", card.balance.amount()),
-                cur_code: Some(card.currency.iso_numeric_code.to_string()),
+                avl_bal: format!("{}", card.balance.amount),
+                cur_code: Some(card.get_currency_info().iso_numeric_code),
             },
         });
 

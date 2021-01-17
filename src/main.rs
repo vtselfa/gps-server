@@ -3,25 +3,30 @@
 #[macro_use]
 extern crate rocket;
 extern crate regex;
+extern crate lazy_static;
 extern crate log;
 extern crate xml;
 extern crate yaserde;
 extern crate yaserde_derive;
 extern crate gps_lib;
 extern crate chrono;
-extern crate rusty_money;
 extern crate thiserror;
 extern crate rust_decimal;
+extern crate serde_json;
+extern crate opimps;
 
 mod action;
 mod types;
 mod utils;
 mod actions;
+mod currency;
+mod money;
 
 use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
 use rocket::{Data, Outcome::*, Request};
 use std::io::Read;
+use log::{error, warn};
 
 use action::Action;
 use actions::create_card::CreateCard;
@@ -29,6 +34,7 @@ use actions::balance_adjustment::BalanceAdjustment;
 use actions::load::Load;
 use actions::unload::Unload;
 use actions::balance_enquiry::BalanceEnquiry;
+use actions::balance_enquiry::BalanceEnquiryV2;
 use actions::enquiry::Enquiry;
 use types::GpsError;
 
@@ -84,6 +90,8 @@ impl PostStr {
             "Ws_Load"              => Ok(PostStr{action: Box::new(Load::new(&contents)?)}),
             "Ws_Unload"            => Ok(PostStr{action: Box::new(Unload::new(&contents)?)}),
             "Ws_Balance_Enquiry"   => Ok(PostStr{action: Box::new(BalanceEnquiry::new(&contents)?)}),
+            "Ws_Balance_Enquiry_V2"   => Ok(PostStr{action: Box::new(BalanceEnquiryV2::new(&contents)?)}),
+            "Ws_Enquiry"              => Ok(PostStr{action: Box::new(Enquiry::new(&contents)?)}),
             _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
         }
     }
@@ -95,18 +103,21 @@ impl FromDataSimple for PostStr {
 
     fn from_data(req: &Request, data: Data) -> data::Outcome<Self, Self::Error> {
         match PostStr::from_data_impl(req, data) {
-            Err(e) => Failure((Status::BadRequest, e)),
+            Err(e) => {
+                error!("Could not parse request: {}", e);
+                Failure((Status::BadRequest, e))
+            },
             Ok(v) => Success(v),
         }
     }
 }
 
-#[post("/hello", format = "text/xml", data = "<input>")]
+#[post("/hello", data = "<input>")]
 fn server_post(input: PostStr, state: rocket::State<types::State>) -> String {
     let state: &types::State = state.inner();
     match input.response(state) {
         Err(e) => {
-            println!("{}", e);
+            error!("{}", e);
             e.to_string()
         }
         Ok(v) => v,
@@ -114,6 +125,10 @@ fn server_post(input: PostStr, state: rocket::State<types::State>) -> String {
 }
 
 fn main() {
+    if let Err(err) = log4rs::init_file("log4rs.yml", Default::default()) {
+        warn!("Unable to find log4rs.yml logging config: {}", err);
+    }
+
     rocket::ignite()
         .manage(types::State{..Default::default()})
         .mount("/", routes![server_post])
