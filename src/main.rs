@@ -13,7 +13,6 @@ extern crate chrono;
 extern crate thiserror;
 extern crate rust_decimal;
 extern crate serde_json;
-extern crate opimps;
 
 mod action;
 mod types;
@@ -25,6 +24,7 @@ mod money;
 use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
 use rocket::{Data, Outcome::*, Request};
+use rocket::response;
 use std::io::Read;
 use log::{error, warn};
 
@@ -124,6 +124,20 @@ fn server_post(input: PostStr, state: rocket::State<types::State>) -> String {
     }
 }
 
+#[get("/state")]
+fn get_state(state: rocket::State<types::State>)
+-> Result<response::content::Json<String>, response::status::Custom<String>> {
+    let state: &types::State = state.inner();
+    match serde_json::to_string(state) {
+        Err(e) => {
+            let msg = format!("Could not serialize program state: {}", e);
+            error!("{}", msg);
+            Err(response::status::Custom::<String>(Status::InternalServerError, msg))
+        }
+        Ok(v) => Ok(response::content::Json(v)),
+    }
+}
+
 fn main() {
     if let Err(err) = log4rs::init_file("log4rs.yml", Default::default()) {
         warn!("Unable to find log4rs.yml logging config: {}", err);
@@ -132,5 +146,6 @@ fn main() {
     rocket::ignite()
         .manage(types::State{..Default::default()})
         .mount("/", routes![server_post])
+        .mount("/", routes![get_state])
         .launch();
 }
