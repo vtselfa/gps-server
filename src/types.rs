@@ -47,21 +47,29 @@ pub enum GpsError {
 
 #[derive(Default, Serialize, Deserialize)]
 pub struct State {
+    // This is a flag that indicates that we are replacing the state with a new one.
+    // It is taken for writing when replacing the state with a new one, or when deleting it.
+    // It is takes for reading in any other case.
+    #[serde(skip_serializing)]
+    pub replacing_state:   RwLock<bool>,
+
     pub next_public_token: AtomicUsize,
-    pub next_item_id: AtomicUsize,
-    pub wsids: RwLock<HashMap<u64, String>>,
-    pub public_tokens:  RwLock<HashMap<String, Card>>,
-    pub transactions: RwLock<Vec<Transaction>>,
+    pub next_item_id:      AtomicUsize,
+    pub wsids:             RwLock<HashMap<u64, String>>,
+    pub public_tokens:     RwLock<HashMap<String, Card>>,
+    pub transactions:      RwLock<Vec<Transaction>>,
 }
 
-#[derive(Serialize, Deserialize)]
+
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Consumer {
     pub title: String,
     pub first_name: String,
     pub last_name: String,
 }
 
-#[derive(Serialize, Deserialize)]
+
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Card {
     pub wsid: i64,
     pub public_token: String,
@@ -77,6 +85,7 @@ pub struct Card {
     pub owner: Consumer,
     // TODO: Groups
 }
+
 
 #[derive(Copy, Clone, Serialize, Deserialize)]
 pub enum CardStatus {
@@ -97,7 +106,7 @@ pub enum CardStatus {
 }
 
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub item_id: u64, // GPS transaction ID
     pub txn_date: DateTime<Utc>,
@@ -108,6 +117,7 @@ pub struct Transaction {
     pub rate_fee: Option<Money>,
     pub note: Option<String>,
 }
+
 
 impl Card {
     pub fn get_start_date(&self) -> String {

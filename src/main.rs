@@ -24,9 +24,11 @@ mod money;
 use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
 use rocket::{Data, Outcome::*, Request};
+use rocket_contrib::json::Json;
 use rocket::response;
 use std::io::Read;
 use log::{error, warn};
+use std::sync::atomic::Ordering;
 
 use action::Action;
 use actions::create_card::CreateCard;
@@ -100,7 +102,6 @@ impl PostStr {
 impl FromDataSimple for PostStr {
     type Error = types::GpsError;
 
-
     fn from_data(req: &Request, data: Data) -> data::Outcome<Self, Self::Error> {
         match PostStr::from_data_impl(req, data) {
             Err(e) => {
@@ -114,6 +115,8 @@ impl FromDataSimple for PostStr {
 
 #[post("/hello", data = "<input>")]
 fn server_post(input: PostStr, state: rocket::State<types::State>) -> String {
+    let _guard = state.replacing_state.read().unwrap();
+
     let state: &types::State = state.inner();
     match input.response(state) {
         Err(e) => {
@@ -127,6 +130,8 @@ fn server_post(input: PostStr, state: rocket::State<types::State>) -> String {
 #[get("/state")]
 fn get_state(state: rocket::State<types::State>)
 -> Result<response::content::Json<String>, response::status::Custom<String>> {
+    let _guard = state.replacing_state.read().unwrap();
+
     let state: &types::State = state.inner();
     match serde_json::to_string(state) {
         Err(e) => {
@@ -138,6 +143,38 @@ fn get_state(state: rocket::State<types::State>)
     }
 }
 
+#[post("/state", format = "json", data = "<new_state>")]
+fn post_state(new_state: Json<types::State>, state: rocket::State<types::State>)
+-> rocket::http::Status {
+    *state.replacing_state.write().unwrap() = true;
+
+    let state = state.inner();
+    state.next_public_token.swap(new_state.next_public_token.load(Ordering::SeqCst), Ordering::SeqCst);
+    state.next_item_id.swap(new_state.next_item_id.load(Ordering::SeqCst), Ordering::SeqCst);
+    *state.wsids.write().unwrap() = new_state.wsids.read().unwrap().clone();
+    *state.public_tokens.write().unwrap() = new_state.public_tokens.read().unwrap().clone();
+    *state.transactions.write().unwrap() = new_state.transactions.read().unwrap().clone();
+
+    *state.replacing_state.write().unwrap() = false;
+    Status::Ok
+}
+
+#[delete("/state")]
+fn delete_state(state: rocket::State<types::State>)
+-> rocket::http::Status {
+    *state.replacing_state.write().unwrap() = true;
+
+    let state = state.inner();
+    state.next_public_token.swap(0, Ordering::SeqCst);
+    state.next_item_id.store(0, Ordering::SeqCst);
+    state.wsids.write().unwrap().clear();
+    state.public_tokens.write().unwrap().clear();
+    state.transactions.write().unwrap().clear();
+
+    *state.replacing_state.write().unwrap() = false;
+    Status::Ok
+}
+
 fn main() {
     if let Err(err) = log4rs::init_file("log4rs.yml", Default::default()) {
         warn!("Unable to find log4rs.yml logging config: {}", err);
@@ -147,5 +184,7 @@ fn main() {
         .manage(types::State{..Default::default()})
         .mount("/", routes![server_post])
         .mount("/", routes![get_state])
+        .mount("/", routes![post_state])
+        .mount("/", routes![delete_state])
         .launch();
 }

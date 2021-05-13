@@ -28,6 +28,11 @@ yaserde_derive = "^0.4.2"
 
 gps_lib = { path = "sub_crates/gps_lib" }
 
+[dependencies.rocket_contrib]
+version = "0.4.7"
+default-features = false
+features = ["json"]
+
 [workspace]
 members = [
     "sub_crates/gps_lib",
