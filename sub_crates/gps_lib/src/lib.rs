@@ -3378,9 +3378,9 @@ pub mod types {
         #[yaserde(rename = "LocTime", prefix = "tns", default)]
         pub loc_time: Option<String>,
         #[yaserde(rename = "StartBal", prefix = "tns", default)]
-        pub start_bal: f64,
+        pub start_bal: String,
         #[yaserde(rename = "EndBal", prefix = "tns", default)]
-        pub end_bal: f64,
+        pub end_bal: String,
         #[yaserde(rename = "TxnFilter", prefix = "tns", default)]
         pub txn_filter: Option<String>,
         #[yaserde(rename = "StartDate", prefix = "tns", default)]
@@ -3394,9 +3394,9 @@ pub mod types {
         #[yaserde(rename = "CurBill", prefix = "tns", default)]
         pub cur_bill: Option<String>,
         #[yaserde(rename = "AvlBal", prefix = "tns", default)]
-        pub avl_bal: f64,
+        pub avl_bal: String,
         #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
-        pub blk_amt: f64,
+        pub blk_amt: String,
         #[yaserde(rename = "SysDate", prefix = "tns", default)]
         pub sys_date: Option<String>,
         #[yaserde(rename = "ActionCode", prefix = "tns", default)]
@@ -3426,11 +3426,11 @@ pub mod types {
         #[yaserde(rename = "PostDate", prefix = "tns", default)]
         pub post_date: Option<String>,
         #[yaserde(rename = "AmtBill", prefix = "tns", default)]
-        pub amt_bill: f64,
+        pub amt_bill: String,
         #[yaserde(rename = "AmtTxn", prefix = "tns", default)]
-        pub amt_txn: f64,
+        pub amt_txn: String,
         #[yaserde(rename = "BillConvRate", prefix = "tns", default)]
-        pub bill_conv_rate: f64,
+        pub bill_conv_rate: String,
         #[yaserde(rename = "DebOrCred", prefix = "tns", default)]
         pub deb_or_cred: i32,
         #[yaserde(rename = "TerminalId", prefix = "tns", default)]
@@ -3444,9 +3444,9 @@ pub mod types {
         #[yaserde(rename = "ItemId", prefix = "tns", default)]
         pub item_id: i64,
         #[yaserde(rename = "AvlBal", prefix = "tns", default)]
-        pub avl_bal: f64,
+        pub avl_bal: String,
         #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
-        pub blk_amt: f64,
+        pub blk_amt: String,
         #[yaserde(rename = "TransactionType", prefix = "tns", default)]
         pub transaction_type: Option<String>,
         #[yaserde(rename = "StatusCode", prefix = "tns", default)]
@@ -3462,13 +3462,13 @@ pub mod types {
         #[yaserde(rename = "WSID", prefix = "tns", default)]
         pub wsid: i64,
         #[yaserde(rename = "FixedFee", prefix = "tns", default)]
-        pub fixed_fee: f64,
+        pub fixed_fee: String,
         #[yaserde(rename = "RateFee", prefix = "tns", default)]
-        pub rate_fee: f64,
+        pub rate_fee: String,
         #[yaserde(rename = "FxPdg", prefix = "tns", default)]
-        pub fx_pdg: f64,
+        pub fx_pdg: String,
         #[yaserde(rename = "MCCPdg", prefix = "tns", default)]
-        pub mcc_pdg: f64,
+        pub mcc_pdg: String,
         #[yaserde(rename = "LinkId", prefix = "tns", default)]
         pub link_id: Option<String>,
         #[yaserde(rename = "MCC", prefix = "tns", default)]
