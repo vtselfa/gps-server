@@ -4,3 +4,4 @@ pub mod balance_adjustment;
 pub mod create_card;
 pub mod balance_enquiry;
 pub mod enquiry;
+pub mod card_statement;

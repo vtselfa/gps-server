@@ -13,6 +13,8 @@ extern crate chrono;
 extern crate thiserror;
 extern crate rust_decimal;
 extern crate serde_json;
+extern crate superslice;
+extern crate strum;
 
 mod action;
 mod types;
@@ -38,6 +40,7 @@ use actions::unload::Unload;
 use actions::balance_enquiry::BalanceEnquiry;
 use actions::balance_enquiry::BalanceEnquiryV2;
 use actions::enquiry::Enquiry;
+use actions::card_statement::CardStatement;
 use types::GpsError;
 
 
@@ -94,6 +97,7 @@ impl PostStr {
             "Ws_Balance_Enquiry"   => Ok(PostStr{action: Box::new(BalanceEnquiry::new(&contents)?)}),
             "Ws_Balance_Enquiry_V2"   => Ok(PostStr{action: Box::new(BalanceEnquiryV2::new(&contents)?)}),
             "Ws_Enquiry"              => Ok(PostStr{action: Box::new(Enquiry::new(&contents)?)}),
+            "Ws_Card_Statement"       => Ok(PostStr{action: Box::new(CardStatement::new(&contents)?)}),
             _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
         }
     }

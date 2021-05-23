@@ -2,15 +2,15 @@ use yaserde::de::from_str;
 use yaserde::ser::to_string;
 use std::sync::atomic::Ordering;
 use chrono::prelude::*;
-use rust_decimal::prelude::*;
 use paste::paste;
 
 use crate::types;
 use crate::types::GpsError;
 use crate::action;
 use crate::impl_wrap_response;
-use crate::currency;
 use crate::money;
+use crate::utils;
+use crate::get_mut_card;
 
 
 pub struct BalanceAdjustment {
@@ -35,53 +35,52 @@ impl action::Action for BalanceAdjustment {
         let parameters = &self.parameters;
         let utc: DateTime<Utc> = Utc::now();
 
-        // Get the public token
-        let public_token = match parameters.public_token.as_ref() {
-            None => return Err(GpsError::ActionCode{num: 999, msg: format!("Missing public_token")}), // TODO: support other ways to get the card
-            Some(v) => v,
-        };
+        get_mut_card!(self.parameters.public_token, state, card, cards_map);
+        utils::check_currency(&parameters.cur_code, card)?;
 
-        // Get the card, with a write mutex
-        let mut public_tokens = state.public_tokens.write().expect("Poisoned read lock");
-        let card = match public_tokens.get_mut(public_token) {
-            None => return Err(GpsError::ActionCode{num: 999, msg: format!("Public token not found")}),
-            Some(card) => card,
-        };
-
-        // We do not support a balance adjustment with a currency different than the one in the
-        // card. Not sure if GPS does.
-        match parameters.cur_code.as_ref().map(String::as_str) {
-            None => (),
-            Some(v) =>  {
-                let currency = currency::find_by_alpha_code(v)?;
-                if currency != card.get_currency() {
-                    return Err(GpsError::ActionCode{num: 999, msg: format!("Currency missmatch")});
-                }
-            }
-        };
-
-        // Get the amount with the correct sign, and as a string because that's what Money expects
+        // Get the amount with the correct sign
         let amount = match parameters.deb_or_cred.as_ref().map(String::as_ref) {
-            Some("-1") => format!("{}", -parameters.amt_adjustment),
-            Some("1") => parameters.amt_adjustment.to_string(),
+            Some("-1") => -utils::get_strictly_positive_amount(&parameters.amt_adjustment.to_string())?,
+            Some("1") => utils::get_strictly_positive_amount(&parameters.amt_adjustment.to_string())?,
             _ => return Err(GpsError::ActionCode{num: 999, msg: format!("Invalid deb_or_cred")}),
         };
-        let amount = Decimal::from_str(&amount)?;
-        let amount = money::Money::new(amount, card.get_currency());
 
-        card.balance = (card.balance + amount)?;
+        card.balance.amount += amount;
 
         // Record the transaction in the card structure
         let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);
         let transaction = types::Transaction {
             item_id: item_id as u64, // GPS transaction ID
+            wsid: Some(parameters.wsid as u64), // GPS transaction ID
+
             txn_date: utc,
             post_date: utc,
+
             amt_bill: amount,
-            amt_txn: amount,
-            fixed_fee: None,
-            rate_fee: None,
-            note: parameters.description.clone(),
+            currency: card.get_currency(),
+            amt_txn: money::Money::new(amount, card.get_currency()), // TODO:: Currency conversion support?
+
+            // Balance adjustments have no fees
+            fee_fixed: None,
+            fee_rate: None,
+            dom_fee_fixed: None,
+            dom_fee_rate: None,
+            non_dom_fee_fixed: None,
+            non_dom_fee_rate: None,
+            fx_fee_fixed: None,
+            fx_fee_rate: None,
+            other_fee_fixed: None,
+
+            note: None,
+            description: parameters.description.clone(),
+
+            balance: card.balance.amount,
+            blocked_balance: card.blocked_balance,
+
+            mcc: None,
+            proc_code: None,
+
+            txn_type: types::TransationTypeStatus::BalanceAdjustment,
         };
 
         let response = self.wrap_response(gps_lib::types::WsBalanceAdjustmentResponse {
@@ -89,7 +88,7 @@ impl action::Action for BalanceAdjustment {
                 wsid: parameters.wsid,
                 iss_code: parameters.iss_code.clone(),
                 txn_code: parameters.txn_code.clone(),
-                public_token: Some(public_token.clone()),
+                public_token: parameters.public_token.clone(),
                 loc_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
                 loc_time: Some(format!("{}", utc.format("%H%M%S"))),
                 item_id: Some(transaction.item_id.to_string()), // GPS transaction ID

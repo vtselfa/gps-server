@@ -48,13 +48,36 @@ impl action::Action for Unload {
         let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);
         let transaction = types::Transaction {
             item_id: item_id as u64, // GPS transaction ID
+            wsid: Some(parameters.wsid as u64), // GPS transaction ID
+
             txn_date: utc,
             post_date: utc,
-            amt_bill: money::Money::new(amount, card.get_currency()),
-            amt_txn: money::Money::new(amount, card.get_currency()), // TODO: Currency conversion support?
-            fixed_fee: None, // Unloads have no fees attached
-            rate_fee: None, // Same as with the fixed fee
-            note: parameters.description.clone(),
+
+            amt_bill: amount,
+            currency: card.get_currency(),
+            amt_txn: money::Money::new(amount, card.get_currency()), // TODO:: Currency conversion support?
+
+            // UNloads have no fees
+            fee_fixed: None,
+            fee_rate: None,
+            dom_fee_fixed: None,
+            dom_fee_rate: None,
+            non_dom_fee_fixed: None,
+            non_dom_fee_rate: None,
+            fx_fee_fixed: None,
+            fx_fee_rate: None,
+            other_fee_fixed: None,
+
+            note: None,
+            description: parameters.description.clone(),
+
+            balance: card.balance.amount,
+            blocked_balance: card.blocked_balance,
+
+            mcc: None,
+            proc_code: None,
+
+            txn_type: types::TransationTypeStatus::Unload,
         };
 
         let response = self.wrap_response(gps_lib::types::WsUnLoadResponse {

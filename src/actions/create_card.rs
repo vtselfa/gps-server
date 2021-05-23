@@ -58,8 +58,9 @@ impl action::Action for CreateCard {
             public_token,
             external_ref: parameters.external_ref.clone(),
             start_date: utc,
-            exp_date: utc.with_year(utc.year() + 3).unwrap(), // TODO: Use provided expiration date if available
+            exp_date: utc.with_year(utc.year() + 3).unwrap().naive_utc().date(), // TODO: Use provided expiration date if available
             balance: money::Money::new(load_value, currency),
+            blocked_balance: money::Money::new(load_value, currency).amount,
             is_live: match parameters.activate_now {
                 0 => false,
                 1 => true,

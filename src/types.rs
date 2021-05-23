@@ -4,8 +4,10 @@ use chrono::prelude::*;
 use std::sync::atomic::AtomicUsize;
 use std::str;
 use std::io;
+use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use thiserror::Error;
+use strum_macros::Display;
 
 use crate::currency;
 use crate::money::Money;
@@ -36,6 +38,9 @@ pub enum GpsError {
 
     #[error(transparent)]
     DecimalError(#[from] rust_decimal::Error),
+
+    #[error(transparent)]
+    DateError(#[from] chrono::ParseError),
 
     #[error("Amount not parseable")]
     ParseIntError(#[from] std::num::ParseIntError),
@@ -75,8 +80,9 @@ pub struct Card {
     pub public_token: String,
     pub external_ref: Option<String>,
     pub start_date: DateTime<Utc>,
-    pub exp_date: DateTime<Utc>,
+    pub exp_date: NaiveDate,
     pub balance: Money,
+    pub blocked_balance: Decimal, // Amount of the balance blocked by outstanding authorisations
     pub is_live: bool,
     pub pan: String,
     pub cvv: String,
@@ -105,17 +111,70 @@ pub enum CardStatus {
     Voided = 99,
 }
 
+#[derive(Display, Clone, Copy, Serialize, Deserialize)]
+pub enum TransationTypeStatus {
+    #[strum(serialize = "AA")]
+    AuthApproved,
+    #[strum(serialize = "AC")]
+    AuthOffline,
+    #[strum(serialize = "AI")]
+    AuthDeclined,
+    #[strum(serialize = "DA")]
+    AuthReversal,
+    #[strum(serialize = "PS")]
+    Presentment,
+    #[strum(serialize = "ES")]
+    FinancialReversal,
+    #[strum(serialize = "NS")]
+    SecondPresentment,
+    #[strum(serialize = "CS")]
+    Chargeback,
+    #[strum(serialize = "BS")]
+    BalanceAdjustment,
+    #[strum(serialize = "LS")]
+    Load,
+    #[strum(serialize = "US")]
+    Unload,
+}
+
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub item_id: u64, // GPS transaction ID
+    pub wsid: Option<u64>, // If it was initiated by a webservice call
+
     pub txn_date: DateTime<Utc>,
     pub post_date: DateTime<Utc>,
-    pub amt_bill: Money,
-    pub amt_txn: Money,
-    pub fixed_fee: Option<Money>,
-    pub rate_fee: Option<Money>,
+
+    // The amount of the transaction billed (for financials) or blocked (for authorisations) to the
+    // cardholder account, expressed in the account currency (after fx, fees excluded).
+    pub amt_bill: Decimal,
+    pub currency: currency::Currency, // Account currency
+
+    pub amt_txn: Money, // The amount and currency of the original payment
+
+    // Total fee = fee_fixed + fee_rate
+    pub fee_fixed: Option<Decimal>,
+    pub fee_rate: Option<Decimal>,
+    pub dom_fee_fixed: Option<Decimal>,
+    pub dom_fee_rate: Option<Decimal>,
+    pub non_dom_fee_fixed: Option<Decimal>,
+    pub non_dom_fee_rate: Option<Decimal>,
+    pub fx_fee_fixed: Option<Decimal>,
+    pub fx_fee_rate: Option<Decimal>,
+    pub other_fee_fixed: Option<Decimal>,
+
     pub note: Option<String>,
+    pub description: Option<String>,
+
+    // Both are AFTER the transaction
+    pub balance: Decimal, // Balance in the card
+    pub blocked_balance: Decimal, // Amount of the balance blocked by outstanding authorisations
+
+    pub mcc: Option<String>,
+    pub proc_code: Option<String>,
+
+    pub txn_type: TransationTypeStatus,
 }
 
 
@@ -150,12 +209,33 @@ impl Card {
     }
 }
 
+impl Transaction {
+    pub fn get_tx_currency(&self) -> currency::Currency {
+        self.amt_txn.currency
+    }
+
+    pub fn get_tx_currency_info(&self) -> currency::CurrencyInfo {
+        currency::get_currency_info(self.get_tx_currency())
+    }
+
+    pub fn get_bill_currency_info(&self) -> currency::CurrencyInfo {
+        currency::get_currency_info(self.currency)
+    }
+
+    pub fn get_type(&self) -> String {
+        self.txn_type.to_string()[0..1].to_string()
+    }
+
+    pub fn get_status(&self) -> String {
+        self.txn_type.to_string()[1..2].to_string()
+    }
+}
+
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::currency::Currency;
-    use rust_decimal::prelude::*;
 
     #[test]
     fn test_get_status_code() {
@@ -164,8 +244,9 @@ mod tests {
             public_token: format!("000000001"),
             external_ref: None,
             start_date: Utc::now(),
-            exp_date: Utc::now(),
+            exp_date: Utc::now().naive_utc().date(),
             balance: Money::new(Decimal::new(0, 2), Currency::EUR),
+            blocked_balance: Money::new(Decimal::new(0, 2), Currency::EUR).amount,
             is_live: false,
             pan: format!("1234123412341234"),
             cvv: format!("123"),
