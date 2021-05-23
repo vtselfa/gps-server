@@ -1,7 +1,6 @@
 use chrono::prelude::*;
 use paste::paste;
 use rand::Rng;
-use rust_decimal::prelude::*;
 use std::sync::atomic::Ordering;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
@@ -9,7 +8,7 @@ use yaserde::ser::to_string;
 use crate::action;
 use crate::currency;
 use crate::impl_wrap_response;
-use crate::money;
+use crate::money::Money;
 use crate::types::GpsError;
 use crate::types;
 use crate::utils;
@@ -45,12 +44,45 @@ impl action::Action for CreateCard {
         // we implement product support. For now, if a currency is not specified, we assume EUR.
         let currency = currency::find_by_alpha_code(parameters.cur_code.as_ref().map_or("EUR", |x|{x.as_str()}))?;
 
-        // TODO: Create a transaction in the card if a load amount is provided and record the
-        // item_id
-        let load_value = Decimal::from_str(&parameters.load_value.to_string())?;
-        if load_value.is_sign_negative() {
-            return Err(GpsError::ActionCode{num: 999, msg: format!("Negative load value")});
-        }
+        // Create a transaction in the card if a load amount is provided
+        let amount = utils::get_strictly_positive_amount(&parameters.load_value.to_string())?;
+        let transactions = if !amount.is_sign_positive() {
+            vec!()
+        } else {
+            let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);
+            vec!(types::Transaction {
+                item_id: item_id as u64, // GPS transaction ID
+                wsid: Some(parameters.wsid as u64), // GPS transaction ID
+
+                txn_date: utc,
+                post_date: utc,
+
+                amt_bill: amount,
+                currency,
+                amt_txn: Money::new(amount, currency),
+
+                fee_fixed: None, // TODO: Loads can have fees attached
+                fee_rate: None, // TODO: Same as with the fixed fee
+                dom_fee_fixed: None,
+                dom_fee_rate: None,
+                non_dom_fee_fixed: None,
+                non_dom_fee_rate: None,
+                fx_fee_fixed: None,
+                fx_fee_rate: None,
+                other_fee_fixed: None,
+
+                note: None,
+                description: Some(format!("Initial load")),
+
+                balance: amount,
+                blocked_balance: Money::zero(currency).amount,
+
+                mcc: None,
+                proc_code: None,
+
+                txn_type: types::TransationTypeStatus::Load,
+            })
+        };
 
         let mut rng = rand::thread_rng();
         let card = types::Card {
@@ -59,8 +91,8 @@ impl action::Action for CreateCard {
             external_ref: parameters.external_ref.clone(),
             start_date: utc,
             exp_date: utc.with_year(utc.year() + 3).unwrap().naive_utc().date(), // TODO: Use provided expiration date if available
-            balance: money::Money::new(load_value, currency),
-            blocked_balance: money::Money::new(load_value, currency).amount,
+            balance: Money::new(amount, currency),
+            blocked_balance: Money::zero(currency).amount,
             is_live: match parameters.activate_now {
                 0 => false,
                 1 => true,
@@ -69,7 +101,7 @@ impl action::Action for CreateCard {
             status: types::CardStatus::AllGood, // GPS returns this no matter if activated or not...
             pan: format!("{:>016}",rng.gen_range(0, 9999_9999_9999_9999 + 1 as i64)),
             cvv: format!("{:>03}", rng.gen_range(0, 999 + 1)),
-            transactions: vec![],
+            transactions,
             owner: types::Consumer {
                 title: parameters.title.clone().unwrap_or(format!("")),
                 first_name: parameters.first_name.clone().unwrap_or(format!("")),
@@ -86,7 +118,7 @@ impl action::Action for CreateCard {
                 external_ref: card.external_ref.clone(),
                 loc_date: Some(utils::loc_date()),
                 loc_time: Some(utils::loc_time()),
-                item_id: 0, // TODO: transaction id for the load operation if we load the card
+                item_id: if card.transactions.is_empty() {0} else {card.transactions[0].item_id as i64},
                 client_code: parameters.client_code.clone(),
                 sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),

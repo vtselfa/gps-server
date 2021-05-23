@@ -30,6 +30,10 @@ impl Money {
         }
     }
 
+    pub fn zero(curr: Currency) -> Self {
+        Self::new(Decimal::new(0, 1), curr)
+    }
+
     pub fn from_string(amount: &str, curr: Currency) -> Result<Money, GpsError> {
         let amount = Decimal::from_str(amount)?;
         Ok(Money::new(amount, curr))
