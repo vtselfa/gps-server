@@ -57,6 +57,13 @@ pub fn get_strictly_positive_amount(amount: &str) -> Result<Decimal, types::GpsE
     Ok(amount)
 }
 
+pub fn error_to_action_code(error: &GpsError) -> String {
+    match error {
+        types::GpsError::ActionCode{num, msg: _} => format!("{}", num),
+        _ => format!("999"), // TODO: map better to action codes?
+    }
+}
+
 // Format the local date as GPS does
 pub fn sys_date() -> String {
     let utc: DateTime<Utc> = Utc::now();

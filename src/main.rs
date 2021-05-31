@@ -22,6 +22,7 @@ mod utils;
 mod actions;
 mod currency;
 mod money;
+// mod action_codes;
 
 use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
@@ -31,6 +32,7 @@ use rocket::response;
 use std::io::Read;
 use log::{error, warn};
 use std::sync::atomic::Ordering;
+use chrono::prelude::*;
 
 use action::Action;
 use actions::create_card::CreateCard;
@@ -50,7 +52,23 @@ struct PostStr {
 
 impl PostStr {
     fn response(&self, state: &types::State) -> Result<String, types::GpsError> {
-        self.action.execute(state)
+        let (action_code, response_sent) = match self.action.execute(state) {
+            Ok(res) => (format!("000"), res),
+            Err(error) => (utils::error_to_action_code(&error), self.action.report_not_successful(&error)?),
+        };
+
+        // Register the WSID and its result to be able to i) ensure that it's not used again,
+        // and ii) be able to implement Ws_WebServiceResult_V2
+        if let Some(wsid) = self.action.get_wsid() {
+            let result =  types::ActionResult{
+                timestamp: Utc::now(),
+                action_name: self.action.get_action_name().to_string(),
+                action_code,
+                response_sent: response_sent.clone(),
+            };
+            state.wsids.write().expect("WSID lock poisoned").insert(wsid, result);
+        }
+        Ok(response_sent)
     }
 
     fn from_data_impl(req: &Request, data: Data) -> Result<Self, types::GpsError> {
@@ -89,16 +107,27 @@ impl PostStr {
 
         println!("Action: {}", action);
 
-        match action::extract_name(action)? {
-            "Ws_CreateCard"        => Ok(PostStr{action: Box::new(CreateCard::new(&contents)?)}),
-            "Ws_BalanceAdjustment" => Ok(PostStr{action: Box::new(BalanceAdjustment::new(&contents)?)}),
-            "Ws_Load"              => Ok(PostStr{action: Box::new(Load::new(&contents)?)}),
-            "Ws_Unload"            => Ok(PostStr{action: Box::new(Unload::new(&contents)?)}),
-            "Ws_Balance_Enquiry"   => Ok(PostStr{action: Box::new(BalanceEnquiry::new(&contents)?)}),
-            "Ws_Balance_Enquiry_V2"   => Ok(PostStr{action: Box::new(BalanceEnquiryV2::new(&contents)?)}),
-            "Ws_Enquiry"              => Ok(PostStr{action: Box::new(Enquiry::new(&contents)?)}),
-            "Ws_Card_Statement"       => Ok(PostStr{action: Box::new(CardStatement::new(&contents)?)}),
-            _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
+        match action::extract_name(action) {
+            Ok(action_name) => match action_name {
+                "Ws_CreateCard" =>
+                    Ok(PostStr{action: Box::new(CreateCard::new(action_name, &contents)?)}),
+                "Ws_BalanceAdjustment" =>
+                    Ok(PostStr{action: Box::new(BalanceAdjustment::new(action_name, &contents)?)}),
+                "Ws_Load" =>
+                    Ok(PostStr{action: Box::new(Load::new(action_name, &contents)?)}),
+                "Ws_Unload" =>
+                    Ok(PostStr{action: Box::new(Unload::new(action_name, &contents)?)}),
+                "Ws_Balance_Enquiry" =>
+                    Ok(PostStr{action: Box::new(BalanceEnquiry::new(action_name, &contents)?)}),
+                "Ws_Balance_Enquiry_V2" =>
+                    Ok(PostStr{action: Box::new(BalanceEnquiryV2::new(action_name, &contents)?)}),
+                "Ws_Enquiry" =>
+                    Ok(PostStr{action: Box::new(Enquiry::new(action_name, &contents)?)}),
+                "Ws_Card_Statement" =>
+                    Ok(PostStr{action: Box::new(CardStatement::new(action_name, &contents)?)}),
+                _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
+            },
+            Err(error) => Err(error),
         }
     }
 }

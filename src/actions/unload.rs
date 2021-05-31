@@ -7,6 +7,7 @@ use yaserde::ser::to_string;
 use crate::action;
 use crate::get_mut_card;
 use crate::impl_wrap_response;
+use crate::impl_action_boilerplate;
 use crate::money;
 use crate::types::GpsError;
 use crate::types;
@@ -15,21 +16,13 @@ use crate::utils;
 
 pub struct Unload {
     pub parameters: gps_lib::types::WsUnLoad,
+    pub action_name: String,
 }
 
 impl_wrap_response!(Unload, UnLoad); // Our name is different than the GPS one
 
 impl action::Action for Unload {
-    fn new(contents: &str) -> Result<Self, types::GpsError> {
-        let envelope: Result<gps_lib::bindings::WsUnLoadSoapInSoapEnvelope, std::string::String> =
-            from_str(&contents);
-        match envelope {
-            Err(e) => Err(types::GpsError::RequestData(e)),
-            Ok(v) => Ok(Unload {
-                parameters: v.body.body.parameters,
-            }),
-        }
-    }
+    impl_action_boilerplate!(Unload, UnLoad);
 
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
@@ -57,7 +50,7 @@ impl action::Action for Unload {
             currency: card.get_currency(),
             amt_txn: money::Money::new(amount, card.get_currency()), // TODO:: Currency conversion support?
 
-            // UNloads have no fees
+            // Unloads have no fees
             fee_fixed: None,
             fee_rate: None,
             dom_fee_fixed: None,
@@ -86,20 +79,48 @@ impl action::Action for Unload {
                 iss_code: parameters.iss_code.clone(),
                 txn_code: parameters.txn_code.clone(),
                 public_token: Some(card.public_token.clone()),
-                loc_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
-                loc_time: Some(format!("{}", utc.format("%H%M%S"))),
+                loc_date: Some(utils::loc_date()),
+                loc_time: Some(utils::loc_time()),
                 item_id: transaction.item_id as i64, // GPS transaction ID, every time a different type...
                 client_code: parameters.client_code.clone(),
-                sys_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
+                sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
                 amt_un_load: parameters.amt_un_load,
                 avl_bal: format!("{}", card.balance.amount),
                 cur_code: Some(card.get_currency_info().iso_numeric_code),
-                blk_amt: format!("0.0"), // TODO: Implement blocked balances in cards
+                blk_amt: format!("{}", card.blocked_balance),
             },
         });
 
         card.transactions.push(transaction);
+
+        match to_string(&response) {
+            Err(e) => Err(types::GpsError::Serialization(e)),
+            Ok(v) => Ok(v),
+        }
+    }
+
+    fn report_not_successful(&self, error: &types::GpsError) -> Result<String, types::GpsError> {
+        let parameters = &self.parameters;
+        let action_code = utils::error_to_action_code(error);
+        let response = self.wrap_response(gps_lib::types::WsUnLoadResponse {
+            ws_un_load_result: gps_lib::types::UnLoad {
+                wsid: parameters.wsid,
+                iss_code: parameters.iss_code.clone(),
+                txn_code: parameters.txn_code.clone(),
+                public_token: parameters.public_token.clone(),
+                loc_date: Some(utils::loc_date()),
+                loc_time: Some(utils::loc_time()),
+                item_id: 0,
+                client_code: parameters.client_code.clone(),
+                sys_date: Some(utils::sys_date()),
+                action_code: Some(action_code),
+                amt_un_load: parameters.amt_un_load,
+                avl_bal: format!("0.00"),
+                cur_code: parameters.curr_code.clone(),
+                blk_amt: format!("0.00"),
+            },
+        });
 
         match to_string(&response) {
             Err(e) => Err(types::GpsError::Serialization(e)),

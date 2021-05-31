@@ -7,6 +7,7 @@ use paste::paste;
 use crate::types;
 use crate::types::GpsError;
 use crate::action;
+use crate::impl_action_boilerplate;
 use crate::impl_wrap_response;
 use crate::money;
 use crate::utils;
@@ -15,21 +16,13 @@ use crate::get_mut_card;
 
 pub struct BalanceAdjustment {
     pub parameters: gps_lib::types::WsBalanceAdjustment,
+    pub action_name: String,
 }
 
 impl_wrap_response!(BalanceAdjustment);
 
 impl action::Action for BalanceAdjustment {
-    fn new(contents: &str) -> Result<Self, types::GpsError> {
-        let envelope: Result<gps_lib::bindings::WsBalanceAdjustmentSoapInSoapEnvelope, std::string::String> =
-            from_str(&contents);
-        match envelope {
-            Err(e) => Err(types::GpsError::RequestData(e)),
-            Ok(v) => Ok(BalanceAdjustment {
-                parameters: v.body.body.parameters,
-            }),
-        }
-    }
+    impl_action_boilerplate!(BalanceAdjustment);
 
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
@@ -89,11 +82,11 @@ impl action::Action for BalanceAdjustment {
                 iss_code: parameters.iss_code.clone(),
                 txn_code: parameters.txn_code.clone(),
                 public_token: parameters.public_token.clone(),
-                loc_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
-                loc_time: Some(format!("{}", utc.format("%H%M%S"))),
+                loc_date: Some(utils::loc_date()),
+                loc_time: Some(utils::loc_time()),
                 item_id: Some(transaction.item_id.to_string()), // GPS transaction ID
                 client_code: parameters.client_code.clone(),
-                sys_date: Some(format!("{}", utc.format("%Y-%m-%d"))),
+                sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
                 avl_bal: format!("{}", card.balance.amount),
                 cur_code: Some(card.get_currency_info().iso_numeric_code),
@@ -101,6 +94,32 @@ impl action::Action for BalanceAdjustment {
         });
 
         card.transactions.push(transaction);
+
+        match to_string(&response) {
+            Err(e) => Err(types::GpsError::Serialization(e)),
+            Ok(v) => Ok(v),
+        }
+    }
+
+    fn report_not_successful(&self, error: &types::GpsError) -> Result<String, types::GpsError> {
+        let parameters = &self.parameters;
+        let action_code = utils::error_to_action_code(error);
+        let response = self.wrap_response(gps_lib::types::WsBalanceAdjustmentResponse {
+            ws_balance_adjustment_result: gps_lib::types::BalanceAdjust {
+                wsid: parameters.wsid,
+                iss_code: parameters.iss_code.clone(),
+                txn_code: parameters.txn_code.clone(),
+                public_token: parameters.public_token.clone(),
+                loc_date: Some(utils::loc_date()),
+                loc_time: Some(utils::loc_time()),
+                item_id: Some(format!("0")), // GPS transaction ID
+                client_code: parameters.client_code.clone(),
+                sys_date: Some(utils::sys_date()),
+                action_code: Some(action_code),
+                avl_bal: format!("0.00"),
+                cur_code: parameters.cur_code.clone(),
+            },
+        });
 
         match to_string(&response) {
             Err(e) => Err(types::GpsError::Serialization(e)),

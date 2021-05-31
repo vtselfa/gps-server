@@ -7,6 +7,7 @@ use yaserde::ser::to_string;
 use crate::action;
 use crate::get_mut_card;
 use crate::impl_wrap_response;
+use crate::impl_action_boilerplate;
 use crate::money;
 use crate::types::GpsError;
 use crate::types;
@@ -14,22 +15,14 @@ use crate::utils;
 
 
 pub struct Load {
+    pub action_name: String,
     pub parameters: gps_lib::types::WsLoad,
 }
 
 impl_wrap_response!(Load);
 
 impl action::Action for Load {
-    fn new(contents: &str) -> Result<Self, types::GpsError> {
-        let envelope: Result<gps_lib::bindings::WsLoadSoapInSoapEnvelope, std::string::String> =
-            from_str(&contents);
-        match envelope {
-            Err(e) => Err(types::GpsError::RequestData(e)),
-            Ok(v) => Ok(Load {
-                parameters: v.body.body.parameters,
-            }),
-        }
-    }
+    impl_action_boilerplate!(Load);
 
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
@@ -93,6 +86,30 @@ impl action::Action for Load {
         });
 
         card.transactions.push(transaction);
+
+        match to_string(&response) {
+            Err(e) => Err(types::GpsError::Serialization(e)),
+            Ok(v) => Ok(v),
+        }
+    }
+
+    fn report_not_successful(&self, error: &types::GpsError) -> Result<String, types::GpsError> {
+        let parameters = &self.parameters;
+        let action_code = utils::error_to_action_code(error);
+        let response = self.wrap_response(gps_lib::types::WsLoadResponse {
+            ws_load_result: gps_lib::types::LoadCard {
+                wsid: parameters.wsid,
+                iss_code: parameters.iss_code.clone(),
+                txn_code: parameters.txn_code.clone(),
+                public_token: parameters.public_token.clone(),
+                loc_date: Some(utils::loc_date()),
+                loc_time: Some(utils::loc_time()),
+                item_id: 0,
+                client_code: parameters.client_code.clone(),
+                sys_date: Some(utils::sys_date()),
+                action_code: Some(action_code),
+            },
+        });
 
         match to_string(&response) {
             Err(e) => Err(types::GpsError::Serialization(e)),

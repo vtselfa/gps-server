@@ -60,7 +60,7 @@ pub struct State {
 
     pub next_public_token: AtomicUsize,
     pub next_item_id:      AtomicUsize,
-    pub wsids:             RwLock<HashMap<u64, String>>,
+    pub wsids:             RwLock<HashMap<u64, ActionResult>>,
     pub public_tokens:     RwLock<HashMap<String, Card>>,
     pub transactions:      RwLock<Vec<Transaction>>,
 }
@@ -139,6 +139,29 @@ pub enum TransationTypeStatus {
 
 
 #[derive(Clone, Serialize, Deserialize)]
+pub struct ActionResult {
+    pub timestamp: DateTime<Utc>,
+    pub action_name: String,
+    pub action_code: String,
+    pub response_sent: String,
+}
+
+
+#[derive(Clone, Serialize, Deserialize, Default)]
+pub struct Fees {
+    pub fee_fixed: Option<Decimal>,
+    pub fee_rate: Option<Decimal>,
+    pub dom_fee_fixed: Option<Decimal>,
+    pub dom_fee_rate: Option<Decimal>,
+    pub non_dom_fee_fixed: Option<Decimal>,
+    pub non_dom_fee_rate: Option<Decimal>,
+    pub fx_fee_fixed: Option<Decimal>,
+    pub fx_fee_rate: Option<Decimal>,
+    pub other_fee_fixed: Option<Decimal>,
+}
+
+
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Transaction {
     pub item_id: u64, // GPS transaction ID
     pub wsid: Option<u64>, // If it was initiated by a webservice call
@@ -210,6 +233,27 @@ impl Card {
 }
 
 impl Transaction {
+    // pub fn get_start_date(&self) -> String {
+    //     format!("{}", self.start_date.format("%m/%Y"))
+    // }
+    //
+    // pub fn get_exp_date(&self) -> String {
+    //     format!("{}", self.exp_date.format("%Y-%m-%d"))
+    // }
+    //
+    // // The end date is the exp date in a different format
+    // pub fn get_end_date(&self) -> String {
+    //     format!("{}", self.exp_date.format("%m/%Y"))
+    // }
+    //
+    // pub fn get_status_code(&self) -> String {
+    //     format!("{:0>2}", self.status as i32)
+    // }
+    //
+    // pub fn get_emboss_name(&self) -> String {
+    //     format!("{} {} {}", self.owner.title, self.owner.first_name, self.owner.last_name)
+    // }
+
     pub fn get_tx_currency(&self) -> currency::Currency {
         self.amt_txn.currency
     }

@@ -7,6 +7,7 @@ use yaserde::ser::to_string;
 
 use crate::action;
 use crate::currency;
+use crate::impl_action_boilerplate;
 use crate::impl_wrap_response;
 use crate::money::Money;
 use crate::types::GpsError;
@@ -15,22 +16,14 @@ use crate::utils;
 
 
 pub struct CreateCard {
+    pub action_name: String,
     pub parameters: gps_lib::types::WsCreateCard,
 }
 
 impl_wrap_response!(CreateCard);
 
 impl action::Action for CreateCard {
-    fn new(contents: &str) -> Result<Self, types::GpsError> {
-        let envelope: Result<gps_lib::bindings::WsCreateCardSoapInSoapEnvelope, std::string::String> =
-            from_str(&contents);
-        match envelope {
-            Err(e) => Err(types::GpsError::RequestData(e)),
-            Ok(v) => Ok(CreateCard {
-                parameters: v.body.body.parameters,
-            }),
-        }
-    }
+    impl_action_boilerplate!(CreateCard);
 
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
@@ -133,6 +126,31 @@ impl action::Action for CreateCard {
         });
 
         state.public_tokens.write().expect("Public tokens lock poisoned").insert(card.public_token.clone(), card);
+
+        match to_string(&response) {
+            Err(e) => Err(types::GpsError::Serialization(e)),
+            Ok(v) => Ok(v),
+        }
+    }
+
+    fn report_not_successful(&self, error: &types::GpsError) -> Result<String, types::GpsError> {
+        let parameters = &self.parameters;
+        let action_code = utils::error_to_action_code(error);
+        let response = self.wrap_response(gps_lib::types::WsCreateCardResponse {
+            ws_create_card_result: gps_lib::types::VirtualCards {
+                wsid: parameters.wsid,
+                iss_code: parameters.iss_code.clone(),
+                txn_code: parameters.txn_code.clone(),
+                loc_date: Some(utils::loc_date()),
+                loc_time: Some(utils::loc_time()),
+                item_id: 0,
+                client_code: parameters.client_code.clone(),
+                sys_date: Some(utils::sys_date()),
+                action_code: Some(action_code),
+                load_value: parameters.load_value.clone(),
+                ..Default::default()
+            },
+        });
 
         match to_string(&response) {
             Err(e) => Err(types::GpsError::Serialization(e)),
