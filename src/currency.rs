@@ -1,13 +1,11 @@
-use std::collections::HashMap;
-use serde::{Deserialize, Serialize};
 use lazy_static::lazy_static;
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 use crate::types::GpsError;
 
-
-
 #[derive(Debug, Serialize, Deserialize)]
-pub struct CurrencyInfo{
+pub struct CurrencyInfo {
     pub decimals: u32,
     pub iso_alpha_code: String,
     pub iso_numeric_code: String,
@@ -18,19 +16,18 @@ pub struct CurrencyInfo{
 }
 
 lazy_static! {
-    static ref ALPHA_CODE_TO_ENUM: HashMap<String, Currency> =
-        gen_alpha_code_to_enum();
-
-    static ref NUM_CODE_TO_ENUM: HashMap<String, Currency> =
-        gen_num_code_to_enum();
+    static ref ALPHA_CODE_TO_ENUM: HashMap<String, Currency> = gen_alpha_code_to_enum();
+    static ref NUM_CODE_TO_ENUM: HashMap<String, Currency> = gen_num_code_to_enum();
 }
-
 
 /// Returns an enum value given an alphabetic ISO-4217 currency code.
 pub fn find_by_alpha_code(code: &str) -> Result<Currency, GpsError> {
     match ALPHA_CODE_TO_ENUM.get(&code.to_uppercase()) {
         Some(c) => Ok(*c),
-        None => Err(GpsError::CurrencyError(format!("The string '{}' is not a valid ISO alpha code for a currency", code))),
+        None => Err(GpsError::CurrencyError(format!(
+            "The string '{}' is not a valid ISO alpha code for a currency",
+            code
+        ))),
     }
 }
 
@@ -38,7 +35,10 @@ pub fn find_by_alpha_code(code: &str) -> Result<Currency, GpsError> {
 pub fn find_by_numeric_code(code: &str) -> Result<Currency, GpsError> {
     match NUM_CODE_TO_ENUM.get(code) {
         Some(c) => Ok(*c),
-        None => Err(GpsError::CurrencyError(format!("The string '{}' is not a valid ISO numeric code for a currency", code))),
+        None => Err(GpsError::CurrencyError(format!(
+            "The string '{}' is not a valid ISO numeric code for a currency",
+            code
+        ))),
     }
 }
 
@@ -59,7 +59,6 @@ fn gen_num_code_to_enum() -> HashMap<String, Currency> {
     }
     map
 }
-
 
 // Macro that provides a constant to iterate over the Currency Enum.
 macro_rules! define_enum {
@@ -246,7 +245,6 @@ define_enum!(Currency {
     ZMW,
     ZWL,
 });
-
 
 /// Returns a CurrencyInfo object given an ISO enum.
 pub fn get_currency_info(code: Currency) -> CurrencyInfo {

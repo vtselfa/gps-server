@@ -1,17 +1,16 @@
-use std::sync::RwLock;
-use std::collections::HashMap;
 use chrono::prelude::*;
-use std::sync::atomic::AtomicUsize;
-use std::str;
-use std::io;
 use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
-use thiserror::Error;
+use std::collections::HashMap;
+use std::io;
+use std::str;
+use std::sync::atomic::AtomicUsize;
+use std::sync::RwLock;
 use strum_macros::Display;
+use thiserror::Error;
 
 use crate::currency;
 use crate::money::Money;
-
 
 #[derive(Error, Debug)]
 pub enum GpsError {
@@ -46,9 +45,8 @@ pub enum GpsError {
     ParseIntError(#[from] std::num::ParseIntError),
 
     #[error("action code '{num:?}': {msg:?}")]
-    ActionCode{num: i32, msg: String},
+    ActionCode { num: i32, msg: String },
 }
-
 
 #[derive(Default, Serialize, Deserialize)]
 pub struct State {
@@ -56,15 +54,14 @@ pub struct State {
     // It is taken for writing when replacing the state with a new one, or when deleting it.
     // It is takes for reading in any other case.
     #[serde(skip_serializing)]
-    pub replacing_state:   RwLock<bool>,
+    pub replacing_state: RwLock<bool>,
 
     pub next_public_token: AtomicUsize,
-    pub next_item_id:      AtomicUsize,
-    pub wsids:             RwLock<HashMap<u64, ActionResult>>,
-    pub public_tokens:     RwLock<HashMap<String, Card>>,
-    pub transactions:      RwLock<Vec<Transaction>>,
+    pub next_item_id: AtomicUsize,
+    pub wsids: RwLock<HashMap<u64, ActionResult>>,
+    pub public_tokens: RwLock<HashMap<String, Card>>,
+    pub transactions: RwLock<Vec<Transaction>>,
 }
-
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Consumer {
@@ -72,7 +69,6 @@ pub struct Consumer {
     pub first_name: String,
     pub last_name: String,
 }
-
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Card {
@@ -91,7 +87,6 @@ pub struct Card {
     pub owner: Consumer,
     // TODO: Groups
 }
-
 
 #[derive(Copy, Clone, Serialize, Deserialize)]
 pub enum CardStatus {
@@ -137,7 +132,6 @@ pub enum TransationTypeStatus {
     Unload,
 }
 
-
 #[derive(Clone, Serialize, Deserialize)]
 pub struct ActionResult {
     pub timestamp: DateTime<Utc>,
@@ -145,7 +139,6 @@ pub struct ActionResult {
     pub action_code: String,
     pub response_sent: String,
 }
-
 
 #[derive(Clone, Serialize, Deserialize, Default)]
 pub struct Fees {
@@ -160,10 +153,9 @@ pub struct Fees {
     pub other_fee_fixed: Option<Decimal>,
 }
 
-
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Transaction {
-    pub item_id: u64, // GPS transaction ID
+    pub item_id: u64,      // GPS transaction ID
     pub wsid: Option<u64>, // If it was initiated by a webservice call
 
     pub txn_date: DateTime<Utc>,
@@ -191,7 +183,7 @@ pub struct Transaction {
     pub description: Option<String>,
 
     // Both are AFTER the transaction
-    pub balance: Decimal, // Balance in the card
+    pub balance: Decimal,         // Balance in the card
     pub blocked_balance: Decimal, // Amount of the balance blocked by outstanding authorisations
 
     pub mcc: Option<String>,
@@ -199,7 +191,6 @@ pub struct Transaction {
 
     pub txn_type: TransationTypeStatus,
 }
-
 
 impl Card {
     pub fn get_start_date(&self) -> String {
@@ -220,7 +211,10 @@ impl Card {
     }
 
     pub fn get_emboss_name(&self) -> String {
-        format!("{} {} {}", self.owner.title, self.owner.first_name, self.owner.last_name)
+        format!(
+            "{} {} {}",
+            self.owner.title, self.owner.first_name, self.owner.last_name
+        )
     }
 
     pub fn get_currency(&self) -> currency::Currency {
@@ -274,7 +268,6 @@ impl Transaction {
         self.txn_type.to_string()[1..2].to_string()
     }
 }
-
 
 #[cfg(test)]
 mod tests {

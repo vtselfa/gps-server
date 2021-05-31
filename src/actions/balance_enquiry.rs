@@ -7,26 +7,22 @@ use crate::action;
 use crate::get_card;
 use crate::impl_action_boilerplate;
 use crate::impl_wrap_response;
-use crate::types::GpsError;
 use crate::types;
+use crate::types::GpsError;
 use crate::utils;
-
 
 pub struct BalanceEnquiry {
     pub parameters: gps_lib::types::WsBalanceEnquiry,
     pub action_name: String,
 }
 
-
 pub struct BalanceEnquiryV2 {
     pub parameters: gps_lib::types::WsBalanceEnquiryV2,
     pub action_name: String,
 }
 
-
 impl_wrap_response!(BalanceEnquiry);
 impl_wrap_response!(BalanceEnquiryV2);
-
 
 impl action::Action for BalanceEnquiry {
     impl_action_boilerplate!(BalanceEnquiry);
@@ -51,7 +47,7 @@ impl action::Action for BalanceEnquiry {
                 avl_bal: format!("{}", card.balance.amount),
                 blk_amt: format!("{}", card.blocked_balance),
                 cur_code: Some(card.get_currency_info().iso_numeric_code),
-                pin_status: 0, // TODO: WTF is this?
+                pin_status: 0,    // TODO: WTF is this?
                 limit_info: None, // TODO: WTF is this?
             },
         });
@@ -89,7 +85,6 @@ impl action::Action for BalanceEnquiry {
     }
 }
 
-
 impl action::Action for BalanceEnquiryV2 {
     impl_action_boilerplate!(BalanceEnquiryV2);
 
@@ -114,7 +109,7 @@ impl action::Action for BalanceEnquiryV2 {
                 avl_bal: format!("{}", card.balance.amount),
                 blk_amt: format!("{}", card.blocked_balance),
                 cur_code: Some(card.get_currency_info().iso_numeric_code),
-                pin_status: 0, // TODO: WTF is this?
+                pin_status: 0,    // TODO: WTF is this?
                 limit_info: None, // TODO: WTF is this?
             }),
         });

@@ -1,17 +1,16 @@
+use chrono::prelude::*;
+use paste::paste;
+use superslice::*;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
-use paste::paste;
-use chrono::prelude::*;
-use superslice::*;
 
-use crate::types;
-use crate::utils;
+use crate::action;
 use crate::get_card;
 use crate::impl_action_boilerplate;
 use crate::impl_wrap_response;
+use crate::types;
 use crate::types::GpsError;
-use crate::action;
-
+use crate::utils;
 
 pub struct CardStatement {
     pub parameters: gps_lib::types::WsCardStatement,
@@ -29,46 +28,65 @@ impl action::Action for CardStatement {
 
         get_card!(self.parameters.public_token, state, card, cards_map);
 
-
-        let start_date = parameters.start_date.as_ref().map(|x|&x[..]).unwrap_or("1970-01-01");
+        let start_date = parameters
+            .start_date
+            .as_ref()
+            .map(|x| &x[..])
+            .unwrap_or("1970-01-01");
         let start_date = DateTime::<Utc>::from_utc(
-            NaiveDate::parse_from_str(&start_date, "%Y-%m-%d")?.and_hms(0, 0, 0), Utc);
+            NaiveDate::parse_from_str(&start_date, "%Y-%m-%d")?.and_hms(0, 0, 0),
+            Utc,
+        );
 
-        let end_date = parameters.end_date.as_ref().map(|x|&x[..]).unwrap_or("2050-01-01");
+        let end_date = parameters
+            .end_date
+            .as_ref()
+            .map(|x| &x[..])
+            .unwrap_or("2050-01-01");
         let end_date = DateTime::<Utc>::from_utc(
-            NaiveDate::parse_from_str(&end_date, "%Y-%m-%d")?.and_hms(0, 0, 0), Utc);
+            NaiveDate::parse_from_str(&end_date, "%Y-%m-%d")?.and_hms(0, 0, 0),
+            Utc,
+        );
 
-        let mut lb = card.transactions.lower_bound_by(|x| x.txn_date.cmp(&start_date));
-        let ub = card.transactions.upper_bound_by(|x| x.txn_date.cmp(&end_date));
+        let mut lb = card
+            .transactions
+            .lower_bound_by(|x| x.txn_date.cmp(&start_date));
+        let ub = card
+            .transactions
+            .upper_bound_by(|x| x.txn_date.cmp(&end_date));
 
         println!("{} {}", lb, ub);
-        let start_bal =
-            if card.transactions.is_empty() {
-                format!("0.0")
-            } else if lb < card.transactions.len() {
-                format!("{}", card.transactions[lb].balance - card.transactions[lb].amt_bill)
-            } else {
-                format!("{}", card.transactions[lb - 1].balance)
-            };
+        let start_bal = if card.transactions.is_empty() {
+            format!("0.0")
+        } else if lb < card.transactions.len() {
+            format!(
+                "{}",
+                card.transactions[lb].balance - card.transactions[lb].amt_bill
+            )
+        } else {
+            format!("{}", card.transactions[lb - 1].balance)
+        };
 
-        let end_bal =
-            if card.transactions.is_empty() {
-                format!("0.0")
-            } else if ub < card.transactions.len() {
-                format!("{}", card.transactions[ub].balance - card.transactions[lb].amt_bill)
-            } else {
-                format!("{}", card.transactions[ub - 1].balance)
-            };
+        let end_bal = if card.transactions.is_empty() {
+            format!("0.0")
+        } else if ub < card.transactions.len() {
+            format!(
+                "{}",
+                card.transactions[ub].balance - card.transactions[lb].amt_bill
+            )
+        } else {
+            format!("{}", card.transactions[ub - 1].balance)
+        };
 
-        let mut txs =  gps_lib::types::ArrayOfTransaction2 {
-            transaction_2: vec!()
+        let mut txs = gps_lib::types::ArrayOfTransaction2 {
+            transaction_2: vec![],
         };
 
         while lb < ub {
             let tx = &card.transactions[lb];
             txs.transaction_2.push(gps_lib::types::Transaction2 {
-                txn_date : Some(tx.txn_date.format("%Y-%m-%d").to_string()),
-                post_date : Some(tx.post_date.format("%Y-%m-%d").to_string()),
+                txn_date: Some(tx.txn_date.format("%Y-%m-%d").to_string()),
+                post_date: Some(tx.post_date.format("%Y-%m-%d").to_string()),
                 amt_bill: format!("{}", tx.amt_bill),
                 amt_txn: format!("{}", tx.amt_txn.amount),
                 bill_conv_rate: format!("{}", tx.amt_txn.amount / tx.amt_bill),
@@ -87,8 +105,14 @@ impl action::Action for CardStatement {
                 loc_date: None,
                 fee_id: 0,
                 wsid: tx.wsid.unwrap_or(0) as i64,
-                fixed_fee: tx.fee_fixed.map(|x| format!("{}", x)).unwrap_or(format!("0.00")),
-                rate_fee: tx.fee_rate.map(|x| format!("{}", x)).unwrap_or(format!("0.00")),
+                fixed_fee: tx
+                    .fee_fixed
+                    .map(|x| format!("{}", x))
+                    .unwrap_or(format!("0.00")),
+                rate_fee: tx
+                    .fee_rate
+                    .map(|x| format!("{}", x))
+                    .unwrap_or(format!("0.00")),
                 fx_pdg: format!("0.00"),
                 mcc_pdg: format!("0.00"),
                 link_id: None,
@@ -131,7 +155,11 @@ impl action::Action for CardStatement {
                 blk_amt: format!("{}", card.blocked_balance),
                 sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
-                transactions: if txs.transaction_2.is_empty() {None} else {Some(txs)},
+                transactions: if txs.transaction_2.is_empty() {
+                    None
+                } else {
+                    Some(txs)
+                },
             },
         });
 

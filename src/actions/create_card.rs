@@ -10,10 +10,9 @@ use crate::currency;
 use crate::impl_action_boilerplate;
 use crate::impl_wrap_response;
 use crate::money::Money;
-use crate::types::GpsError;
 use crate::types;
+use crate::types::GpsError;
 use crate::utils;
-
 
 pub struct CreateCard {
     pub action_name: String,
@@ -35,16 +34,18 @@ impl action::Action for CreateCard {
 
         // TODO: Currencies are usually taken from products, so we will not have proper currency support until
         // we implement product support. For now, if a currency is not specified, we assume EUR.
-        let currency = currency::find_by_alpha_code(parameters.cur_code.as_ref().map_or("EUR", |x|{x.as_str()}))?;
+        let currency = currency::find_by_alpha_code(
+            parameters.cur_code.as_ref().map_or("EUR", |x| x.as_str()),
+        )?;
 
         // Create a transaction in the card if a load amount is provided
         let amount = utils::get_strictly_positive_amount(&parameters.load_value.to_string())?;
         let transactions = if !amount.is_sign_positive() {
-            vec!()
+            vec![]
         } else {
             let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);
-            vec!(types::Transaction {
-                item_id: item_id as u64, // GPS transaction ID
+            vec![types::Transaction {
+                item_id: item_id as u64,            // GPS transaction ID
                 wsid: Some(parameters.wsid as u64), // GPS transaction ID
 
                 txn_date: utc,
@@ -55,7 +56,7 @@ impl action::Action for CreateCard {
                 amt_txn: Money::new(amount, currency),
 
                 fee_fixed: None, // TODO: Loads can have fees attached
-                fee_rate: None, // TODO: Same as with the fixed fee
+                fee_rate: None,  // TODO: Same as with the fixed fee
                 dom_fee_fixed: None,
                 dom_fee_rate: None,
                 non_dom_fee_fixed: None,
@@ -74,7 +75,7 @@ impl action::Action for CreateCard {
                 proc_code: None,
 
                 txn_type: types::TransationTypeStatus::Load,
-            })
+            }]
         };
 
         let mut rng = rand::thread_rng();
@@ -89,17 +90,22 @@ impl action::Action for CreateCard {
             is_live: match parameters.activate_now {
                 0 => false,
                 1 => true,
-                _ => return Err(GpsError::ActionCode{num: 999, msg: format!("Invalid activate_now value")})  // Actually, GPS does not check this
+                _ => {
+                    return Err(GpsError::ActionCode {
+                        num: 999,
+                        msg: format!("Invalid activate_now value"),
+                    })
+                } // Actually, GPS does not check this
             },
             status: types::CardStatus::AllGood, // GPS returns this no matter if activated or not...
-            pan: format!("{:>016}",rng.gen_range(0, 9999_9999_9999_9999 + 1 as i64)),
+            pan: format!("{:>016}", rng.gen_range(0, 9999_9999_9999_9999 + 1 as i64)),
             cvv: format!("{:>03}", rng.gen_range(0, 999 + 1)),
             transactions,
             owner: types::Consumer {
                 title: parameters.title.clone().unwrap_or(format!("")),
                 first_name: parameters.first_name.clone().unwrap_or(format!("")),
                 last_name: parameters.last_name.clone().unwrap_or(format!("")),
-            }
+            },
         };
 
         let response = self.wrap_response(gps_lib::types::WsCreateCardResponse {
@@ -111,7 +117,11 @@ impl action::Action for CreateCard {
                 external_ref: card.external_ref.clone(),
                 loc_date: Some(utils::loc_date()),
                 loc_time: Some(utils::loc_time()),
-                item_id: if card.transactions.is_empty() {0} else {card.transactions[0].item_id as i64},
+                item_id: if card.transactions.is_empty() {
+                    0
+                } else {
+                    card.transactions[0].item_id as i64
+                },
                 client_code: parameters.client_code.clone(),
                 sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
@@ -125,7 +135,11 @@ impl action::Action for CreateCard {
             },
         });
 
-        state.public_tokens.write().expect("Public tokens lock poisoned").insert(card.public_token.clone(), card);
+        state
+            .public_tokens
+            .write()
+            .expect("Public tokens lock poisoned")
+            .insert(card.public_token.clone(), card);
 
         match to_string(&response) {
             Err(e) => Err(types::GpsError::Serialization(e)),

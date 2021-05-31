@@ -2,49 +2,48 @@
 
 #[macro_use]
 extern crate rocket;
-extern crate regex;
+extern crate chrono;
+extern crate gps_lib;
 extern crate lazy_static;
 extern crate log;
+extern crate regex;
+extern crate rust_decimal;
+extern crate serde_json;
+extern crate strum;
+extern crate superslice;
+extern crate thiserror;
 extern crate xml;
 extern crate yaserde;
 extern crate yaserde_derive;
-extern crate gps_lib;
-extern crate chrono;
-extern crate thiserror;
-extern crate rust_decimal;
-extern crate serde_json;
-extern crate superslice;
-extern crate strum;
 
 mod action;
-mod types;
-mod utils;
 mod actions;
 mod currency;
 mod money;
+mod types;
+mod utils;
 // mod action_codes;
 
+use chrono::prelude::*;
+use log::{error, warn};
 use rocket::data::{self, FromDataSimple};
 use rocket::http::Status;
+use rocket::response;
 use rocket::{Data, Outcome::*, Request};
 use rocket_contrib::json::Json;
-use rocket::response;
 use std::io::Read;
-use log::{error, warn};
 use std::sync::atomic::Ordering;
-use chrono::prelude::*;
 
 use action::Action;
-use actions::create_card::CreateCard;
 use actions::balance_adjustment::BalanceAdjustment;
-use actions::load::Load;
-use actions::unload::Unload;
 use actions::balance_enquiry::BalanceEnquiry;
 use actions::balance_enquiry::BalanceEnquiryV2;
-use actions::enquiry::Enquiry;
 use actions::card_statement::CardStatement;
+use actions::create_card::CreateCard;
+use actions::enquiry::Enquiry;
+use actions::load::Load;
+use actions::unload::Unload;
 use types::GpsError;
-
 
 struct PostStr {
     pub action: Box<dyn action::Action>,
@@ -54,19 +53,26 @@ impl PostStr {
     fn response(&self, state: &types::State) -> Result<String, types::GpsError> {
         let (action_code, response_sent) = match self.action.execute(state) {
             Ok(res) => (format!("000"), res),
-            Err(error) => (utils::error_to_action_code(&error), self.action.report_not_successful(&error)?),
+            Err(error) => (
+                utils::error_to_action_code(&error),
+                self.action.report_not_successful(&error)?,
+            ),
         };
 
         // Register the WSID and its result to be able to i) ensure that it's not used again,
         // and ii) be able to implement Ws_WebServiceResult_V2
         if let Some(wsid) = self.action.get_wsid() {
-            let result =  types::ActionResult{
+            let result = types::ActionResult {
                 timestamp: Utc::now(),
                 action_name: self.action.get_action_name().to_string(),
                 action_code,
                 response_sent: response_sent.clone(),
             };
-            state.wsids.write().expect("WSID lock poisoned").insert(wsid, result);
+            state
+                .wsids
+                .write()
+                .expect("WSID lock poisoned")
+                .insert(wsid, result);
         }
         Ok(response_sent)
     }
@@ -77,22 +83,32 @@ impl PostStr {
         const MAX_SIZE: usize = 4096;
 
         match req.headers().get("Content-Length").next() {
-            None => return Err(GpsError::ContentLength("Missing content-length header".to_string())),
+            None => {
+                return Err(GpsError::ContentLength(
+                    "Missing content-length header".to_string(),
+                ))
+            }
             Some(header) => match header.parse::<usize>() {
-                Err(_) => return Err(GpsError::ContentLength("Malformed content-length header".to_string())),
+                Err(_) => {
+                    return Err(GpsError::ContentLength(
+                        "Malformed content-length header".to_string(),
+                    ))
+                }
                 Ok(content_length) => {
                     if content_length > MAX_SIZE {
-                        return Err(GpsError::ContentLength("Incoming data too long".to_string()));
+                        return Err(GpsError::ContentLength(
+                            "Incoming data too long".to_string(),
+                        ));
                     }
                 }
-            }
+            },
         };
 
         let mut buffer: [u8; MAX_SIZE] = [0; MAX_SIZE];
         let mut offset = 0;
         let mut stream = data.open();
         loop {
-            let read_bytes = stream.read(&mut buffer[offset ..])?;
+            let read_bytes = stream.read(&mut buffer[offset..])?;
             if read_bytes == 0 {
                 break; // EOF
             }
@@ -101,7 +117,11 @@ impl PostStr {
         let contents = std::str::from_utf8(&buffer)?.to_string();
 
         let action = match req.headers().get_one("soapaction") {
-            None =>  return Err(GpsError::RequestData("No soapaction SOAP header found".to_string())),
+            None => {
+                return Err(GpsError::RequestData(
+                    "No soapaction SOAP header found".to_string(),
+                ))
+            }
             Some(a) => a,
         };
 
@@ -109,23 +129,34 @@ impl PostStr {
 
         match action::extract_name(action) {
             Ok(action_name) => match action_name {
-                "Ws_CreateCard" =>
-                    Ok(PostStr{action: Box::new(CreateCard::new(action_name, &contents)?)}),
-                "Ws_BalanceAdjustment" =>
-                    Ok(PostStr{action: Box::new(BalanceAdjustment::new(action_name, &contents)?)}),
-                "Ws_Load" =>
-                    Ok(PostStr{action: Box::new(Load::new(action_name, &contents)?)}),
-                "Ws_Unload" =>
-                    Ok(PostStr{action: Box::new(Unload::new(action_name, &contents)?)}),
-                "Ws_Balance_Enquiry" =>
-                    Ok(PostStr{action: Box::new(BalanceEnquiry::new(action_name, &contents)?)}),
-                "Ws_Balance_Enquiry_V2" =>
-                    Ok(PostStr{action: Box::new(BalanceEnquiryV2::new(action_name, &contents)?)}),
-                "Ws_Enquiry" =>
-                    Ok(PostStr{action: Box::new(Enquiry::new(action_name, &contents)?)}),
-                "Ws_Card_Statement" =>
-                    Ok(PostStr{action: Box::new(CardStatement::new(action_name, &contents)?)}),
-                _ => Err(GpsError::Action(format!("Action {} not implemented", action))),
+                "Ws_CreateCard" => Ok(PostStr {
+                    action: Box::new(CreateCard::new(action_name, &contents)?),
+                }),
+                "Ws_BalanceAdjustment" => Ok(PostStr {
+                    action: Box::new(BalanceAdjustment::new(action_name, &contents)?),
+                }),
+                "Ws_Load" => Ok(PostStr {
+                    action: Box::new(Load::new(action_name, &contents)?),
+                }),
+                "Ws_Unload" => Ok(PostStr {
+                    action: Box::new(Unload::new(action_name, &contents)?),
+                }),
+                "Ws_Balance_Enquiry" => Ok(PostStr {
+                    action: Box::new(BalanceEnquiry::new(action_name, &contents)?),
+                }),
+                "Ws_Balance_Enquiry_V2" => Ok(PostStr {
+                    action: Box::new(BalanceEnquiryV2::new(action_name, &contents)?),
+                }),
+                "Ws_Enquiry" => Ok(PostStr {
+                    action: Box::new(Enquiry::new(action_name, &contents)?),
+                }),
+                "Ws_Card_Statement" => Ok(PostStr {
+                    action: Box::new(CardStatement::new(action_name, &contents)?),
+                }),
+                _ => Err(GpsError::Action(format!(
+                    "Action {} not implemented",
+                    action
+                ))),
             },
             Err(error) => Err(error),
         }
@@ -140,7 +171,7 @@ impl FromDataSimple for PostStr {
             Err(e) => {
                 error!("Could not parse request: {}", e);
                 Failure((Status::BadRequest, e))
-            },
+            }
             Ok(v) => Success(v),
         }
     }
@@ -161,8 +192,9 @@ fn server_post(input: PostStr, state: rocket::State<types::State>) -> String {
 }
 
 #[get("/state")]
-fn get_state(state: rocket::State<types::State>)
--> Result<response::content::Json<String>, response::status::Custom<String>> {
+fn get_state(
+    state: rocket::State<types::State>,
+) -> Result<response::content::Json<String>, response::status::Custom<String>> {
     let _guard = state.replacing_state.read().unwrap();
 
     let state: &types::State = state.inner();
@@ -170,20 +202,31 @@ fn get_state(state: rocket::State<types::State>)
         Err(e) => {
             let msg = format!("Could not serialize program state: {}", e);
             error!("{}", msg);
-            Err(response::status::Custom::<String>(Status::InternalServerError, msg))
+            Err(response::status::Custom::<String>(
+                Status::InternalServerError,
+                msg,
+            ))
         }
         Ok(v) => Ok(response::content::Json(v)),
     }
 }
 
 #[post("/state", format = "json", data = "<new_state>")]
-fn post_state(new_state: Json<types::State>, state: rocket::State<types::State>)
--> rocket::http::Status {
+fn post_state(
+    new_state: Json<types::State>,
+    state: rocket::State<types::State>,
+) -> rocket::http::Status {
     *state.replacing_state.write().unwrap() = true;
 
     let state = state.inner();
-    state.next_public_token.swap(new_state.next_public_token.load(Ordering::SeqCst), Ordering::SeqCst);
-    state.next_item_id.swap(new_state.next_item_id.load(Ordering::SeqCst), Ordering::SeqCst);
+    state.next_public_token.swap(
+        new_state.next_public_token.load(Ordering::SeqCst),
+        Ordering::SeqCst,
+    );
+    state.next_item_id.swap(
+        new_state.next_item_id.load(Ordering::SeqCst),
+        Ordering::SeqCst,
+    );
     *state.wsids.write().unwrap() = new_state.wsids.read().unwrap().clone();
     *state.public_tokens.write().unwrap() = new_state.public_tokens.read().unwrap().clone();
     *state.transactions.write().unwrap() = new_state.transactions.read().unwrap().clone();
@@ -193,8 +236,7 @@ fn post_state(new_state: Json<types::State>, state: rocket::State<types::State>)
 }
 
 #[delete("/state")]
-fn delete_state(state: rocket::State<types::State>)
--> rocket::http::Status {
+fn delete_state(state: rocket::State<types::State>) -> rocket::http::Status {
     *state.replacing_state.write().unwrap() = true;
 
     let state = state.inner();
@@ -214,7 +256,9 @@ fn main() {
     }
 
     rocket::ignite()
-        .manage(types::State{..Default::default()})
+        .manage(types::State {
+            ..Default::default()
+        })
         .mount("/", routes![server_post])
         .mount("/", routes![get_state])
         .mount("/", routes![post_state])

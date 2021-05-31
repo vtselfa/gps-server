@@ -1,18 +1,17 @@
-use yaserde::de::from_str;
-use yaserde::ser::to_string;
-use std::sync::atomic::Ordering;
 use chrono::prelude::*;
 use paste::paste;
+use std::sync::atomic::Ordering;
+use yaserde::de::from_str;
+use yaserde::ser::to_string;
 
-use crate::types;
-use crate::types::GpsError;
 use crate::action;
+use crate::get_mut_card;
 use crate::impl_action_boilerplate;
 use crate::impl_wrap_response;
 use crate::money;
+use crate::types;
+use crate::types::GpsError;
 use crate::utils;
-use crate::get_mut_card;
-
 
 pub struct BalanceAdjustment {
     pub parameters: gps_lib::types::WsBalanceAdjustment,
@@ -33,9 +32,18 @@ impl action::Action for BalanceAdjustment {
 
         // Get the amount with the correct sign
         let amount = match parameters.deb_or_cred.as_ref().map(String::as_ref) {
-            Some("-1") => -utils::get_strictly_positive_amount(&parameters.amt_adjustment.to_string())?,
-            Some("1") => utils::get_strictly_positive_amount(&parameters.amt_adjustment.to_string())?,
-            _ => return Err(GpsError::ActionCode{num: 999, msg: format!("Invalid deb_or_cred")}),
+            Some("-1") => {
+                -utils::get_strictly_positive_amount(&parameters.amt_adjustment.to_string())?
+            }
+            Some("1") => {
+                utils::get_strictly_positive_amount(&parameters.amt_adjustment.to_string())?
+            }
+            _ => {
+                return Err(GpsError::ActionCode {
+                    num: 999,
+                    msg: format!("Invalid deb_or_cred"),
+                })
+            }
         };
 
         card.balance.amount += amount;
@@ -43,7 +51,7 @@ impl action::Action for BalanceAdjustment {
         // Record the transaction in the card structure
         let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);
         let transaction = types::Transaction {
-            item_id: item_id as u64, // GPS transaction ID
+            item_id: item_id as u64,            // GPS transaction ID
             wsid: Some(parameters.wsid as u64), // GPS transaction ID
 
             txn_date: utc,

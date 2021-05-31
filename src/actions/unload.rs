@@ -6,13 +6,12 @@ use yaserde::ser::to_string;
 
 use crate::action;
 use crate::get_mut_card;
-use crate::impl_wrap_response;
 use crate::impl_action_boilerplate;
+use crate::impl_wrap_response;
 use crate::money;
-use crate::types::GpsError;
 use crate::types;
+use crate::types::GpsError;
 use crate::utils;
-
 
 pub struct Unload {
     pub parameters: gps_lib::types::WsUnLoad,
@@ -33,14 +32,17 @@ impl action::Action for Unload {
         let amount = utils::get_strictly_positive_amount(&parameters.amt_un_load.to_string())?;
 
         if card.balance.amount < amount {
-            return Err(GpsError::ActionCode{num: 999, msg: format!("Unload amount is greater than the current balance")});
+            return Err(GpsError::ActionCode {
+                num: 999,
+                msg: format!("Unload amount is greater than the current balance"),
+            });
         }
         card.balance.amount -= amount;
 
         // Record the transaction in the card structure
         let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);
         let transaction = types::Transaction {
-            item_id: item_id as u64, // GPS transaction ID
+            item_id: item_id as u64,            // GPS transaction ID
             wsid: Some(parameters.wsid as u64), // GPS transaction ID
 
             txn_date: utc,
