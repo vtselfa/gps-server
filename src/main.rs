@@ -32,6 +32,7 @@ use rocket::response;
 use rocket::{Data, Outcome::*, Request};
 use rocket_contrib::json::Json;
 use std::io::Read;
+use std::sync::atomic::AtomicUsize;
 use std::sync::atomic::Ordering;
 
 use action::Action;
@@ -42,6 +43,7 @@ use actions::card_statement::CardStatement;
 use actions::create_card::CreateCard;
 use actions::enquiry::Enquiry;
 use actions::load::Load;
+use actions::result::ResultV2;
 use actions::unload::Unload;
 use types::GpsError;
 
@@ -153,6 +155,9 @@ impl PostStr {
                 "Ws_Card_Statement" => Ok(PostStr {
                     action: Box::new(CardStatement::new(action_name, &contents)?),
                 }),
+                "Ws_WebServiceResult_V2" => Ok(PostStr {
+                    action: Box::new(ResultV2::new(action_name, &contents)?),
+                }),
                 _ => Err(GpsError::Action(format!(
                     "Action {} not implemented",
                     action
@@ -257,6 +262,8 @@ fn main() {
 
     rocket::ignite()
         .manage(types::State {
+            next_item_id: AtomicUsize::new(1),
+            next_public_token: AtomicUsize::new(1),
             ..Default::default()
         })
         .mount("/", routes![server_post])

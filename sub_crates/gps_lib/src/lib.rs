@@ -9075,13 +9075,18 @@ pub mod types {
         #[yaserde(rename = "Ws_WebServiceResult_V2Result", prefix = "tns", default)]
         pub ws_web_service_result_v2_result: Wsresult2,
     }
+
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "ResponseSent",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
         prefix = "tns"
     )]
-    pub struct ResponseSent {}
+    pub struct ResponseSent {
+        #[yaserde(rename = "Response", prefix = "tns", default)]
+        pub response: String,
+    }
+
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "WSResult2",
