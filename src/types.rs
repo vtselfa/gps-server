@@ -88,7 +88,7 @@ pub struct Card {
     // TODO: Groups
 }
 
-#[derive(Copy, Clone, Serialize, Deserialize)]
+#[derive(Copy, Clone, Serialize, Deserialize, FromPrimitive)]
 pub enum CardStatus {
     AllGood = 0,
     ReferToCardIssuer = 1, // Retired, do not use

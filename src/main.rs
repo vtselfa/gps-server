@@ -15,6 +15,8 @@ extern crate thiserror;
 extern crate xml;
 extern crate yaserde;
 extern crate yaserde_derive;
+#[macro_use]
+extern crate num_derive;
 
 mod action;
 mod actions;
@@ -44,6 +46,7 @@ use actions::create_card::CreateCard;
 use actions::enquiry::Enquiry;
 use actions::load::Load;
 use actions::result::ResultV2;
+use actions::status_change::StatusChange;
 use actions::unload::Unload;
 use types::GpsError;
 
@@ -157,6 +160,9 @@ impl PostStr {
                 }),
                 "Ws_WebServiceResult_V2" => Ok(PostStr {
                     action: Box::new(ResultV2::new(action_name, &contents)?),
+                }),
+                "Ws_StatusChange" => Ok(PostStr {
+                    action: Box::new(StatusChange::new(action_name, &contents)?),
                 }),
                 _ => Err(GpsError::Action(format!(
                     "Action {} not implemented",
