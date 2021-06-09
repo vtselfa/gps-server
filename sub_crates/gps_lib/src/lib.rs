@@ -7515,7 +7515,7 @@ pub mod types {
         #[yaserde(rename = "TerminalID", prefix = "tns", default)]
         pub terminal_id: Option<String>,
         #[yaserde(rename = "LoadValue", prefix = "tns", default)]
-        pub load_value: f64,
+        pub load_value: String,
         #[yaserde(rename = "CurCode", prefix = "tns", default)]
         pub cur_code: Option<String>,
         #[yaserde(rename = "Reason", prefix = "tns", default)]

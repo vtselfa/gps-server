@@ -72,20 +72,30 @@ pub struct Consumer {
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Card {
-    pub wsid: i64,
+    pub wsid: u64,
     pub public_token: String,
     pub external_ref: Option<String>,
     pub start_date: DateTime<Utc>,
     pub exp_date: NaiveDate,
     pub balance: Money,
-    pub blocked_balance: Decimal, // Amount of the balance blocked by outstanding authorisations
+    pub blocked_balance: Decimal, // Amount blocked by outstanding authorisations
     pub is_live: bool,
     pub pan: String,
     pub cvv: String,
-    pub transactions: Vec<Transaction>,
     pub status: CardStatus,
     pub owner: Consumer,
-    // TODO: Groups
+
+    // TODO: Implement groups better. We just record whatever string the user passed.
+    pub limits_group: String,
+    pub mcc_group: String,
+    pub perms_group: String,
+    pub ws_fee_group: String,
+    pub linkage_group: String,
+    pub auth_calendar_group: String,
+    pub fx_group: String,
+
+    // TODO: Add card types (virtual, physical, mvc)
+    pub transactions: Vec<Transaction>,
 }
 
 #[derive(Copy, Clone, Serialize, Deserialize, FromPrimitive)]

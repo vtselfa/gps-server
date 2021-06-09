@@ -41,6 +41,7 @@ use action::Action;
 use actions::balance_adjustment::BalanceAdjustment;
 use actions::balance_enquiry::BalanceEnquiry;
 use actions::balance_enquiry::BalanceEnquiryV2;
+use actions::card_change_groups::CardChangeGroups;
 use actions::card_statement::CardStatement;
 use actions::create_card::CreateCard;
 use actions::enquiry::Enquiry;
@@ -163,6 +164,9 @@ impl PostStr {
                 }),
                 "Ws_StatusChange" => Ok(PostStr {
                     action: Box::new(StatusChange::new(action_name, &contents)?),
+                }),
+                "Ws_Card_Change_Groups" => Ok(PostStr {
+                    action: Box::new(CardChangeGroups::new(action_name, &contents)?),
                 }),
                 _ => Err(GpsError::Action(format!(
                     "Action {} not implemented",

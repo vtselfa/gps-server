@@ -80,7 +80,7 @@ impl action::Action for CreateCard {
 
         let mut rng = rand::thread_rng();
         let card = types::Card {
-            wsid: parameters.wsid,
+            wsid: parameters.wsid as u64,
             public_token,
             external_ref: parameters.external_ref.clone(),
             start_date: utc,
@@ -106,6 +106,19 @@ impl action::Action for CreateCard {
                 first_name: parameters.first_name.clone().unwrap_or(format!("")),
                 last_name: parameters.last_name.clone().unwrap_or(format!("")),
             },
+
+            // TODO: Store a numeric ID, not the name of the group. Implement products. Use the
+            // product values as defaults.
+            limits_group: parameters.limits_group.clone().unwrap_or(format!("")),
+            mcc_group: parameters.mcc_group.clone().unwrap_or(format!("")),
+            perms_group: parameters.perms_group.clone().unwrap_or(format!("")),
+            ws_fee_group: parameters.ws_fee_group.clone().unwrap_or(format!("")),
+            linkage_group: parameters.linkage_group.clone().unwrap_or(format!("")),
+            auth_calendar_group: parameters
+                .auth_calendar_group
+                .clone()
+                .unwrap_or(format!("")),
+            fx_group: parameters.fx_group.clone().unwrap_or(format!("")),
         };
 
         let response = self.wrap_response(gps_lib::types::WsCreateCardResponse {
