@@ -54,8 +54,8 @@ impl action::Action for Enquiry {
                 fee_group: None,
                 sched_fee_group: None,
                 ws_fee_group: None,
-                linkage_group: None,                            // TODO: We use it
-                primary_token: Some(card.public_token.clone()), // TODO: When is it different?
+                linkage_group: None, // TODO: We use it
+                primary_token: None,
                 auth_calendar_group: None,
                 fx_group: None,
                 black_list: None,

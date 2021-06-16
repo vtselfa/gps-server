@@ -38,6 +38,7 @@ use std::sync::atomic::AtomicUsize;
 use std::sync::atomic::Ordering;
 
 use action::Action;
+use actions::activate::Activate;
 use actions::balance_adjustment::BalanceAdjustment;
 use actions::balance_enquiry::BalanceEnquiry;
 use actions::balance_enquiry::BalanceEnquiryV2;
@@ -167,6 +168,9 @@ impl PostStr {
                 }),
                 "Ws_Card_Change_Groups" => Ok(PostStr {
                     action: Box::new(CardChangeGroups::new(action_name, &contents)?),
+                }),
+                "Ws_Activate" => Ok(PostStr {
+                    action: Box::new(Activate::new(action_name, &contents)?),
                 }),
                 _ => Err(GpsError::Action(format!(
                     "Action {} not implemented",

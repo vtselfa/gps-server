@@ -1,3 +1,4 @@
+pub mod activate;
 pub mod balance_adjustment;
 pub mod balance_enquiry;
 pub mod card_change_groups;

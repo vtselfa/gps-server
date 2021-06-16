@@ -79,7 +79,7 @@ pub struct Card {
     pub exp_date: NaiveDate,
     pub balance: Money,
     pub blocked_balance: Decimal, // Amount blocked by outstanding authorisations
-    pub is_live: bool,
+    pub is_live: bool, // Indicates if the card has been activated or not
     pub pan: String,
     pub cvv: String,
     pub status: CardStatus,
@@ -98,7 +98,7 @@ pub struct Card {
     pub transactions: Vec<Transaction>,
 }
 
-#[derive(Copy, Clone, Serialize, Deserialize, FromPrimitive)]
+#[derive(Copy, Clone, Serialize, Deserialize, FromPrimitive, PartialEq)]
 pub enum CardStatus {
     AllGood = 0,
     ReferToCardIssuer = 1, // Retired, do not use
