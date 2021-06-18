@@ -17,14 +17,15 @@ extern crate yaserde_derive;
 use std::io::{Read, Write};
 use yaserde::{YaDeserialize, YaSerialize};
 
-pub const SOAP_ENCODING: &str = "http://www.w3.org/2003/05/soap-encoding";
 #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
 pub struct Header {}
 #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
 #[yaserde(
     rename = "Fault",
-    namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-    prefix = "soapenv"
+    namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+    namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+    prefix = "soap"
 )]
 pub struct SoapFault {
     #[yaserde(rename = "faultcode", default)]
@@ -45,7 +46,7 @@ pub mod messages {
         pub parameters: types::WsBankingUpdateBankingEnabledCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_UpdateBankingEnabledCardSoapOut")]
+    #[yaserde(rename = "Ws_Banking_UpdateBankingEnabledCardResponse")]
     pub struct WsBankingUpdateBankingEnabledCardSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingUpdateBankingEnabledCardResponse,
@@ -63,7 +64,7 @@ pub mod messages {
         pub parameters: types::WsBankingStatusQueryBankingEnabledCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_StatusQueryBankingEnabledCardSoapOut")]
+    #[yaserde(rename = "Ws_Banking_StatusQueryBankingEnabledCardResponse")]
     pub struct WsBankingStatusQueryBankingEnabledCardSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingStatusQueryBankingEnabledCardResponse,
@@ -81,7 +82,7 @@ pub mod messages {
         pub parameters: types::WsBankingCreateCustomer,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_CreateCustomerSoapOut")]
+    #[yaserde(rename = "Ws_Banking_CreateCustomerResponse")]
     pub struct WsBankingCreateCustomerSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingCreateCustomerResponse,
@@ -99,7 +100,7 @@ pub mod messages {
         pub parameters: types::WsBankingRegisterNotification,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_RegisterNotificationSoapOut")]
+    #[yaserde(rename = "Ws_Banking_RegisterNotificationResponse")]
     pub struct WsBankingRegisterNotificationSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingRegisterNotificationResponse,
@@ -117,7 +118,7 @@ pub mod messages {
         pub parameters: types::WsBankingAccountModulusCheck,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_AccountModulusCheckSoapOut")]
+    #[yaserde(rename = "Ws_Banking_AccountModulusCheckResponse")]
     pub struct WsBankingAccountModulusCheckSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingAccountModulusCheckResponse,
@@ -135,7 +136,7 @@ pub mod messages {
         pub parameters: types::WsBankingGetDirectDebitInstructionsBankingEnabledCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_GetDirectDebitInstructionsBankingEnabledCardSoapOut")]
+    #[yaserde(rename = "Ws_Banking_GetDirectDebitInstructionsBankingEnabledCardResponse")]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingGetDirectDebitInstructionsBankingEnabledCardResponse,
@@ -153,7 +154,7 @@ pub mod messages {
         pub parameters: types::WsBankingCancelDirectDebitBankingEnabledCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_CancelDirectDebitBankingEnabledCardSoapOut")]
+    #[yaserde(rename = "Ws_Banking_CancelDirectDebitBankingEnabledCardResponse")]
     pub struct WsBankingCancelDirectDebitBankingEnabledCardSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingCancelDirectDebitBankingEnabledCardResponse,
@@ -171,7 +172,7 @@ pub mod messages {
         pub parameters: types::WsBankingGetPendingDirectDebits,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_GetPendingDirectDebitsSoapOut")]
+    #[yaserde(rename = "Ws_Banking_GetPendingDirectDebitsResponse")]
     pub struct WsBankingGetPendingDirectDebitsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingGetPendingDirectDebitsResponse,
@@ -189,7 +190,7 @@ pub mod messages {
         pub parameters: types::WsBankingCardStatementV2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_Card_Statement_V2SoapOut")]
+    #[yaserde(rename = "Ws_Banking_Card_Statement_V2Response")]
     pub struct WsBankingCardStatementV2SoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingCardStatementV2Response,
@@ -207,7 +208,7 @@ pub mod messages {
         pub parameters: types::WsInsert3DSecureDetails,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Insert3DSecureDetailsSoapOut")]
+    #[yaserde(rename = "Ws_Insert3DSecureDetailsResponse")]
     pub struct WsInsert3DSecureDetailsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsInsert3DSecureDetailsResponse,
@@ -225,7 +226,7 @@ pub mod messages {
         pub parameters: types::WsUpdate3DSecureDetails,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Update3DSecureDetailsSoapOut")]
+    #[yaserde(rename = "Ws_Update3DSecureDetailsResponse")]
     pub struct WsUpdate3DSecureDetailsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsUpdate3DSecureDetailsResponse,
@@ -243,7 +244,7 @@ pub mod messages {
         pub parameters: types::WsUpdateLastModifiedType,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_UpdateLastModifiedTypeSoapOut")]
+    #[yaserde(rename = "Ws_UpdateLastModifiedTypeResponse")]
     pub struct WsUpdateLastModifiedTypeSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsUpdateLastModifiedTypeResponse,
@@ -261,7 +262,7 @@ pub mod messages {
         pub parameters: types::WsDelete3DSecureDetails,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Delete3DSecureDetailsSoapOut")]
+    #[yaserde(rename = "Ws_Delete3DSecureDetailsResponse")]
     pub struct WsDelete3DSecureDetailsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsDelete3DSecureDetailsResponse,
@@ -279,7 +280,7 @@ pub mod messages {
         pub parameters: types::WsQuery3DSecureDetails,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Query3DSecureDetailsSoapOut")]
+    #[yaserde(rename = "Ws_Query3DSecureDetailsResponse")]
     pub struct WsQuery3DSecureDetailsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsQuery3DSecureDetailsResponse,
@@ -297,7 +298,7 @@ pub mod messages {
         pub parameters: types::WsGPSLockUnlock,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GPS_Lock_UnlockSoapOut")]
+    #[yaserde(rename = "Ws_GPS_Lock_UnlockResponse")]
     pub struct WsGPSLockUnlockSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGPSLockUnlockResponse,
@@ -315,7 +316,7 @@ pub mod messages {
         pub parameters: types::WsVerificationRequest,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "WS_VerificationRequestSoapOut")]
+    #[yaserde(rename = "WS_VerificationRequestResponse")]
     pub struct WsVerificationRequestSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsVerificationRequestResponse,
@@ -333,7 +334,7 @@ pub mod messages {
         pub parameters: types::WsAddUpDelCredentials,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_AddUpDelCredentialsSoapOut")]
+    #[yaserde(rename = "Ws_AddUpDelCredentialsResponse")]
     pub struct WsAddUpDelCredentialsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsAddUpDelCredentialsResponse,
@@ -351,7 +352,7 @@ pub mod messages {
         pub parameters: types::Ws3DSAddUpDelDetails,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_3DS_AddUpDelDetailsSoapOut")]
+    #[yaserde(rename = "Ws_3DS_AddUpDelDetailsResponse")]
     pub struct Ws3DSAddUpDelDetailsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::Ws3DSAddUpDelDetailsResponse,
@@ -369,7 +370,7 @@ pub mod messages {
         pub parameters: types::WsBalanceUpdate,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_BalanceUpdateSoapOut")]
+    #[yaserde(rename = "Ws_BalanceUpdateResponse")]
     pub struct WsBalanceUpdateSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBalanceUpdateResponse,
@@ -387,7 +388,7 @@ pub mod messages {
         pub parameters: types::WsPaymentTokenGet,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Payment_Token_GetSoapOut")]
+    #[yaserde(rename = "Ws_Payment_Token_GetResponse")]
     pub struct WsPaymentTokenGetSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsPaymentTokenGetResponse,
@@ -405,7 +406,7 @@ pub mod messages {
         pub parameters: types::WsPaymentTokenStatusChange,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Payment_Token_StatusChangeSoapOut")]
+    #[yaserde(rename = "Ws_Payment_Token_StatusChangeResponse")]
     pub struct WsPaymentTokenStatusChangeSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsPaymentTokenStatusChangeResponse,
@@ -423,7 +424,7 @@ pub mod messages {
         pub parameters: types::WsActivate,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_ActivateSoapOut")]
+    #[yaserde(rename = "Ws_ActivateResponse")]
     pub struct WsActivateSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsActivateResponse,
@@ -441,7 +442,7 @@ pub mod messages {
         pub parameters: types::WsLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_LoadSoapOut")]
+    #[yaserde(rename = "Ws_LoadResponse")]
     pub struct WsLoadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsLoadResponse,
@@ -459,7 +460,7 @@ pub mod messages {
         pub parameters: types::WsUnLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_UnLoadSoapOut")]
+    #[yaserde(rename = "Ws_UnLoadResponse")]
     pub struct WsUnLoadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsUnLoadResponse,
@@ -477,7 +478,7 @@ pub mod messages {
         pub parameters: types::WsStatusChange,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_StatusChangeSoapOut")]
+    #[yaserde(rename = "Ws_StatusChangeResponse")]
     pub struct WsStatusChangeSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsStatusChangeResponse,
@@ -495,7 +496,7 @@ pub mod messages {
         pub parameters: types::WsEnquiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_EnquirySoapOut")]
+    #[yaserde(rename = "Ws_EnquiryResponse")]
     pub struct WsEnquirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsEnquiryResponse,
@@ -513,7 +514,7 @@ pub mod messages {
         pub parameters: types::WsBalanceTransfer,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_BalanceTransferSoapOut")]
+    #[yaserde(rename = "Ws_BalanceTransferResponse")]
     pub struct WsBalanceTransferSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBalanceTransferResponse,
@@ -531,7 +532,7 @@ pub mod messages {
         pub parameters: types::WsBalanceEnquiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Balance_EnquirySoapOut")]
+    #[yaserde(rename = "Ws_Balance_EnquiryResponse")]
     pub struct WsBalanceEnquirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBalanceEnquiryResponse,
@@ -549,7 +550,7 @@ pub mod messages {
         pub parameters: types::WsBalanceEnquiryRep,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Balance_Enquiry_RepSoapOut")]
+    #[yaserde(rename = "Ws_Balance_Enquiry_RepResponse")]
     pub struct WsBalanceEnquiryRepSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBalanceEnquiryRepResponse,
@@ -567,7 +568,10 @@ pub mod messages {
         pub parameters: types::WsBalanceEnquiryV2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Balance_Enquiry_V2SoapOut")]
+    #[yaserde(
+        rename = "Ws_Balance_Enquiry_V2Response"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        )]
     pub struct WsBalanceEnquiryV2SoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBalanceEnquiryV2Response,
@@ -585,7 +589,7 @@ pub mod messages {
         pub parameters: types::WsBalanceEnquiryWallet,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Balance_Enquiry_WalletSoapOut")]
+    #[yaserde(rename = "Ws_Balance_Enquiry_WalletResponse")]
     pub struct WsBalanceEnquiryWalletSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBalanceEnquiryWalletResponse,
@@ -603,7 +607,7 @@ pub mod messages {
         pub parameters: types::WsCardStatement,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Card_StatementSoapOut")]
+    #[yaserde(rename = "Ws_Card_StatementResponse")]
     pub struct WsCardStatementSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardStatementResponse,
@@ -621,7 +625,7 @@ pub mod messages {
         pub parameters: types::WsCardStatementRep,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Card_Statement_RepSoapOut")]
+    #[yaserde(rename = "Ws_Card_Statement_RepResponse")]
     pub struct WsCardStatementRepSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardStatementRepResponse,
@@ -639,7 +643,7 @@ pub mod messages {
         pub parameters: types::WsCustomerEnquiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Customer_EnquirySoapOut")]
+    #[yaserde(rename = "Ws_Customer_EnquiryResponse")]
     pub struct WsCustomerEnquirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCustomerEnquiryResponse,
@@ -657,7 +661,7 @@ pub mod messages {
         pub parameters: types::WsCustomerEnquiryV2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Customer_Enquiry_V2SoapOut")]
+    #[yaserde(rename = "Ws_Customer_Enquiry_V2Response")]
     pub struct WsCustomerEnquiryV2SoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCustomerEnquiryV2Response,
@@ -675,7 +679,7 @@ pub mod messages {
         pub parameters: types::WsUpdateCardholderDetails,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Update_Cardholder_DetailsSoapOut")]
+    #[yaserde(rename = "Ws_Update_Cardholder_DetailsResponse")]
     pub struct WsUpdateCardholderDetailsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsUpdateCardholderDetailsResponse,
@@ -693,7 +697,7 @@ pub mod messages {
         pub parameters: types::WsUnLoadStatusChange,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_UnLoad_StatusChangeSoapOut")]
+    #[yaserde(rename = "Ws_UnLoad_StatusChangeResponse")]
     pub struct WsUnLoadStatusChangeSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsUnLoadStatusChangeResponse,
@@ -711,7 +715,7 @@ pub mod messages {
         pub parameters: types::WsActivateLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Activate_LoadSoapOut")]
+    #[yaserde(rename = "Ws_Activate_LoadResponse")]
     pub struct WsActivateLoadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsActivateLoadResponse,
@@ -729,7 +733,7 @@ pub mod messages {
         pub parameters: types::WsBalanceAdjustment,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_BalanceAdjustmentSoapOut")]
+    #[yaserde(rename = "Ws_BalanceAdjustmentResponse")]
     pub struct WsBalanceAdjustmentSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBalanceAdjustmentResponse,
@@ -747,7 +751,7 @@ pub mod messages {
         pub parameters: types::WsExtendExpiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_ExtendExpirySoapOut")]
+    #[yaserde(rename = "Ws_ExtendExpiryResponse")]
     pub struct WsExtendExpirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsExtendExpiryResponse,
@@ -765,7 +769,7 @@ pub mod messages {
         pub parameters: types::WsTransactionVoid,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Transaction_VoidSoapOut")]
+    #[yaserde(rename = "Ws_Transaction_VoidResponse")]
     pub struct WsTransactionVoidSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsTransactionVoidResponse,
@@ -783,7 +787,7 @@ pub mod messages {
         pub parameters: types::WsCardHolderDetailsEnquiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_CardHolder_Details_EnquirySoapOut")]
+    #[yaserde(rename = "Ws_CardHolder_Details_EnquiryResponse")]
     pub struct WsCardHolderDetailsEnquirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardHolderDetailsEnquiryResponse,
@@ -801,7 +805,7 @@ pub mod messages {
         pub parameters: types::WsCardHolderDetailsEnquiryV2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_CardHolder_Details_Enquiry_V2SoapOut")]
+    #[yaserde(rename = "Ws_CardHolder_Details_Enquiry_V2Response")]
     pub struct WsCardHolderDetailsEnquiryV2SoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardHolderDetailsEnquiryV2Response,
@@ -819,7 +823,7 @@ pub mod messages {
         pub parameters: types::WsPhoneActivation,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Phone_ActivationSoapOut")]
+    #[yaserde(rename = "Ws_Phone_ActivationResponse")]
     pub struct WsPhoneActivationSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsPhoneActivationResponse,
@@ -837,7 +841,7 @@ pub mod messages {
         pub parameters: types::WsBulkCreation,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_BulkCreationSoapOut")]
+    #[yaserde(rename = "Ws_BulkCreationResponse")]
     pub struct WsBulkCreationSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBulkCreationResponse,
@@ -855,7 +859,7 @@ pub mod messages {
         pub parameters: types::WsBulkWalletCreation,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_BulkWalletCreationSoapOut")]
+    #[yaserde(rename = "Ws_BulkWalletCreationResponse")]
     pub struct WsBulkWalletCreationSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBulkWalletCreationResponse,
@@ -873,7 +877,7 @@ pub mod messages {
         pub parameters: types::WsWebServiceResult,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_WebServiceResultSoapOut")]
+    #[yaserde(rename = "Ws_WebServiceResultResponse")]
     pub struct WsWebServiceResultSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsWebServiceResultResponse,
@@ -891,7 +895,7 @@ pub mod messages {
         pub parameters: types::WsGenericFees,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Generic_FeesSoapOut")]
+    #[yaserde(rename = "Ws_Generic_FeesResponse")]
     pub struct WsGenericFeesSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGenericFeesResponse,
@@ -909,7 +913,7 @@ pub mod messages {
         pub parameters: types::WsCardBalEnq,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Card_BalEnqSoapOut")]
+    #[yaserde(rename = "Ws_Card_BalEnqResponse")]
     pub struct WsCardBalEnqSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardBalEnqResponse,
@@ -927,7 +931,7 @@ pub mod messages {
         pub parameters: types::WsPinControl,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "WS_PinControlSoapOut")]
+    #[yaserde(rename = "WS_PinControlResponse")]
     pub struct WsPinControlSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsPinControlResponse,
@@ -945,7 +949,7 @@ pub mod messages {
         pub parameters: types::WsCreateCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_CreateCardSoapOut")]
+    #[yaserde(rename = "Ws_CreateCardResponse")]
     pub struct WsCreateCardSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCreateCardResponse,
@@ -963,7 +967,7 @@ pub mod messages {
         pub parameters: types::WsCreateWallet,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_CreateWalletSoapOut")]
+    #[yaserde(rename = "Ws_CreateWalletResponse")]
     pub struct WsCreateWalletSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCreateWalletResponse,
@@ -981,7 +985,7 @@ pub mod messages {
         pub parameters: types::WsRegenerate,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_RegenerateSoapOut")]
+    #[yaserde(rename = "Ws_RegenerateResponse")]
     pub struct WsRegenerateSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsRegenerateResponse,
@@ -999,7 +1003,7 @@ pub mod messages {
         pub parameters: types::WsConvertCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Convert_CardSoapOut")]
+    #[yaserde(rename = "Ws_Convert_CardResponse")]
     pub struct WsConvertCardSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsConvertCardResponse,
@@ -1017,7 +1021,7 @@ pub mod messages {
         pub parameters: types::WsChangeGroups,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Change_GroupsSoapOut")]
+    #[yaserde(rename = "Ws_Change_GroupsResponse")]
     pub struct WsChangeGroupsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsChangeGroupsResponse,
@@ -1035,7 +1039,7 @@ pub mod messages {
         pub parameters: types::WsCheck,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_CheckSoapOut")]
+    #[yaserde(rename = "Ws_CheckResponse")]
     pub struct WsCheckSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCheckResponse,
@@ -1053,7 +1057,7 @@ pub mod messages {
         pub parameters: types::WsSimpleCheck,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Simple_CheckSoapOut")]
+    #[yaserde(rename = "Ws_Simple_CheckResponse")]
     pub struct WsSimpleCheckSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsSimpleCheckResponse,
@@ -1065,7 +1069,7 @@ pub mod messages {
         pub parameters: types::WsClientFx,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Client_FxSoapOut")]
+    #[yaserde(rename = "Ws_Client_FxResponse")]
     pub struct WsClientFxSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsClientFxResponse,
@@ -1083,7 +1087,7 @@ pub mod messages {
         pub parameters: types::WsLinkCards,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Link_CardsSoapOut")]
+    #[yaserde(rename = "Ws_Link_CardsResponse")]
     pub struct WsLinkCardsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsLinkCardsResponse,
@@ -1101,7 +1105,7 @@ pub mod messages {
         pub parameters: types::WsListGroup,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_List_GroupSoapOut")]
+    #[yaserde(rename = "Ws_List_GroupResponse")]
     pub struct WsListGroupSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsListGroupResponse,
@@ -1119,7 +1123,7 @@ pub mod messages {
         pub parameters: types::WsListProducts,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_List_ProductsSoapOut")]
+    #[yaserde(rename = "Ws_List_ProductsResponse")]
     pub struct WsListProductsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsListProductsResponse,
@@ -1137,7 +1141,7 @@ pub mod messages {
         pub parameters: types::WsGetCardRequest,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GetCardRequestSoapOut")]
+    #[yaserde(rename = "Ws_GetCardRequestResponse")]
     pub struct WsGetCardRequestSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGetCardRequestResponse,
@@ -1155,7 +1159,7 @@ pub mod messages {
         pub parameters: types::WsGetCardRequestStatus,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GetCardRequestStatusSoapOut")]
+    #[yaserde(rename = "Ws_GetCardRequestStatusResponse")]
     pub struct WsGetCardRequestStatusSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGetCardRequestStatusResponse,
@@ -1173,7 +1177,7 @@ pub mod messages {
         pub parameters: types::WsCardAcceptorWhiteList,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_CardAcceptorWhiteListSoapOut")]
+    #[yaserde(rename = "Ws_CardAcceptorWhiteListResponse")]
     pub struct WsCardAcceptorWhiteListSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardAcceptorWhiteListResponse,
@@ -1191,7 +1195,7 @@ pub mod messages {
         pub parameters: types::WsCardAcceptorBlackList,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_CardAcceptorBlackListSoapOut")]
+    #[yaserde(rename = "Ws_CardAcceptorBlackListResponse")]
     pub struct WsCardAcceptorBlackListSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardAcceptorBlackListResponse,
@@ -1209,7 +1213,7 @@ pub mod messages {
         pub parameters: types::WsSendMessage,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_SendMessageSoapOut")]
+    #[yaserde(rename = "Ws_SendMessageResponse")]
     pub struct WsSendMessageSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsSendMessageResponse,
@@ -1227,7 +1231,7 @@ pub mod messages {
         pub parameters: types::WsMVCLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_MVCLoadSoapOut")]
+    #[yaserde(rename = "Ws_MVCLoadResponse")]
     pub struct WsMVCLoadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsMVCLoadResponse,
@@ -1245,7 +1249,7 @@ pub mod messages {
         pub parameters: types::WsListPendingFees,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_List_Pending_FeesSoapOut")]
+    #[yaserde(rename = "Ws_List_Pending_FeesResponse")]
     pub struct WsListPendingFeesSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsListPendingFeesResponse,
@@ -1263,7 +1267,7 @@ pub mod messages {
         pub parameters: types::WsWebServiceResultV2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_WebServiceResult_V2SoapOut")]
+    #[yaserde(rename = "Ws_WebServiceResult_V2Response")]
     pub struct WsWebServiceResultV2SoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsWebServiceResultV2Response,
@@ -1281,7 +1285,7 @@ pub mod messages {
         pub parameters: types::WsGetPasscode,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Get_PasscodeSoapOut")]
+    #[yaserde(rename = "Ws_Get_PasscodeResponse")]
     pub struct WsGetPasscodeSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGetPasscodeResponse,
@@ -1299,7 +1303,7 @@ pub mod messages {
         pub parameters: types::WsGetCardExpireSoon,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Get_Card_ExpireSoonSoapOut")]
+    #[yaserde(rename = "Ws_Get_Card_ExpireSoonResponse")]
     pub struct WsGetCardExpireSoonSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGetCardExpireSoonResponse,
@@ -1317,7 +1321,7 @@ pub mod messages {
         pub parameters: types::WsSendCardFiles,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Send_CardFilesSoapOut")]
+    #[yaserde(rename = "Ws_Send_CardFilesResponse")]
     pub struct WsSendCardFilesSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsSendCardFilesResponse,
@@ -1335,7 +1339,7 @@ pub mod messages {
         pub parameters: types::WsSafeReports,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_SafeReportsSoapOut")]
+    #[yaserde(rename = "Ws_SafeReportsResponse")]
     pub struct WsSafeReportsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsSafeReportsResponse,
@@ -1353,7 +1357,7 @@ pub mod messages {
         pub parameters: types::WsRegenerateWallet,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_RegenerateWalletSoapOut")]
+    #[yaserde(rename = "Ws_RegenerateWalletResponse")]
     pub struct WsRegenerateWalletSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsRegenerateWalletResponse,
@@ -1371,7 +1375,7 @@ pub mod messages {
         pub parameters: types::WsUpdateLoadSource,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_UpdateLoadSourceSoapOut")]
+    #[yaserde(rename = "Ws_UpdateLoadSourceResponse")]
     pub struct WsUpdateLoadSourceSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsUpdateLoadSourceResponse,
@@ -1389,7 +1393,7 @@ pub mod messages {
         pub parameters: types::WsMVCUnload,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_MVCUnloadSoapOut")]
+    #[yaserde(rename = "Ws_MVCUnloadResponse")]
     pub struct WsMVCUnloadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsMVCUnloadResponse,
@@ -1407,7 +1411,7 @@ pub mod messages {
         pub parameters: types::WsActivateMVCLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Activate_MVCLoadSoapOut")]
+    #[yaserde(rename = "Ws_Activate_MVCLoadResponse")]
     pub struct WsActivateMVCLoadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsActivateMVCLoadResponse,
@@ -1425,7 +1429,7 @@ pub mod messages {
         pub parameters: types::WsRenewCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Renew_CardSoapOut")]
+    #[yaserde(rename = "Ws_Renew_CardResponse")]
     pub struct WsRenewCardSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsRenewCardResponse,
@@ -1443,7 +1447,7 @@ pub mod messages {
         pub parameters: types::WsResetAccumulator,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_ResetAccumulatorSoapOut")]
+    #[yaserde(rename = "Ws_ResetAccumulatorResponse")]
     pub struct WsResetAccumulatorSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsResetAccumulatorResponse,
@@ -1461,7 +1465,7 @@ pub mod messages {
         pub parameters: types::WsEnrol,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_EnrolSoapOut")]
+    #[yaserde(rename = "Ws_EnrolResponse")]
     pub struct WsEnrolSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsEnrolResponse,
@@ -1479,7 +1483,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardActivate,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_ActivateSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_ActivateResponse")]
     pub struct WsGiftCardActivateSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardActivateResponse,
@@ -1497,7 +1501,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_LoadSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_LoadResponse")]
     pub struct WsGiftCardLoadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardLoadResponse,
@@ -1515,7 +1519,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardUnLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_UnLoadSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_UnLoadResponse")]
     pub struct WsGiftCardUnLoadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardUnLoadResponse,
@@ -1533,7 +1537,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardStatusChange,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_StatusChangeSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_StatusChangeResponse")]
     pub struct WsGiftCardStatusChangeSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardStatusChangeResponse,
@@ -1551,7 +1555,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardEnquiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_EnquirySoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_EnquiryResponse")]
     pub struct WsGiftCardEnquirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardEnquiryResponse,
@@ -1569,7 +1573,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardBalanceTransfer,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_BalanceTransferSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_BalanceTransferResponse")]
     pub struct WsGiftCardBalanceTransferSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardBalanceTransferResponse,
@@ -1587,7 +1591,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardBalanceEnquiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_Balance_EnquirySoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_Balance_EnquiryResponse")]
     pub struct WsGiftCardBalanceEnquirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardBalanceEnquiryResponse,
@@ -1605,7 +1609,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardCardStatement,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_Card_StatementSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_Card_StatementResponse")]
     pub struct WsGiftCardCardStatementSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardCardStatementResponse,
@@ -1623,7 +1627,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardUpdateCardholderDetails,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_Update_Cardholder_DetailsSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_Update_Cardholder_DetailsResponse")]
     pub struct WsGiftCardUpdateCardholderDetailsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardUpdateCardholderDetailsResponse,
@@ -1641,7 +1645,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardUnLoadStatusChange,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_UnLoad_StatusChangeSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_UnLoad_StatusChangeResponse")]
     pub struct WsGiftCardUnLoadStatusChangeSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardUnLoadStatusChangeResponse,
@@ -1659,7 +1663,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardActivateLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_Activate_LoadSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_Activate_LoadResponse")]
     pub struct WsGiftCardActivateLoadSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardActivateLoadResponse,
@@ -1677,7 +1681,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardBalanceAdjustment,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_BalanceAdjustmentSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_BalanceAdjustmentResponse")]
     pub struct WsGiftCardBalanceAdjustmentSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardBalanceAdjustmentResponse,
@@ -1695,7 +1699,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardExtendExpiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_ExtendExpirySoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_ExtendExpiryResponse")]
     pub struct WsGiftCardExtendExpirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardExtendExpiryResponse,
@@ -1713,7 +1717,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardTransactionVoid,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_Transaction_VoidSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_Transaction_VoidResponse")]
     pub struct WsGiftCardTransactionVoidSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardTransactionVoidResponse,
@@ -1731,7 +1735,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardCardHolderDetailsEnquiry,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_CardHolder_Details_EnquirySoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_CardHolder_Details_EnquiryResponse")]
     pub struct WsGiftCardCardHolderDetailsEnquirySoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardCardHolderDetailsEnquiryResponse,
@@ -1749,7 +1753,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardPhoneActivation,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_Phone_ActivationSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_Phone_ActivationResponse")]
     pub struct WsGiftCardPhoneActivationSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardPhoneActivationResponse,
@@ -1767,7 +1771,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardBulkCreation,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_BulkCreationSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_BulkCreationResponse")]
     pub struct WsGiftCardBulkCreationSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardBulkCreationResponse,
@@ -1785,7 +1789,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardWebServiceResult,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_WebServiceResultSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_WebServiceResultResponse")]
     pub struct WsGiftCardWebServiceResultSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardWebServiceResultResponse,
@@ -1803,7 +1807,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardGenericFees,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_Generic_FeesSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_Generic_FeesResponse")]
     pub struct WsGiftCardGenericFeesSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardGenericFeesResponse,
@@ -1821,7 +1825,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardPinControl,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_PinControlSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_PinControlResponse")]
     pub struct WsGiftCardPinControlSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardPinControlResponse,
@@ -1839,7 +1843,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardUpdateLoadSource,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_UpdateLoadSourceSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_UpdateLoadSourceResponse")]
     pub struct WsGiftCardUpdateLoadSourceSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardUpdateLoadSourceResponse,
@@ -1857,7 +1861,7 @@ pub mod messages {
         pub parameters: types::WsGiftCardActivateLoadProductTpyeCP,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_GiftCard_Activate_Load_ProductTpye_CPSoapOut")]
+    #[yaserde(rename = "Ws_GiftCard_Activate_Load_ProductTpye_CPResponse")]
     pub struct WsGiftCardActivateLoadProductTpyeCPSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsGiftCardActivateLoadProductTpyeCPResponse,
@@ -1875,7 +1879,7 @@ pub mod messages {
         pub parameters: types::WsCardTransactionXML,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Card_TransactionXMLSoapOut")]
+    #[yaserde(rename = "Ws_Card_TransactionXMLResponse")]
     pub struct WsCardTransactionXMLSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardTransactionXMLResponse,
@@ -1893,7 +1897,7 @@ pub mod messages {
         pub parameters: types::WsCardChangeGroups,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Card_Change_GroupsSoapOut")]
+    #[yaserde(rename = "Ws_Card_Change_GroupsResponse")]
     pub struct WsCardChangeGroupsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardChangeGroupsResponse,
@@ -1911,7 +1915,7 @@ pub mod messages {
         pub parameters: types::WsCardChangeCardacceptorList,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Card_Change_Cardacceptor_ListSoapOut")]
+    #[yaserde(rename = "Ws_Card_Change_Cardacceptor_ListResponse")]
     pub struct WsCardChangeCardacceptorListSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCardChangeCardacceptorListResponse,
@@ -1929,7 +1933,7 @@ pub mod messages {
         pub parameters: types::WsChangeCardacceptorList,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Change_Cardacceptor_ListSoapOut")]
+    #[yaserde(rename = "Ws_Change_Cardacceptor_ListResponse")]
     pub struct WsChangeCardacceptorListSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsChangeCardacceptorListResponse,
@@ -1947,7 +1951,7 @@ pub mod messages {
         pub parameters: types::WsAddressMatchChecking,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_AddressMatchCheckingSoapOut")]
+    #[yaserde(rename = "Ws_AddressMatchCheckingResponse")]
     pub struct WsAddressMatchCheckingSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsAddressMatchCheckingResponse,
@@ -1965,7 +1969,7 @@ pub mod messages {
         pub parameters: types::WsLicenseVerification,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_LicenseVerificationSoapOut")]
+    #[yaserde(rename = "Ws_LicenseVerificationResponse")]
     pub struct WsLicenseVerificationSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsLicenseVerificationResponse,
@@ -1983,7 +1987,7 @@ pub mod messages {
         pub parameters: types::WsPassportVerification,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_PassportVerificationSoapOut")]
+    #[yaserde(rename = "Ws_PassportVerificationResponse")]
     pub struct WsPassportVerificationSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsPassportVerificationResponse,
@@ -2001,7 +2005,7 @@ pub mod messages {
         pub parameters: types::WsSanctionsPEPCheck,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Sanctions_PEP_CheckSoapOut")]
+    #[yaserde(rename = "Ws_Sanctions_PEP_CheckResponse")]
     pub struct WsSanctionsPEPCheckSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsSanctionsPEPCheckResponse,
@@ -2019,7 +2023,7 @@ pub mod messages {
         pub parameters: types::WsSanctionsPEPCheckV2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Sanctions_PEP_Check_V2SoapOut")]
+    #[yaserde(rename = "Ws_Sanctions_PEP_Check_V2Response")]
     pub struct WsSanctionsPEPCheckV2SoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsSanctionsPEPCheckV2Response,
@@ -2037,7 +2041,7 @@ pub mod messages {
         pub parameters: types::WsListSanctionsPEP,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_List_Sanctions_PEPSoapOut")]
+    #[yaserde(rename = "Ws_List_Sanctions_PEPResponse")]
     pub struct WsListSanctionsPEPSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsListSanctionsPEPResponse,
@@ -2055,7 +2059,7 @@ pub mod messages {
         pub parameters: types::WsListSanctionsPEPMatches,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_List_Sanctions_PEP_MatchesSoapOut")]
+    #[yaserde(rename = "Ws_List_Sanctions_PEP_MatchesResponse")]
     pub struct WsListSanctionsPEPMatchesSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsListSanctionsPEPMatchesResponse,
@@ -2073,7 +2077,7 @@ pub mod messages {
         pub parameters: types::WsUpdateSanctionsPEPMatches,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Update_Sanctions_PEP_MatchesSoapOut")]
+    #[yaserde(rename = "Ws_Update_Sanctions_PEP_MatchesResponse")]
     pub struct WsUpdateSanctionsPEPMatchesSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsUpdateSanctionsPEPMatchesResponse,
@@ -2091,7 +2095,7 @@ pub mod messages {
         pub parameters: types::WsCreateCardV2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_CreateCard_V2SoapOut")]
+    #[yaserde(rename = "Ws_CreateCard_V2Response")]
     pub struct WsCreateCardV2SoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsCreateCardV2Response,
@@ -2109,7 +2113,7 @@ pub mod messages {
         pub parameters: types::WsBankingReturnBankDetailsFromToken,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_ReturnBankDetailsFromTokenSoapOut")]
+    #[yaserde(rename = "Ws_Banking_ReturnBankDetailsFromTokenResponse")]
     pub struct WsBankingReturnBankDetailsFromTokenSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingReturnBankDetailsFromTokenResponse,
@@ -2127,7 +2131,7 @@ pub mod messages {
         pub parameters: types::WsBankingChangeAccountBankingFeaturesStatus,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_ChangeAccountBankingFeaturesStatusSoapOut")]
+    #[yaserde(rename = "Ws_Banking_ChangeAccountBankingFeaturesStatusResponse")]
     pub struct WsBankingChangeAccountBankingFeaturesStatusSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingChangeAccountBankingFeaturesStatusResponse,
@@ -2145,7 +2149,7 @@ pub mod messages {
         pub parameters: types::WsBankingTransferFunds,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(rename = "Ws_Banking_TransferFundsSoapOut")]
+    #[yaserde(rename = "Ws_Banking_TransferFundsResponse")]
     pub struct WsBankingTransferFundsSoapOut {
         #[yaserde(flatten, default)]
         pub parameters: types::WsBankingTransferFundsResponse,
@@ -2167,7 +2171,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_UpdateBankingEnabledCard",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingUpdateBankingEnabledCard {
@@ -2208,7 +2211,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_UpdateBankingEnabledCardResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingUpdateBankingEnabledCardResponse {
@@ -2297,7 +2299,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_StatusQueryBankingEnabledCard",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingStatusQueryBankingEnabledCard {
@@ -2322,7 +2323,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_StatusQueryBankingEnabledCardResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingStatusQueryBankingEnabledCardResponse {
@@ -2423,7 +2423,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_CreateCustomer",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingCreateCustomer {
@@ -2562,7 +2561,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_CreateCustomerResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingCreateCustomerResponse {
@@ -2619,7 +2617,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_RegisterNotification",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingRegisterNotification {
@@ -2700,7 +2697,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_RegisterNotificationResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingRegisterNotificationResponse {
@@ -2733,7 +2729,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_AccountModulusCheck",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingAccountModulusCheck {
@@ -2760,7 +2755,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_AccountModulusCheckResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingAccountModulusCheckResponse {
@@ -2911,7 +2905,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_GetDirectDebitInstructionsBankingEnabledCard",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCard {
@@ -2954,7 +2947,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_GetDirectDebitInstructionsBankingEnabledCardResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCardResponse {
@@ -3052,7 +3044,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_CancelDirectDebitBankingEnabledCard",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingCancelDirectDebitBankingEnabledCard {
@@ -3091,7 +3082,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_CancelDirectDebitBankingEnabledCardResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingCancelDirectDebitBankingEnabledCardResponse {
@@ -3132,7 +3122,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_GetPendingDirectDebits",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingGetPendingDirectDebits {
@@ -3163,7 +3152,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_GetPendingDirectDebitsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingGetPendingDirectDebitsResponse {
@@ -3254,7 +3242,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_Card_Statement_V2",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingCardStatementV2 {
@@ -3323,7 +3310,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_Card_Statement_V2Response",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingCardStatementV2Response {
@@ -3359,49 +3345,48 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "CardStatement2",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct CardStatement2 {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "StartBal", prefix = "tns", default)]
+        #[yaserde(rename = "StartBal", default)]
         pub start_bal: String,
-        #[yaserde(rename = "EndBal", prefix = "tns", default)]
+        #[yaserde(rename = "EndBal", default)]
         pub end_bal: String,
-        #[yaserde(rename = "TxnFilter", prefix = "tns", default)]
+        #[yaserde(rename = "TxnFilter", default)]
         pub txn_filter: Option<String>,
-        #[yaserde(rename = "StartDate", prefix = "tns", default)]
+        #[yaserde(rename = "StartDate", default)]
         pub start_date: Option<String>,
-        #[yaserde(rename = "EndDate", prefix = "tns", default)]
+        #[yaserde(rename = "EndDate", default)]
         pub end_date: Option<String>,
-        #[yaserde(rename = "NumTxn", prefix = "tns", default)]
+        #[yaserde(rename = "NumTxn", default)]
         pub num_txn: i32,
-        #[yaserde(rename = "ItemSrc", prefix = "tns", default)]
+        #[yaserde(rename = "ItemSrc", default)]
         pub item_src: i32,
-        #[yaserde(rename = "CurBill", prefix = "tns", default)]
+        #[yaserde(rename = "CurBill", default)]
         pub cur_bill: Option<String>,
-        #[yaserde(rename = "AvlBal", prefix = "tns", default)]
+        #[yaserde(rename = "AvlBal", default)]
         pub avl_bal: String,
-        #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
+        #[yaserde(rename = "BlkAmt", default)]
         pub blk_amt: String,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "Transactions", prefix = "tns", default)]
+        #[yaserde(rename = "Transactions", default)]
         pub transactions: Option<ArrayOfTransaction2>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
@@ -3504,7 +3489,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Insert3DSecureDetails",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsInsert3DSecureDetails {
@@ -3527,7 +3511,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Insert3DSecureDetailsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsInsert3DSecureDetailsResponse {
@@ -3550,7 +3533,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Update3DSecureDetails",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdate3DSecureDetails {
@@ -3573,7 +3555,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Update3DSecureDetailsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdate3DSecureDetailsResponse {
@@ -3584,7 +3565,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_UpdateLastModifiedType",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdateLastModifiedType {
@@ -3599,7 +3579,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_UpdateLastModifiedTypeResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdateLastModifiedTypeResponse {
@@ -3610,7 +3589,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Delete3DSecureDetails",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsDelete3DSecureDetails {
@@ -3623,7 +3601,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Delete3DSecureDetailsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsDelete3DSecureDetailsResponse {
@@ -3634,7 +3611,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Query3DSecureDetails",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsQuery3DSecureDetails {
@@ -3649,7 +3625,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Query3DSecureDetailsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsQuery3DSecureDetailsResponse {
@@ -3704,7 +3679,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GPS_Lock_Unlock",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGPSLockUnlock {
@@ -3719,7 +3693,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GPS_Lock_UnlockResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGPSLockUnlockResponse {
@@ -3751,7 +3724,6 @@ pub mod types {
     #[yaserde(
         rename = "WS_VerificationRequest",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsVerificationRequest {
@@ -3792,7 +3764,6 @@ pub mod types {
     #[yaserde(
         rename = "WS_VerificationRequestResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsVerificationRequestResponse {
@@ -3868,7 +3839,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_AddUpDelCredentials",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsAddUpDelCredentials {
@@ -3931,7 +3901,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_AddUpDelCredentialsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsAddUpDelCredentialsResponse {
@@ -3962,7 +3931,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_3DS_AddUpDelDetails",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct Ws3DSAddUpDelDetails {
@@ -4039,7 +4007,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_3DS_AddUpDelDetailsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct Ws3DSAddUpDelDetailsResponse {
@@ -4066,7 +4033,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_BalanceUpdate",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceUpdate {
@@ -4099,7 +4065,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_BalanceUpdateResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceUpdateResponse {
@@ -4142,7 +4107,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Payment_Token_Get",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPaymentTokenGet {
@@ -4169,7 +4133,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Payment_Token_GetResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPaymentTokenGetResponse {
@@ -4302,7 +4265,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Payment_Token_StatusChange",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPaymentTokenStatusChange {
@@ -4333,7 +4295,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Payment_Token_StatusChangeResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPaymentTokenStatusChangeResponse {
@@ -4376,7 +4337,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Activate",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsActivate {
@@ -4440,12 +4400,10 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_ActivateResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsActivateResponse {
-        #[yaserde(rename = "Ws_ActivateResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_ActivateResult", default)]
         pub ws_activate_result: Activate,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
@@ -4455,32 +4413,31 @@ pub mod types {
         prefix = "tns"
     )]
     pub struct Activate {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "IsLive", prefix = "tns", default)]
+        #[yaserde(rename = "IsLive", default)]
         pub is_live: bool,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Load",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsLoad {
@@ -4542,47 +4499,42 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_LoadResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsLoadResponse {
-        #[yaserde(rename = "Ws_LoadResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_LoadResult", default)]
         pub ws_load_result: LoadCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "LoadCard",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
     )]
     pub struct LoadCard {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "ItemID", prefix = "tns", default)]
+        #[yaserde(rename = "ItemID", default)]
         pub item_id: i64,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_UnLoad",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUnLoad {
@@ -4638,12 +4590,10 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_UnLoadResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsUnLoadResponse {
-        #[yaserde(rename = "Ws_UnLoadResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_UnLoadResult", default)]
         pub ws_un_load_result: UnLoad,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
@@ -4653,40 +4603,39 @@ pub mod types {
         prefix = "tns"
     )]
     pub struct UnLoad {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "AmtUnLoad", prefix = "tns", default)]
+        #[yaserde(rename = "AmtUnLoad", default)]
         pub amt_un_load: f64,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "AvlBal", prefix = "tns", default)]
+        #[yaserde(rename = "AvlBal", default)]
         pub avl_bal: String,
-        #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
+        #[yaserde(rename = "BlkAmt", default)]
         pub blk_amt: String,
-        #[yaserde(rename = "ItemID", prefix = "tns", default)]
+        #[yaserde(rename = "ItemID", default)]
         pub item_id: i64,
-        #[yaserde(rename = "CurCode", prefix = "tns", default)]
+        #[yaserde(rename = "CurCode", default)]
         pub cur_code: Option<String>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_StatusChange",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsStatusChange {
@@ -4738,45 +4687,40 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_StatusChangeResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsStatusChangeResponse {
-        #[yaserde(rename = "Ws_StatusChangeResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_StatusChangeResult", default)]
         pub ws_status_change_result: StatusChange,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "StatusChange",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
     )]
     pub struct StatusChange {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Enquiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsEnquiry {
@@ -4822,12 +4766,10 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_EnquiryResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsEnquiryResponse {
-        #[yaserde(rename = "Ws_EnquiryResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_EnquiryResult", default)]
         pub ws_enquiry_result: Card2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
@@ -4837,80 +4779,79 @@ pub mod types {
         prefix = "tns"
     )]
     pub struct Card2 {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "StartDate", prefix = "tns", default)]
+        #[yaserde(rename = "StartDate", default)]
         pub start_date: Option<String>,
-        #[yaserde(rename = "EndDate", prefix = "tns", default)]
+        #[yaserde(rename = "EndDate", default)]
         pub end_date: Option<String>,
-        #[yaserde(rename = "ExpDate", prefix = "tns", default)]
+        #[yaserde(rename = "ExpDate", default)]
         pub exp_date: Option<String>,
-        #[yaserde(rename = "StatCode", prefix = "tns", default)]
+        #[yaserde(rename = "StatCode", default)]
         pub stat_code: Option<String>,
-        #[yaserde(rename = "EmbossName", prefix = "tns", default)]
+        #[yaserde(rename = "EmbossName", default)]
         pub emboss_name: Option<String>,
-        #[yaserde(rename = "AvlBal", prefix = "tns", default)]
+        #[yaserde(rename = "AvlBal", default)]
         pub avl_bal: String,
-        #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
+        #[yaserde(rename = "BlkAmt", default)]
         pub blk_amt: String,
-        #[yaserde(rename = "CurCode", prefix = "tns", default)]
+        #[yaserde(rename = "CurCode", default)]
         pub cur_code: Option<String>,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "IsLive", prefix = "tns", default)]
+        #[yaserde(rename = "IsLive", default)]
         pub is_live: bool,
-        #[yaserde(rename = "Scheme", prefix = "tns", default)]
+        #[yaserde(rename = "Scheme", default)]
         pub scheme: Option<String>,
-        #[yaserde(rename = "Product", prefix = "tns", default)]
+        #[yaserde(rename = "Product", default)]
         pub product: Option<String>,
-        #[yaserde(rename = "MaskedPAN", prefix = "tns", default)]
+        #[yaserde(rename = "MaskedPAN", default)]
         pub masked_pan: Option<String>,
-        #[yaserde(rename = "LimitGroup", prefix = "tns", default)]
+        #[yaserde(rename = "LimitGroup", default)]
         pub limit_group: Option<String>,
-        #[yaserde(rename = "MCCGroup", prefix = "tns", default)]
+        #[yaserde(rename = "MCCGroup", default)]
         pub mcc_group: Option<String>,
-        #[yaserde(rename = "PERMSGroup", prefix = "tns", default)]
+        #[yaserde(rename = "PERMSGroup", default)]
         pub perms_group: Option<String>,
-        #[yaserde(rename = "FeeGroup", prefix = "tns", default)]
+        #[yaserde(rename = "FeeGroup", default)]
         pub fee_group: Option<String>,
-        #[yaserde(rename = "SchedFeeGroup", prefix = "tns", default)]
+        #[yaserde(rename = "SchedFeeGroup", default)]
         pub sched_fee_group: Option<String>,
-        #[yaserde(rename = "WSFeeGroup", prefix = "tns", default)]
+        #[yaserde(rename = "WSFeeGroup", default)]
         pub ws_fee_group: Option<String>,
-        #[yaserde(rename = "LinkageGroup", prefix = "tns", default)]
+        #[yaserde(rename = "LinkageGroup", default)]
         pub linkage_group: Option<String>,
-        #[yaserde(rename = "PrimaryToken", prefix = "tns", default)]
+        #[yaserde(rename = "PrimaryToken", default)]
         pub primary_token: Option<String>,
-        #[yaserde(rename = "AuthCalendarGroup", prefix = "tns", default)]
+        #[yaserde(rename = "AuthCalendarGroup", default)]
         pub auth_calendar_group: Option<String>,
-        #[yaserde(rename = "FXGroup", prefix = "tns", default)]
+        #[yaserde(rename = "FXGroup", default)]
         pub fx_group: Option<String>,
-        #[yaserde(rename = "BlackList", prefix = "tns", default)]
+        #[yaserde(rename = "BlackList", default)]
         pub black_list: Option<String>,
-        #[yaserde(rename = "WhiteList", prefix = "tns", default)]
+        #[yaserde(rename = "WhiteList", default)]
         pub white_list: Option<String>,
-        #[yaserde(rename = "PaymentTokenUsageGroup", prefix = "tns", default)]
+        #[yaserde(rename = "PaymentTokenUsageGroup", default)]
         pub payment_token_usage_group: Option<String>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_BalanceTransfer",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceTransfer {
@@ -4975,7 +4916,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_BalanceTransferResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceTransferResponse {
@@ -5024,7 +4964,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Balance_Enquiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceEnquiry {
@@ -5072,48 +5011,44 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Balance_EnquiryResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsBalanceEnquiryResponse {
-        #[yaserde(rename = "Ws_Balance_EnquiryResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_Balance_EnquiryResult", default)]
         pub ws_balance_enquiry_result: BalanceEnquire,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "BalanceEnquire",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
     )]
     pub struct BalanceEnquire {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "AvlBal", prefix = "tns", default)]
+        #[yaserde(rename = "AvlBal", default)]
         pub avl_bal: String,
-        #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
+        #[yaserde(rename = "BlkAmt", default)]
         pub blk_amt: String,
-        #[yaserde(rename = "CurCode", prefix = "tns", default)]
+        #[yaserde(rename = "CurCode", default)]
         pub cur_code: Option<String>,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "PINStatus", prefix = "tns", default)]
+        #[yaserde(rename = "PINStatus", default)]
         pub pin_status: i32,
-        #[yaserde(rename = "LimitInfo", prefix = "tns", default)]
+        #[yaserde(rename = "LimitInfo", default)]
         pub limit_info: Option<ArrayOfLimitInformation>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
@@ -5188,7 +5123,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Balance_Enquiry_Rep",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceEnquiryRep {
@@ -5237,7 +5171,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Balance_Enquiry_RepResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceEnquiryRepResponse {
@@ -5248,8 +5181,8 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Balance_Enquiry_V2",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        prefix = "tns",
+        default_namespace = "tns",
     )]
     pub struct WsBalanceEnquiryV2 {
         #[yaserde(rename = "WSID", prefix = "tns", default)]
@@ -5290,12 +5223,10 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Balance_Enquiry_V2Response",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsBalanceEnquiryV2Response {
-        #[yaserde(rename = "Ws_Balance_Enquiry_V2Result", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_Balance_Enquiry_V2Result", default)]
         pub ws_balance_enquiry_v2_result: Option<BalanceEnquire2>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
@@ -5308,44 +5239,42 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "BalanceEnquire2",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct BalanceEnquire2 {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "AvlBal", prefix = "tns", default)]
+        #[yaserde(rename = "AvlBal", default)]
         pub avl_bal: String,
-        #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
+        #[yaserde(rename = "BlkAmt", default)]
         pub blk_amt: String,
-        #[yaserde(rename = "CurCode", prefix = "tns", default)]
+        #[yaserde(rename = "CurCode", default)]
         pub cur_code: Option<String>,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "PINStatus", prefix = "tns", default)]
+        #[yaserde(rename = "PINStatus", default)]
         pub pin_status: i32,
-        #[yaserde(rename = "LimitInfo", prefix = "tns", default)]
+        #[yaserde(rename = "LimitInfo", default)]
         pub limit_info: Option<LimitInfo>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Balance_Enquiry_Wallet",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceEnquiryWallet {
@@ -5382,7 +5311,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Balance_Enquiry_WalletResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceEnquiryWalletResponse {
@@ -5430,7 +5358,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Card_Statement",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardStatement {
@@ -5488,19 +5415,16 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Card_StatementResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsCardStatementResponse {
-        #[yaserde(rename = "Ws_Card_StatementResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_Card_StatementResult", default)]
         pub ws_card_statement_result: CardStatement2,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Card_Statement_Rep",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardStatementRep {
@@ -5559,7 +5483,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Card_Statement_RepResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardStatementRepResponse {
@@ -5570,7 +5493,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Customer_Enquiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCustomerEnquiry {
@@ -5601,7 +5523,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Customer_EnquiryResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCustomerEnquiryResponse {
@@ -5690,7 +5611,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Customer_Enquiry_V2",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCustomerEnquiryV2 {
@@ -5719,7 +5639,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Customer_Enquiry_V2Response",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCustomerEnquiryV2Response {
@@ -5844,7 +5763,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Update_Cardholder_Details",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdateCardholderDetails {
@@ -6037,7 +5955,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Update_Cardholder_DetailsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdateCardholderDetailsResponse {
@@ -6072,7 +5989,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_UnLoad_StatusChange",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUnLoadStatusChange {
@@ -6133,7 +6049,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_UnLoad_StatusChangeResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUnLoadStatusChangeResponse {
@@ -6144,7 +6059,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Activate_Load",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsActivateLoad {
@@ -6239,7 +6153,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Activate_LoadResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsActivateLoadResponse {
@@ -6290,7 +6203,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_BalanceAdjustment",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBalanceAdjustment {
@@ -6346,51 +6258,46 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_BalanceAdjustmentResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsBalanceAdjustmentResponse {
-        #[yaserde(rename = "Ws_BalanceAdjustmentResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_BalanceAdjustmentResult", default)]
         pub ws_balance_adjustment_result: BalanceAdjust,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "BalanceAdjust",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
     )]
     pub struct BalanceAdjust {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "AvlBal", prefix = "tns", default)]
+        #[yaserde(rename = "AvlBal", default)]
         pub avl_bal: String,
-        #[yaserde(rename = "CurCode", prefix = "tns", default)]
+        #[yaserde(rename = "CurCode", default)]
         pub cur_code: Option<String>,
-        #[yaserde(rename = "ItemID", prefix = "tns", default)]
+        #[yaserde(rename = "ItemID", default)]
         pub item_id: Option<String>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_ExtendExpiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsExtendExpiry {
@@ -6437,7 +6344,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_ExtendExpiryResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsExtendExpiryResponse {
@@ -6482,7 +6388,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Transaction_Void",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsTransactionVoid {
@@ -6529,7 +6434,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Transaction_VoidResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsTransactionVoidResponse {
@@ -6570,7 +6474,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CardHolder_Details_Enquiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardHolderDetailsEnquiry {
@@ -6615,7 +6518,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CardHolder_Details_EnquiryResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardHolderDetailsEnquiryResponse {
@@ -6788,7 +6690,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CardHolder_Details_Enquiry_V2",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardHolderDetailsEnquiryV2 {
@@ -6831,7 +6732,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CardHolder_Details_Enquiry_V2Response",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardHolderDetailsEnquiryV2Response {
@@ -7008,7 +6908,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Phone_Activation",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPhoneActivation {
@@ -7027,7 +6926,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Phone_ActivationResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPhoneActivationResponse {
@@ -7063,7 +6961,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_BulkCreation",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBulkCreation {
@@ -7074,7 +6971,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_BulkCreationResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBulkCreationResponse {
@@ -7117,7 +7013,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_BulkWalletCreation",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBulkWalletCreation {
@@ -7130,7 +7025,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_BulkWalletCreationResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBulkWalletCreationResponse {
@@ -7166,7 +7060,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_WebServiceResult",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsWebServiceResult {
@@ -7179,7 +7072,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_WebServiceResultResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsWebServiceResultResponse {
@@ -7210,7 +7102,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Generic_Fees",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGenericFees {
@@ -7237,7 +7128,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Generic_FeesResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGenericFeesResponse {
@@ -7280,7 +7170,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Card_BalEnq",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardBalEnq {
@@ -7327,7 +7216,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Card_BalEnqResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardBalEnqResponse {
@@ -7382,7 +7270,6 @@ pub mod types {
     #[yaserde(
         rename = "WS_PinControl",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPinControl {
@@ -7429,7 +7316,6 @@ pub mod types {
     #[yaserde(
         rename = "WS_PinControlResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPinControlResponse {
@@ -7470,7 +7356,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CreateCard",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCreateCard {
@@ -7644,63 +7529,58 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_CreateCardResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsCreateCardResponse {
-        #[yaserde(rename = "Ws_CreateCardResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_CreateCardResult", default)]
         pub ws_create_card_result: VirtualCards,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "VirtualCards",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
     )]
     pub struct VirtualCards {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "TxnCode", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCode", default)]
         pub txn_code: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
-        #[yaserde(rename = "ExternalRef", prefix = "tns", default)]
+        #[yaserde(rename = "ExternalRef", default)]
         pub external_ref: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "ItemID", prefix = "tns", default)]
+        #[yaserde(rename = "ItemID", default)]
         pub item_id: i64,
-        #[yaserde(rename = "ClientCode", prefix = "tns", default)]
+        #[yaserde(rename = "ClientCode", default)]
         pub client_code: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "LoadValue", prefix = "tns", default)]
+        #[yaserde(rename = "LoadValue", default)]
         pub load_value: String,
-        #[yaserde(rename = "IsLive", prefix = "tns", default)]
+        #[yaserde(rename = "IsLive", default)]
         pub is_live: bool,
-        #[yaserde(rename = "StartDate", prefix = "tns", default)]
+        #[yaserde(rename = "StartDate", default)]
         pub start_date: Option<String>,
-        #[yaserde(rename = "ExpDate", prefix = "tns", default)]
+        #[yaserde(rename = "ExpDate", default)]
         pub exp_date: Option<String>,
-        #[yaserde(rename = "CVV", prefix = "tns", default)]
+        #[yaserde(rename = "CVV", default)]
         pub cvv: Option<String>,
-        #[yaserde(rename = "MaskedPAN", prefix = "tns", default)]
+        #[yaserde(rename = "MaskedPAN", default)]
         pub masked_pan: Option<String>,
-        #[yaserde(rename = "Image", prefix = "tns", default)]
+        #[yaserde(rename = "Image", default)]
         pub image: Option<String>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_CreateWallet",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCreateWallet {
@@ -7849,7 +7729,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CreateWalletResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCreateWalletResponse {
@@ -7904,7 +7783,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Regenerate",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsRegenerate {
@@ -7935,7 +7813,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_RegenerateResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsRegenerateResponse {
@@ -7964,7 +7841,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Convert_Card",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsConvertCard {
@@ -7981,7 +7857,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Convert_CardResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsConvertCardResponse {
@@ -8006,7 +7881,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Change_Groups",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsChangeGroups {
@@ -8063,7 +7937,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Change_GroupsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsChangeGroupsResponse {
@@ -8138,7 +8011,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Check",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCheck {
@@ -8151,7 +8023,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CheckResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCheckResponse {
@@ -8176,7 +8047,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Simple_Check",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSimpleCheck {}
@@ -8184,7 +8054,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Simple_CheckResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSimpleCheckResponse {
@@ -8195,7 +8064,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Client_Fx",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsClientFx {
@@ -8240,7 +8108,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Client_FxResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsClientFxResponse {
@@ -8307,7 +8174,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Link_Cards",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsLinkCards {
@@ -8330,7 +8196,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Link_CardsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsLinkCardsResponse {
@@ -8381,7 +8246,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_Group",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListGroup {
@@ -8396,7 +8260,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_GroupResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListGroupResponse {
@@ -8449,7 +8312,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_Products",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListProducts {
@@ -8462,7 +8324,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_ProductsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListProductsResponse {
@@ -8533,7 +8394,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GetCardRequest",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGetCardRequest {
@@ -8548,7 +8408,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GetCardRequestResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGetCardRequestResponse {
@@ -8597,7 +8456,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GetCardRequestStatus",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGetCardRequestStatus {
@@ -8612,7 +8470,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GetCardRequestStatusResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGetCardRequestStatusResponse {
@@ -8643,7 +8500,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CardAcceptorWhiteList",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardAcceptorWhiteList {
@@ -8682,7 +8538,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CardAcceptorWhiteListResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardAcceptorWhiteListResponse {
@@ -8765,7 +8620,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CardAcceptorBlackList",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardAcceptorBlackList {
@@ -8782,7 +8636,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CardAcceptorBlackListResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardAcceptorBlackListResponse {
@@ -8839,7 +8692,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_SendMessage",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSendMessage {
@@ -8874,7 +8726,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_SendMessageResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSendMessageResponse {
@@ -8907,7 +8758,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_MVCLoad",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsMVCLoad {
@@ -8930,7 +8780,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_MVCLoadResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsMVCLoadResponse {
@@ -8969,7 +8818,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_Pending_Fees",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListPendingFees {
@@ -8988,7 +8836,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_Pending_FeesResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListPendingFeesResponse {
@@ -9055,7 +8902,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_WebServiceResult_V2",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsWebServiceResultV2 {
@@ -9067,12 +8913,10 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_WebServiceResult_V2Response",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsWebServiceResultV2Response {
-        #[yaserde(rename = "Ws_WebServiceResult_V2Result", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_WebServiceResult_V2Result", default)]
         pub ws_web_service_result_v2_result: Wsresult2,
     }
 
@@ -9083,7 +8927,7 @@ pub mod types {
         prefix = "tns"
     )]
     pub struct ResponseSent {
-        #[yaserde(rename = "Response", prefix = "tns", default)]
+        #[yaserde(rename = "Response", default)]
         pub response: String,
     }
 
@@ -9094,18 +8938,17 @@ pub mod types {
         prefix = "tns"
     )]
     pub struct Wsresult2 {
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "WebMethod", prefix = "tns", default)]
+        #[yaserde(rename = "WebMethod", default)]
         pub web_method: Option<String>,
-        #[yaserde(rename = "ResponseSent", prefix = "tns", default)]
+        #[yaserde(rename = "ResponseSent", default)]
         pub response_sent: Option<ResponseSent>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Get_Passcode",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGetPasscode {
@@ -9122,7 +8965,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Get_PasscodeResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGetPasscodeResponse {
@@ -9149,7 +8991,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Get_Card_ExpireSoon",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGetCardExpireSoon {
@@ -9162,7 +9003,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Get_Card_ExpireSoonResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGetCardExpireSoonResponse {
@@ -9229,7 +9069,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Send_CardFiles",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSendCardFiles {
@@ -9248,7 +9087,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Send_CardFilesResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSendCardFilesResponse {
@@ -9279,7 +9117,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_SafeReports",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSafeReports {
@@ -9314,7 +9151,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_SafeReportsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSafeReportsResponse {
@@ -9353,7 +9189,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_RegenerateWallet",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsRegenerateWallet {
@@ -9384,7 +9219,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_RegenerateWalletResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsRegenerateWalletResponse {
@@ -9419,7 +9253,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_UpdateLoadSource",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdateLoadSource {
@@ -9444,7 +9277,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_UpdateLoadSourceResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdateLoadSourceResponse {
@@ -9479,7 +9311,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_MVCUnload",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsMVCUnload {
@@ -9504,7 +9335,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_MVCUnloadResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsMVCUnloadResponse {
@@ -9515,7 +9345,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Activate_MVCLoad",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsActivateMVCLoad {
@@ -9590,7 +9419,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Activate_MVCLoadResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsActivateMVCLoadResponse {
@@ -9639,7 +9467,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Renew_Card",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsRenewCard {
@@ -9672,7 +9499,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Renew_CardResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsRenewCardResponse {
@@ -9781,7 +9607,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_ResetAccumulator",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsResetAccumulator {
@@ -9816,7 +9641,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_ResetAccumulatorResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsResetAccumulatorResponse {
@@ -9843,7 +9667,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Enrol",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsEnrol {
@@ -9864,7 +9687,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_EnrolResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsEnrolResponse {
@@ -9895,7 +9717,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Activate",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardActivate {
@@ -9960,7 +9781,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_ActivateResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardActivateResponse {
@@ -9971,7 +9791,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Load",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardLoad {
@@ -10028,7 +9847,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_LoadResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardLoadResponse {
@@ -10039,7 +9857,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_UnLoad",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardUnLoad {
@@ -10092,7 +9909,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_UnLoadResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardUnLoadResponse {
@@ -10103,7 +9919,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_StatusChange",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardStatusChange {
@@ -10154,7 +9969,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_StatusChangeResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardStatusChangeResponse {
@@ -10165,7 +9979,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Enquiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardEnquiry {
@@ -10212,7 +10025,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_EnquiryResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardEnquiryResponse {
@@ -10223,7 +10035,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_BalanceTransfer",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardBalanceTransfer {
@@ -10278,7 +10089,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_BalanceTransferResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardBalanceTransferResponse {
@@ -10289,7 +10099,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Balance_Enquiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardBalanceEnquiry {
@@ -10336,7 +10145,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Balance_EnquiryResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardBalanceEnquiryResponse {
@@ -10347,7 +10155,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Card_Statement",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardCardStatement {
@@ -10404,7 +10211,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Card_StatementResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardCardStatementResponse {
@@ -10529,7 +10335,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Update_Cardholder_Details",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardUpdateCardholderDetails {
@@ -10712,7 +10517,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Update_Cardholder_DetailsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardUpdateCardholderDetailsResponse {
@@ -10727,7 +10531,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_UnLoad_StatusChange",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardUnLoadStatusChange {
@@ -10788,7 +10591,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_UnLoad_StatusChangeResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardUnLoadStatusChangeResponse {
@@ -10803,7 +10605,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Activate_Load",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardActivateLoad {
@@ -10894,7 +10695,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Activate_LoadResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardActivateLoadResponse {
@@ -10905,7 +10705,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_BalanceAdjustment",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardBalanceAdjustment {
@@ -10960,7 +10759,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_BalanceAdjustmentResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardBalanceAdjustmentResponse {
@@ -10975,7 +10773,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_ExtendExpiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardExtendExpiry {
@@ -11022,7 +10819,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_ExtendExpiryResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardExtendExpiryResponse {
@@ -11033,7 +10829,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Transaction_Void",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardTransactionVoid {
@@ -11080,7 +10875,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Transaction_VoidResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardTransactionVoidResponse {
@@ -11091,7 +10885,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_CardHolder_Details_Enquiry",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardCardHolderDetailsEnquiry {
@@ -11136,7 +10929,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_CardHolder_Details_EnquiryResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardCardHolderDetailsEnquiryResponse {
@@ -11151,7 +10943,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Phone_Activation",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardPhoneActivation {
@@ -11170,7 +10961,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Phone_ActivationResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardPhoneActivationResponse {
@@ -11181,7 +10971,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_BulkCreation",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardBulkCreation {
@@ -11192,7 +10981,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_BulkCreationResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardBulkCreationResponse {
@@ -11203,7 +10991,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_WebServiceResult",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardWebServiceResult {
@@ -11216,7 +11003,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_WebServiceResultResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardWebServiceResultResponse {
@@ -11227,7 +11013,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Generic_Fees",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardGenericFees {
@@ -11254,7 +11039,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Generic_FeesResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardGenericFeesResponse {
@@ -11265,7 +11049,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_PinControl",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardPinControl {
@@ -11320,7 +11103,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_PinControlResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardPinControlResponse {
@@ -11365,7 +11147,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_UpdateLoadSource",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardUpdateLoadSource {
@@ -11390,7 +11171,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_UpdateLoadSourceResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardUpdateLoadSourceResponse {
@@ -11401,7 +11181,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Activate_Load_ProductTpye_CP",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardActivateLoadProductTpyeCP {
@@ -11504,7 +11283,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_GiftCard_Activate_Load_ProductTpye_CPResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsGiftCardActivateLoadProductTpyeCPResponse {
@@ -11519,7 +11297,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Card_TransactionXML",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardTransactionXML {
@@ -11574,7 +11351,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Card_TransactionXMLResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardTransactionXMLResponse {
@@ -11626,7 +11402,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Card_Change_Groups",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardChangeGroups {
@@ -11666,41 +11441,36 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Card_Change_GroupsResponse",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-        prefix = "tns"
+        namespace = "http://www.globalprocessing.ae/HyperionWeb",
     )]
     pub struct WsCardChangeGroupsResponse {
-        #[yaserde(rename = "Ws_Card_Change_GroupsResult", prefix = "tns", default)]
+        #[yaserde(rename = "Ws_Card_Change_GroupsResult", default)]
         pub ws_card_change_groups_result: ChangeGroup,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "ChangeGroup",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
     )]
     pub struct ChangeGroup {
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "IssCode", prefix = "tns", default)]
+        #[yaserde(rename = "IssCode", default)]
         pub iss_code: Option<String>,
-        #[yaserde(rename = "ActionCode", prefix = "tns", default)]
+        #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "LocTime", prefix = "tns", default)]
+        #[yaserde(rename = "LocTime", default)]
         pub loc_time: Option<String>,
-        #[yaserde(rename = "SysDate", prefix = "tns", default)]
+        #[yaserde(rename = "SysDate", default)]
         pub sys_date: Option<String>,
-        #[yaserde(rename = "PublicToken", prefix = "tns", default)]
+        #[yaserde(rename = "PublicToken", default)]
         pub public_token: Option<String>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Card_Change_Cardacceptor_List",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardChangeCardacceptorList {
@@ -11725,7 +11495,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Card_Change_Cardacceptor_ListResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCardChangeCardacceptorListResponse {
@@ -11762,7 +11531,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Change_Cardacceptor_List",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsChangeCardacceptorList {
@@ -11791,7 +11559,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Change_Cardacceptor_ListResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsChangeCardacceptorListResponse {
@@ -11852,7 +11619,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_AddressMatchChecking",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsAddressMatchChecking {
@@ -11891,7 +11657,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_AddressMatchCheckingResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsAddressMatchCheckingResponse {
@@ -11916,7 +11681,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_LicenseVerification",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsLicenseVerification {
@@ -11941,7 +11705,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_LicenseVerificationResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsLicenseVerificationResponse {
@@ -11952,7 +11715,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_PassportVerification",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPassportVerification {
@@ -11985,7 +11747,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_PassportVerificationResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsPassportVerificationResponse {
@@ -11996,7 +11757,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Sanctions_PEP_Check",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSanctionsPEPCheck {
@@ -12021,7 +11781,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Sanctions_PEP_CheckResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSanctionsPEPCheckResponse {
@@ -12048,7 +11807,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Sanctions_PEP_Check_V2",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSanctionsPEPCheckV2 {
@@ -12079,7 +11837,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Sanctions_PEP_Check_V2Response",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsSanctionsPEPCheckV2Response {
@@ -12090,7 +11847,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_Sanctions_PEP",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListSanctionsPEP {
@@ -12105,7 +11861,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_Sanctions_PEPResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListSanctionsPEPResponse {
@@ -12374,7 +12129,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_Sanctions_PEP_Matches",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListSanctionsPEPMatches {
@@ -12395,7 +12149,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_List_Sanctions_PEP_MatchesResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsListSanctionsPEPMatchesResponse {
@@ -12506,7 +12259,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Update_Sanctions_PEP_Matches",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdateSanctionsPEPMatches {
@@ -12525,7 +12277,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Update_Sanctions_PEP_MatchesResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsUpdateSanctionsPEPMatchesResponse {
@@ -12558,7 +12309,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CreateCard_V2",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCreateCardV2 {
@@ -12779,7 +12529,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_CreateCard_V2Response",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsCreateCardV2Response {
@@ -12836,7 +12585,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_ReturnBankDetailsFromToken",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingReturnBankDetailsFromToken {
@@ -12861,7 +12609,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_ReturnBankDetailsFromTokenResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingReturnBankDetailsFromTokenResponse {
@@ -12896,7 +12643,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_ChangeAccountBankingFeaturesStatus",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingChangeAccountBankingFeaturesStatus {
@@ -12983,7 +12729,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_ChangeAccountBankingFeaturesStatusResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingChangeAccountBankingFeaturesStatusResponse {
@@ -13081,7 +12826,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_TransferFunds",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingTransferFunds {
@@ -13154,7 +12898,6 @@ pub mod types {
     #[yaserde(
         rename = "Ws_Banking_TransferFundsResponse",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
         prefix = "tns"
     )]
     pub struct WsBankingTransferFundsResponse {
@@ -13721,28 +13464,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingUpdateBankingEnabledCardSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingUpdateBankingEnabledCardSoapIn,
     }
 
     impl WsBankingUpdateBankingEnabledCardSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingUpdateBankingEnabledCardSoapIn) -> Self {
             WsBankingUpdateBankingEnabledCardSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -13754,7 +13496,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingUpdateBankingEnabledCardSoapOut {
-        #[yaserde(rename = "WsBankingUpdateBankingEnabledCardSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingUpdateBankingEnabledCardResponse", default)]
         pub body: ports::WsBankingUpdateBankingEnabledCardSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -13762,28 +13504,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingUpdateBankingEnabledCardSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingUpdateBankingEnabledCardSoapOut,
     }
 
     impl WsBankingUpdateBankingEnabledCardSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingUpdateBankingEnabledCardSoapOut) -> Self {
             WsBankingUpdateBankingEnabledCardSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -13803,28 +13544,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingStatusQueryBankingEnabledCardSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingStatusQueryBankingEnabledCardSoapIn,
     }
 
     impl WsBankingStatusQueryBankingEnabledCardSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingStatusQueryBankingEnabledCardSoapIn) -> Self {
             WsBankingStatusQueryBankingEnabledCardSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -13836,7 +13576,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingStatusQueryBankingEnabledCardSoapOut {
-        #[yaserde(rename = "WsBankingStatusQueryBankingEnabledCardSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingStatusQueryBankingEnabledCardResponse", default)]
         pub body: ports::WsBankingStatusQueryBankingEnabledCardSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -13844,28 +13584,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingStatusQueryBankingEnabledCardSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingStatusQueryBankingEnabledCardSoapOut,
     }
 
     impl WsBankingStatusQueryBankingEnabledCardSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingStatusQueryBankingEnabledCardSoapOut) -> Self {
             WsBankingStatusQueryBankingEnabledCardSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -13885,28 +13624,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingCreateCustomerSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingCreateCustomerSoapIn,
     }
 
     impl WsBankingCreateCustomerSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingCreateCustomerSoapIn) -> Self {
             WsBankingCreateCustomerSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -13918,7 +13656,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingCreateCustomerSoapOut {
-        #[yaserde(rename = "WsBankingCreateCustomerSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingCreateCustomerResponse", default)]
         pub body: ports::WsBankingCreateCustomerSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -13926,28 +13664,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingCreateCustomerSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingCreateCustomerSoapOut,
     }
 
     impl WsBankingCreateCustomerSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingCreateCustomerSoapOut) -> Self {
             WsBankingCreateCustomerSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -13967,28 +13704,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingRegisterNotificationSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingRegisterNotificationSoapIn,
     }
 
     impl WsBankingRegisterNotificationSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingRegisterNotificationSoapIn) -> Self {
             WsBankingRegisterNotificationSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14000,7 +13736,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingRegisterNotificationSoapOut {
-        #[yaserde(rename = "WsBankingRegisterNotificationSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingRegisterNotificationResponse", default)]
         pub body: ports::WsBankingRegisterNotificationSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14008,28 +13744,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingRegisterNotificationSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingRegisterNotificationSoapOut,
     }
 
     impl WsBankingRegisterNotificationSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingRegisterNotificationSoapOut) -> Self {
             WsBankingRegisterNotificationSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14049,28 +13784,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingAccountModulusCheckSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingAccountModulusCheckSoapIn,
     }
 
     impl WsBankingAccountModulusCheckSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingAccountModulusCheckSoapIn) -> Self {
             WsBankingAccountModulusCheckSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14082,7 +13816,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingAccountModulusCheckSoapOut {
-        #[yaserde(rename = "WsBankingAccountModulusCheckSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingAccountModulusCheckResponse", default)]
         pub body: ports::WsBankingAccountModulusCheckSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14090,28 +13824,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingAccountModulusCheckSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingAccountModulusCheckSoapOut,
     }
 
     impl WsBankingAccountModulusCheckSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingAccountModulusCheckSoapOut) -> Self {
             WsBankingAccountModulusCheckSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14134,28 +13867,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingGetDirectDebitInstructionsBankingEnabledCardSoapIn,
     }
 
     impl WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingGetDirectDebitInstructionsBankingEnabledCardSoapIn) -> Self {
             WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14168,7 +13900,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOut {
         #[yaserde(
-            rename = "WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOut",
+            rename = "Ws_BankingGetDirectDebitInstructionsBankingEnabledCardResponse",
             default
         )]
         pub body: ports::WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOut,
@@ -14178,28 +13910,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOut,
     }
 
     impl WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOut) -> Self {
             WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14219,28 +13950,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingCancelDirectDebitBankingEnabledCardSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingCancelDirectDebitBankingEnabledCardSoapIn,
     }
 
     impl WsBankingCancelDirectDebitBankingEnabledCardSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingCancelDirectDebitBankingEnabledCardSoapIn) -> Self {
             WsBankingCancelDirectDebitBankingEnabledCardSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14253,7 +13983,7 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingCancelDirectDebitBankingEnabledCardSoapOut {
         #[yaserde(
-            rename = "WsBankingCancelDirectDebitBankingEnabledCardSoapOut",
+            rename = "Ws_BankingCancelDirectDebitBankingEnabledCardResponse",
             default
         )]
         pub body: ports::WsBankingCancelDirectDebitBankingEnabledCardSoapOut,
@@ -14263,28 +13993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingCancelDirectDebitBankingEnabledCardSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingCancelDirectDebitBankingEnabledCardSoapOut,
     }
 
     impl WsBankingCancelDirectDebitBankingEnabledCardSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingCancelDirectDebitBankingEnabledCardSoapOut) -> Self {
             WsBankingCancelDirectDebitBankingEnabledCardSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14304,28 +14033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingGetPendingDirectDebitsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingGetPendingDirectDebitsSoapIn,
     }
 
     impl WsBankingGetPendingDirectDebitsSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingGetPendingDirectDebitsSoapIn) -> Self {
             WsBankingGetPendingDirectDebitsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14337,7 +14065,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingGetPendingDirectDebitsSoapOut {
-        #[yaserde(rename = "WsBankingGetPendingDirectDebitsSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingGetPendingDirectDebitsResponse", default)]
         pub body: ports::WsBankingGetPendingDirectDebitsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14345,28 +14073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingGetPendingDirectDebitsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingGetPendingDirectDebitsSoapOut,
     }
 
     impl WsBankingGetPendingDirectDebitsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingGetPendingDirectDebitsSoapOut) -> Self {
             WsBankingGetPendingDirectDebitsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14386,28 +14113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingCardStatementV2SoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingCardStatementV2SoapIn,
     }
 
     impl WsBankingCardStatementV2SoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingCardStatementV2SoapIn) -> Self {
             WsBankingCardStatementV2SoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14419,7 +14145,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingCardStatementV2SoapOut {
-        #[yaserde(rename = "WsBankingCardStatementV2SoapOut", default)]
+        #[yaserde(rename = "Ws_BankingCardStatementV2Response", default)]
         pub body: ports::WsBankingCardStatementV2SoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14427,28 +14153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingCardStatementV2SoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingCardStatementV2SoapOut,
     }
 
     impl WsBankingCardStatementV2SoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingCardStatementV2SoapOut) -> Self {
             WsBankingCardStatementV2SoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14468,28 +14193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsInsert3DSecureDetailsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsInsert3DSecureDetailsSoapIn,
     }
 
     impl WsInsert3DSecureDetailsSoapInSoapEnvelope {
         pub fn new(body: SoapWsInsert3DSecureDetailsSoapIn) -> Self {
             WsInsert3DSecureDetailsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14501,7 +14225,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsInsert3DSecureDetailsSoapOut {
-        #[yaserde(rename = "WsInsert3DSecureDetailsSoapOut", default)]
+        #[yaserde(rename = "Ws_Insert3DSecureDetailsResponse", default)]
         pub body: ports::WsInsert3DSecureDetailsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14509,28 +14233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsInsert3DSecureDetailsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsInsert3DSecureDetailsSoapOut,
     }
 
     impl WsInsert3DSecureDetailsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsInsert3DSecureDetailsSoapOut) -> Self {
             WsInsert3DSecureDetailsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14550,28 +14273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdate3DSecureDetailsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdate3DSecureDetailsSoapIn,
     }
 
     impl WsUpdate3DSecureDetailsSoapInSoapEnvelope {
         pub fn new(body: SoapWsUpdate3DSecureDetailsSoapIn) -> Self {
             WsUpdate3DSecureDetailsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14583,7 +14305,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsUpdate3DSecureDetailsSoapOut {
-        #[yaserde(rename = "WsUpdate3DSecureDetailsSoapOut", default)]
+        #[yaserde(rename = "Ws_Update3DSecureDetailsResponse", default)]
         pub body: ports::WsUpdate3DSecureDetailsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14591,28 +14313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdate3DSecureDetailsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdate3DSecureDetailsSoapOut,
     }
 
     impl WsUpdate3DSecureDetailsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsUpdate3DSecureDetailsSoapOut) -> Self {
             WsUpdate3DSecureDetailsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14632,28 +14353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdateLastModifiedTypeSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdateLastModifiedTypeSoapIn,
     }
 
     impl WsUpdateLastModifiedTypeSoapInSoapEnvelope {
         pub fn new(body: SoapWsUpdateLastModifiedTypeSoapIn) -> Self {
             WsUpdateLastModifiedTypeSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14665,7 +14385,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsUpdateLastModifiedTypeSoapOut {
-        #[yaserde(rename = "WsUpdateLastModifiedTypeSoapOut", default)]
+        #[yaserde(rename = "Ws_UpdateLastModifiedTypeResponse", default)]
         pub body: ports::WsUpdateLastModifiedTypeSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14673,28 +14393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdateLastModifiedTypeSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdateLastModifiedTypeSoapOut,
     }
 
     impl WsUpdateLastModifiedTypeSoapOutSoapEnvelope {
         pub fn new(body: SoapWsUpdateLastModifiedTypeSoapOut) -> Self {
             WsUpdateLastModifiedTypeSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14714,28 +14433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsDelete3DSecureDetailsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsDelete3DSecureDetailsSoapIn,
     }
 
     impl WsDelete3DSecureDetailsSoapInSoapEnvelope {
         pub fn new(body: SoapWsDelete3DSecureDetailsSoapIn) -> Self {
             WsDelete3DSecureDetailsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14747,7 +14465,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsDelete3DSecureDetailsSoapOut {
-        #[yaserde(rename = "WsDelete3DSecureDetailsSoapOut", default)]
+        #[yaserde(rename = "Ws_Delete3DSecureDetailsResponse", default)]
         pub body: ports::WsDelete3DSecureDetailsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14755,28 +14473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsDelete3DSecureDetailsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsDelete3DSecureDetailsSoapOut,
     }
 
     impl WsDelete3DSecureDetailsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsDelete3DSecureDetailsSoapOut) -> Self {
             WsDelete3DSecureDetailsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14796,28 +14513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsQuery3DSecureDetailsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsQuery3DSecureDetailsSoapIn,
     }
 
     impl WsQuery3DSecureDetailsSoapInSoapEnvelope {
         pub fn new(body: SoapWsQuery3DSecureDetailsSoapIn) -> Self {
             WsQuery3DSecureDetailsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14829,7 +14545,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsQuery3DSecureDetailsSoapOut {
-        #[yaserde(rename = "WsQuery3DSecureDetailsSoapOut", default)]
+        #[yaserde(rename = "Ws_Query3DSecureDetailsResponse", default)]
         pub body: ports::WsQuery3DSecureDetailsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14837,28 +14553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsQuery3DSecureDetailsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsQuery3DSecureDetailsSoapOut,
     }
 
     impl WsQuery3DSecureDetailsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsQuery3DSecureDetailsSoapOut) -> Self {
             WsQuery3DSecureDetailsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14878,28 +14593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGPSLockUnlockSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGPSLockUnlockSoapIn,
     }
 
     impl WsGPSLockUnlockSoapInSoapEnvelope {
         pub fn new(body: SoapWsGPSLockUnlockSoapIn) -> Self {
             WsGPSLockUnlockSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14911,7 +14625,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGPSLockUnlockSoapOut {
-        #[yaserde(rename = "WsGPSLockUnlockSoapOut", default)]
+        #[yaserde(rename = "Ws_GPSLockUnlockResponse", default)]
         pub body: ports::WsGPSLockUnlockSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -14919,28 +14633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGPSLockUnlockSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGPSLockUnlockSoapOut,
     }
 
     impl WsGPSLockUnlockSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGPSLockUnlockSoapOut) -> Self {
             WsGPSLockUnlockSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14960,28 +14673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsVerificationRequestSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsVerificationRequestSoapIn,
     }
 
     impl WsVerificationRequestSoapInSoapEnvelope {
         pub fn new(body: SoapWsVerificationRequestSoapIn) -> Self {
             WsVerificationRequestSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -14993,7 +14705,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsVerificationRequestSoapOut {
-        #[yaserde(rename = "WsVerificationRequestSoapOut", default)]
+        #[yaserde(rename = "Ws_VerificationRequestResponse", default)]
         pub body: ports::WsVerificationRequestSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15001,28 +14713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsVerificationRequestSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsVerificationRequestSoapOut,
     }
 
     impl WsVerificationRequestSoapOutSoapEnvelope {
         pub fn new(body: SoapWsVerificationRequestSoapOut) -> Self {
             WsVerificationRequestSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15042,28 +14753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsAddUpDelCredentialsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsAddUpDelCredentialsSoapIn,
     }
 
     impl WsAddUpDelCredentialsSoapInSoapEnvelope {
         pub fn new(body: SoapWsAddUpDelCredentialsSoapIn) -> Self {
             WsAddUpDelCredentialsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15075,7 +14785,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsAddUpDelCredentialsSoapOut {
-        #[yaserde(rename = "WsAddUpDelCredentialsSoapOut", default)]
+        #[yaserde(rename = "Ws_AddUpDelCredentialsResponse", default)]
         pub body: ports::WsAddUpDelCredentialsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15083,28 +14793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsAddUpDelCredentialsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsAddUpDelCredentialsSoapOut,
     }
 
     impl WsAddUpDelCredentialsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsAddUpDelCredentialsSoapOut) -> Self {
             WsAddUpDelCredentialsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15124,28 +14833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct Ws3DSAddUpDelDetailsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWs3DSAddUpDelDetailsSoapIn,
     }
 
     impl Ws3DSAddUpDelDetailsSoapInSoapEnvelope {
         pub fn new(body: SoapWs3DSAddUpDelDetailsSoapIn) -> Self {
             Ws3DSAddUpDelDetailsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15157,7 +14865,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWs3DSAddUpDelDetailsSoapOut {
-        #[yaserde(rename = "Ws3DSAddUpDelDetailsSoapOut", default)]
+        #[yaserde(rename = "Ws_3DSAddUpDelDetailsResponse", default)]
         pub body: ports::Ws3DSAddUpDelDetailsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15165,28 +14873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct Ws3DSAddUpDelDetailsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWs3DSAddUpDelDetailsSoapOut,
     }
 
     impl Ws3DSAddUpDelDetailsSoapOutSoapEnvelope {
         pub fn new(body: SoapWs3DSAddUpDelDetailsSoapOut) -> Self {
             Ws3DSAddUpDelDetailsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15206,28 +14913,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceUpdateSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceUpdateSoapIn,
     }
 
     impl WsBalanceUpdateSoapInSoapEnvelope {
         pub fn new(body: SoapWsBalanceUpdateSoapIn) -> Self {
             WsBalanceUpdateSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15239,7 +14945,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBalanceUpdateSoapOut {
-        #[yaserde(rename = "WsBalanceUpdateSoapOut", default)]
+        #[yaserde(rename = "Ws_BalanceUpdateResponse", default)]
         pub body: ports::WsBalanceUpdateSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15247,28 +14953,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceUpdateSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceUpdateSoapOut,
     }
 
     impl WsBalanceUpdateSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBalanceUpdateSoapOut) -> Self {
             WsBalanceUpdateSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15288,28 +14993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPaymentTokenGetSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPaymentTokenGetSoapIn,
     }
 
     impl WsPaymentTokenGetSoapInSoapEnvelope {
         pub fn new(body: SoapWsPaymentTokenGetSoapIn) -> Self {
             WsPaymentTokenGetSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15321,7 +15025,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsPaymentTokenGetSoapOut {
-        #[yaserde(rename = "WsPaymentTokenGetSoapOut", default)]
+        #[yaserde(rename = "Ws_PaymentTokenGetResponse", default)]
         pub body: ports::WsPaymentTokenGetSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15329,28 +15033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPaymentTokenGetSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPaymentTokenGetSoapOut,
     }
 
     impl WsPaymentTokenGetSoapOutSoapEnvelope {
         pub fn new(body: SoapWsPaymentTokenGetSoapOut) -> Self {
             WsPaymentTokenGetSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15370,28 +15073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPaymentTokenStatusChangeSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPaymentTokenStatusChangeSoapIn,
     }
 
     impl WsPaymentTokenStatusChangeSoapInSoapEnvelope {
         pub fn new(body: SoapWsPaymentTokenStatusChangeSoapIn) -> Self {
             WsPaymentTokenStatusChangeSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15403,7 +15105,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsPaymentTokenStatusChangeSoapOut {
-        #[yaserde(rename = "WsPaymentTokenStatusChangeSoapOut", default)]
+        #[yaserde(rename = "Ws_PaymentTokenStatusChangeResponse", default)]
         pub body: ports::WsPaymentTokenStatusChangeSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15411,28 +15113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPaymentTokenStatusChangeSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPaymentTokenStatusChangeSoapOut,
     }
 
     impl WsPaymentTokenStatusChangeSoapOutSoapEnvelope {
         pub fn new(body: SoapWsPaymentTokenStatusChangeSoapOut) -> Self {
             WsPaymentTokenStatusChangeSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15452,28 +15153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsActivateSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsActivateSoapIn,
     }
 
     impl WsActivateSoapInSoapEnvelope {
         pub fn new(body: SoapWsActivateSoapIn) -> Self {
             WsActivateSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15485,7 +15185,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsActivateSoapOut {
-        #[yaserde(rename = "WsActivateSoapOut", default)]
+        #[yaserde(rename = "Ws_ActivateResponse", default)]
         pub body: ports::WsActivateSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15493,28 +15193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsActivateSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsActivateSoapOut,
     }
 
     impl WsActivateSoapOutSoapEnvelope {
         pub fn new(body: SoapWsActivateSoapOut) -> Self {
             WsActivateSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15534,28 +15233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsLoadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsLoadSoapIn,
     }
 
     impl WsLoadSoapInSoapEnvelope {
         pub fn new(body: SoapWsLoadSoapIn) -> Self {
             WsLoadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15567,7 +15265,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsLoadSoapOut {
-        #[yaserde(rename = "WsLoadSoapOut", default)]
+        #[yaserde(rename = "Ws_LoadResponse", default)]
         pub body: ports::WsLoadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15575,28 +15273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsLoadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsLoadSoapOut,
     }
 
     impl WsLoadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsLoadSoapOut) -> Self {
             WsLoadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15616,28 +15313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUnLoadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUnLoadSoapIn,
     }
 
     impl WsUnLoadSoapInSoapEnvelope {
         pub fn new(body: SoapWsUnLoadSoapIn) -> Self {
             WsUnLoadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15649,7 +15345,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsUnLoadSoapOut {
-        #[yaserde(rename = "WsUnLoadSoapOut", default)]
+        #[yaserde(rename = "Ws_UnLoadResponse", default)]
         pub body: ports::WsUnLoadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15657,28 +15353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUnLoadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUnLoadSoapOut,
     }
 
     impl WsUnLoadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsUnLoadSoapOut) -> Self {
             WsUnLoadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15698,28 +15393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsStatusChangeSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsStatusChangeSoapIn,
     }
 
     impl WsStatusChangeSoapInSoapEnvelope {
         pub fn new(body: SoapWsStatusChangeSoapIn) -> Self {
             WsStatusChangeSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15731,7 +15425,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsStatusChangeSoapOut {
-        #[yaserde(rename = "WsStatusChangeSoapOut", default)]
+        #[yaserde(rename = "Ws_StatusChangeResponse", default)]
         pub body: ports::WsStatusChangeSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15739,28 +15433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsStatusChangeSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsStatusChangeSoapOut,
     }
 
     impl WsStatusChangeSoapOutSoapEnvelope {
         pub fn new(body: SoapWsStatusChangeSoapOut) -> Self {
             WsStatusChangeSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15780,28 +15473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsEnquirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsEnquirySoapIn,
     }
 
     impl WsEnquirySoapInSoapEnvelope {
         pub fn new(body: SoapWsEnquirySoapIn) -> Self {
             WsEnquirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15813,7 +15505,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsEnquirySoapOut {
-        #[yaserde(rename = "WsEnquirySoapOut", default)]
+        #[yaserde(rename = "Ws_EnquiryResponse", default)]
         pub body: ports::WsEnquirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15821,28 +15513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsEnquirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsEnquirySoapOut,
     }
 
     impl WsEnquirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsEnquirySoapOut) -> Self {
             WsEnquirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15862,28 +15553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceTransferSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceTransferSoapIn,
     }
 
     impl WsBalanceTransferSoapInSoapEnvelope {
         pub fn new(body: SoapWsBalanceTransferSoapIn) -> Self {
             WsBalanceTransferSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15895,7 +15585,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBalanceTransferSoapOut {
-        #[yaserde(rename = "WsBalanceTransferSoapOut", default)]
+        #[yaserde(rename = "Ws_BalanceTransferResponse", default)]
         pub body: ports::WsBalanceTransferSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15903,28 +15593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceTransferSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceTransferSoapOut,
     }
 
     impl WsBalanceTransferSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBalanceTransferSoapOut) -> Self {
             WsBalanceTransferSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15944,28 +15633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceEnquirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceEnquirySoapIn,
     }
 
     impl WsBalanceEnquirySoapInSoapEnvelope {
         pub fn new(body: SoapWsBalanceEnquirySoapIn) -> Self {
             WsBalanceEnquirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -15977,7 +15665,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBalanceEnquirySoapOut {
-        #[yaserde(rename = "WsBalanceEnquirySoapOut", default)]
+        #[yaserde(rename = "Ws_BalanceEnquiryResponse", default)]
         pub body: ports::WsBalanceEnquirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -15985,28 +15673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceEnquirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceEnquirySoapOut,
     }
 
     impl WsBalanceEnquirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsBalanceEnquirySoapOut) -> Self {
             WsBalanceEnquirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16026,28 +15713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceEnquiryRepSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceEnquiryRepSoapIn,
     }
 
     impl WsBalanceEnquiryRepSoapInSoapEnvelope {
         pub fn new(body: SoapWsBalanceEnquiryRepSoapIn) -> Self {
             WsBalanceEnquiryRepSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16059,7 +15745,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBalanceEnquiryRepSoapOut {
-        #[yaserde(rename = "WsBalanceEnquiryRepSoapOut", default)]
+        #[yaserde(rename = "Ws_BalanceEnquiryRepResponse", default)]
         pub body: ports::WsBalanceEnquiryRepSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16067,28 +15753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceEnquiryRepSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceEnquiryRepSoapOut,
     }
 
     impl WsBalanceEnquiryRepSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBalanceEnquiryRepSoapOut) -> Self {
             WsBalanceEnquiryRepSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16108,28 +15793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceEnquiryV2SoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceEnquiryV2SoapIn,
     }
 
     impl WsBalanceEnquiryV2SoapInSoapEnvelope {
         pub fn new(body: SoapWsBalanceEnquiryV2SoapIn) -> Self {
             WsBalanceEnquiryV2SoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16141,7 +15825,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBalanceEnquiryV2SoapOut {
-        #[yaserde(rename = "WsBalanceEnquiryV2SoapOut", default)]
+        #[yaserde(rename = "Ws_Balance_Enquiry_V2Response", default)]
         pub body: ports::WsBalanceEnquiryV2SoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16149,28 +15833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceEnquiryV2SoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceEnquiryV2SoapOut,
     }
 
     impl WsBalanceEnquiryV2SoapOutSoapEnvelope {
         pub fn new(body: SoapWsBalanceEnquiryV2SoapOut) -> Self {
             WsBalanceEnquiryV2SoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16190,28 +15873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceEnquiryWalletSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceEnquiryWalletSoapIn,
     }
 
     impl WsBalanceEnquiryWalletSoapInSoapEnvelope {
         pub fn new(body: SoapWsBalanceEnquiryWalletSoapIn) -> Self {
             WsBalanceEnquiryWalletSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16223,7 +15905,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBalanceEnquiryWalletSoapOut {
-        #[yaserde(rename = "WsBalanceEnquiryWalletSoapOut", default)]
+        #[yaserde(rename = "Ws_BalanceEnquiryWalletResponse", default)]
         pub body: ports::WsBalanceEnquiryWalletSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16231,28 +15913,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceEnquiryWalletSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceEnquiryWalletSoapOut,
     }
 
     impl WsBalanceEnquiryWalletSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBalanceEnquiryWalletSoapOut) -> Self {
             WsBalanceEnquiryWalletSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16272,28 +15953,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardStatementSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardStatementSoapIn,
     }
 
     impl WsCardStatementSoapInSoapEnvelope {
         pub fn new(body: SoapWsCardStatementSoapIn) -> Self {
             WsCardStatementSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16305,7 +15985,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardStatementSoapOut {
-        #[yaserde(rename = "WsCardStatementSoapOut", default)]
+        #[yaserde(rename = "Ws_Card_StatementResponse", default)]
         pub body: ports::WsCardStatementSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16313,28 +15993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardStatementSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardStatementSoapOut,
     }
 
     impl WsCardStatementSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardStatementSoapOut) -> Self {
             WsCardStatementSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16354,28 +16033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardStatementRepSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardStatementRepSoapIn,
     }
 
     impl WsCardStatementRepSoapInSoapEnvelope {
         pub fn new(body: SoapWsCardStatementRepSoapIn) -> Self {
             WsCardStatementRepSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16387,7 +16065,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardStatementRepSoapOut {
-        #[yaserde(rename = "WsCardStatementRepSoapOut", default)]
+        #[yaserde(rename = "Ws_CardStatementRepResponse", default)]
         pub body: ports::WsCardStatementRepSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16395,28 +16073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardStatementRepSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardStatementRepSoapOut,
     }
 
     impl WsCardStatementRepSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardStatementRepSoapOut) -> Self {
             WsCardStatementRepSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16436,28 +16113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCustomerEnquirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCustomerEnquirySoapIn,
     }
 
     impl WsCustomerEnquirySoapInSoapEnvelope {
         pub fn new(body: SoapWsCustomerEnquirySoapIn) -> Self {
             WsCustomerEnquirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16469,7 +16145,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCustomerEnquirySoapOut {
-        #[yaserde(rename = "WsCustomerEnquirySoapOut", default)]
+        #[yaserde(rename = "Ws_CustomerEnquiryResponse", default)]
         pub body: ports::WsCustomerEnquirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16477,28 +16153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCustomerEnquirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCustomerEnquirySoapOut,
     }
 
     impl WsCustomerEnquirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsCustomerEnquirySoapOut) -> Self {
             WsCustomerEnquirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16518,28 +16193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCustomerEnquiryV2SoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCustomerEnquiryV2SoapIn,
     }
 
     impl WsCustomerEnquiryV2SoapInSoapEnvelope {
         pub fn new(body: SoapWsCustomerEnquiryV2SoapIn) -> Self {
             WsCustomerEnquiryV2SoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16551,7 +16225,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCustomerEnquiryV2SoapOut {
-        #[yaserde(rename = "WsCustomerEnquiryV2SoapOut", default)]
+        #[yaserde(rename = "Ws_CustomerEnquiryV2Response", default)]
         pub body: ports::WsCustomerEnquiryV2SoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16559,28 +16233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCustomerEnquiryV2SoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCustomerEnquiryV2SoapOut,
     }
 
     impl WsCustomerEnquiryV2SoapOutSoapEnvelope {
         pub fn new(body: SoapWsCustomerEnquiryV2SoapOut) -> Self {
             WsCustomerEnquiryV2SoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16600,28 +16273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdateCardholderDetailsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdateCardholderDetailsSoapIn,
     }
 
     impl WsUpdateCardholderDetailsSoapInSoapEnvelope {
         pub fn new(body: SoapWsUpdateCardholderDetailsSoapIn) -> Self {
             WsUpdateCardholderDetailsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16633,7 +16305,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsUpdateCardholderDetailsSoapOut {
-        #[yaserde(rename = "WsUpdateCardholderDetailsSoapOut", default)]
+        #[yaserde(rename = "Ws_UpdateCardholderDetailsResponse", default)]
         pub body: ports::WsUpdateCardholderDetailsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16641,28 +16313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdateCardholderDetailsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdateCardholderDetailsSoapOut,
     }
 
     impl WsUpdateCardholderDetailsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsUpdateCardholderDetailsSoapOut) -> Self {
             WsUpdateCardholderDetailsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16682,28 +16353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUnLoadStatusChangeSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUnLoadStatusChangeSoapIn,
     }
 
     impl WsUnLoadStatusChangeSoapInSoapEnvelope {
         pub fn new(body: SoapWsUnLoadStatusChangeSoapIn) -> Self {
             WsUnLoadStatusChangeSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16715,7 +16385,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsUnLoadStatusChangeSoapOut {
-        #[yaserde(rename = "WsUnLoadStatusChangeSoapOut", default)]
+        #[yaserde(rename = "Ws_UnLoadStatusChangeResponse", default)]
         pub body: ports::WsUnLoadStatusChangeSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16723,28 +16393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUnLoadStatusChangeSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUnLoadStatusChangeSoapOut,
     }
 
     impl WsUnLoadStatusChangeSoapOutSoapEnvelope {
         pub fn new(body: SoapWsUnLoadStatusChangeSoapOut) -> Self {
             WsUnLoadStatusChangeSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16764,28 +16433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsActivateLoadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsActivateLoadSoapIn,
     }
 
     impl WsActivateLoadSoapInSoapEnvelope {
         pub fn new(body: SoapWsActivateLoadSoapIn) -> Self {
             WsActivateLoadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16797,7 +16465,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsActivateLoadSoapOut {
-        #[yaserde(rename = "WsActivateLoadSoapOut", default)]
+        #[yaserde(rename = "Ws_ActivateLoadResponse", default)]
         pub body: ports::WsActivateLoadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16805,28 +16473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsActivateLoadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsActivateLoadSoapOut,
     }
 
     impl WsActivateLoadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsActivateLoadSoapOut) -> Self {
             WsActivateLoadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16846,28 +16513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceAdjustmentSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceAdjustmentSoapIn,
     }
 
     impl WsBalanceAdjustmentSoapInSoapEnvelope {
         pub fn new(body: SoapWsBalanceAdjustmentSoapIn) -> Self {
             WsBalanceAdjustmentSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16879,7 +16545,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBalanceAdjustmentSoapOut {
-        #[yaserde(rename = "WsBalanceAdjustmentSoapOut", default)]
+        #[yaserde(rename = "Ws_BalanceAdjustmentResponse", default)]
         pub body: ports::WsBalanceAdjustmentSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16887,28 +16553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBalanceAdjustmentSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBalanceAdjustmentSoapOut,
     }
 
     impl WsBalanceAdjustmentSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBalanceAdjustmentSoapOut) -> Self {
             WsBalanceAdjustmentSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16928,28 +16593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsExtendExpirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsExtendExpirySoapIn,
     }
 
     impl WsExtendExpirySoapInSoapEnvelope {
         pub fn new(body: SoapWsExtendExpirySoapIn) -> Self {
             WsExtendExpirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -16961,7 +16625,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsExtendExpirySoapOut {
-        #[yaserde(rename = "WsExtendExpirySoapOut", default)]
+        #[yaserde(rename = "Ws_ExtendExpiryResponse", default)]
         pub body: ports::WsExtendExpirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -16969,28 +16633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsExtendExpirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsExtendExpirySoapOut,
     }
 
     impl WsExtendExpirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsExtendExpirySoapOut) -> Self {
             WsExtendExpirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17010,28 +16673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsTransactionVoidSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsTransactionVoidSoapIn,
     }
 
     impl WsTransactionVoidSoapInSoapEnvelope {
         pub fn new(body: SoapWsTransactionVoidSoapIn) -> Self {
             WsTransactionVoidSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17043,7 +16705,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsTransactionVoidSoapOut {
-        #[yaserde(rename = "WsTransactionVoidSoapOut", default)]
+        #[yaserde(rename = "Ws_TransactionVoidResponse", default)]
         pub body: ports::WsTransactionVoidSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17051,28 +16713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsTransactionVoidSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsTransactionVoidSoapOut,
     }
 
     impl WsTransactionVoidSoapOutSoapEnvelope {
         pub fn new(body: SoapWsTransactionVoidSoapOut) -> Self {
             WsTransactionVoidSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17092,28 +16753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardHolderDetailsEnquirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardHolderDetailsEnquirySoapIn,
     }
 
     impl WsCardHolderDetailsEnquirySoapInSoapEnvelope {
         pub fn new(body: SoapWsCardHolderDetailsEnquirySoapIn) -> Self {
             WsCardHolderDetailsEnquirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17125,7 +16785,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardHolderDetailsEnquirySoapOut {
-        #[yaserde(rename = "WsCardHolderDetailsEnquirySoapOut", default)]
+        #[yaserde(rename = "Ws_CardHolderDetailsEnquiryResponse", default)]
         pub body: ports::WsCardHolderDetailsEnquirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17133,28 +16793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardHolderDetailsEnquirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardHolderDetailsEnquirySoapOut,
     }
 
     impl WsCardHolderDetailsEnquirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardHolderDetailsEnquirySoapOut) -> Self {
             WsCardHolderDetailsEnquirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17174,28 +16833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardHolderDetailsEnquiryV2SoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardHolderDetailsEnquiryV2SoapIn,
     }
 
     impl WsCardHolderDetailsEnquiryV2SoapInSoapEnvelope {
         pub fn new(body: SoapWsCardHolderDetailsEnquiryV2SoapIn) -> Self {
             WsCardHolderDetailsEnquiryV2SoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17207,7 +16865,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardHolderDetailsEnquiryV2SoapOut {
-        #[yaserde(rename = "WsCardHolderDetailsEnquiryV2SoapOut", default)]
+        #[yaserde(rename = "Ws_CardHolderDetailsEnquiryV2Response", default)]
         pub body: ports::WsCardHolderDetailsEnquiryV2SoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17215,28 +16873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardHolderDetailsEnquiryV2SoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardHolderDetailsEnquiryV2SoapOut,
     }
 
     impl WsCardHolderDetailsEnquiryV2SoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardHolderDetailsEnquiryV2SoapOut) -> Self {
             WsCardHolderDetailsEnquiryV2SoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17256,28 +16913,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPhoneActivationSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPhoneActivationSoapIn,
     }
 
     impl WsPhoneActivationSoapInSoapEnvelope {
         pub fn new(body: SoapWsPhoneActivationSoapIn) -> Self {
             WsPhoneActivationSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17289,7 +16945,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsPhoneActivationSoapOut {
-        #[yaserde(rename = "WsPhoneActivationSoapOut", default)]
+        #[yaserde(rename = "Ws_PhoneActivationResponse", default)]
         pub body: ports::WsPhoneActivationSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17297,28 +16953,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPhoneActivationSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPhoneActivationSoapOut,
     }
 
     impl WsPhoneActivationSoapOutSoapEnvelope {
         pub fn new(body: SoapWsPhoneActivationSoapOut) -> Self {
             WsPhoneActivationSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17338,28 +16993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBulkCreationSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBulkCreationSoapIn,
     }
 
     impl WsBulkCreationSoapInSoapEnvelope {
         pub fn new(body: SoapWsBulkCreationSoapIn) -> Self {
             WsBulkCreationSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17371,7 +17025,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBulkCreationSoapOut {
-        #[yaserde(rename = "WsBulkCreationSoapOut", default)]
+        #[yaserde(rename = "Ws_BulkCreationResponse", default)]
         pub body: ports::WsBulkCreationSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17379,28 +17033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBulkCreationSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBulkCreationSoapOut,
     }
 
     impl WsBulkCreationSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBulkCreationSoapOut) -> Self {
             WsBulkCreationSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17420,28 +17073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBulkWalletCreationSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBulkWalletCreationSoapIn,
     }
 
     impl WsBulkWalletCreationSoapInSoapEnvelope {
         pub fn new(body: SoapWsBulkWalletCreationSoapIn) -> Self {
             WsBulkWalletCreationSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17453,7 +17105,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBulkWalletCreationSoapOut {
-        #[yaserde(rename = "WsBulkWalletCreationSoapOut", default)]
+        #[yaserde(rename = "Ws_BulkWalletCreationResponse", default)]
         pub body: ports::WsBulkWalletCreationSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17461,28 +17113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBulkWalletCreationSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBulkWalletCreationSoapOut,
     }
 
     impl WsBulkWalletCreationSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBulkWalletCreationSoapOut) -> Self {
             WsBulkWalletCreationSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17502,28 +17153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsWebServiceResultSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsWebServiceResultSoapIn,
     }
 
     impl WsWebServiceResultSoapInSoapEnvelope {
         pub fn new(body: SoapWsWebServiceResultSoapIn) -> Self {
             WsWebServiceResultSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17535,7 +17185,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsWebServiceResultSoapOut {
-        #[yaserde(rename = "WsWebServiceResultSoapOut", default)]
+        #[yaserde(rename = "Ws_WebServiceResultResponse", default)]
         pub body: ports::WsWebServiceResultSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17543,28 +17193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsWebServiceResultSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsWebServiceResultSoapOut,
     }
 
     impl WsWebServiceResultSoapOutSoapEnvelope {
         pub fn new(body: SoapWsWebServiceResultSoapOut) -> Self {
             WsWebServiceResultSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17584,28 +17233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGenericFeesSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGenericFeesSoapIn,
     }
 
     impl WsGenericFeesSoapInSoapEnvelope {
         pub fn new(body: SoapWsGenericFeesSoapIn) -> Self {
             WsGenericFeesSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17617,7 +17265,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGenericFeesSoapOut {
-        #[yaserde(rename = "WsGenericFeesSoapOut", default)]
+        #[yaserde(rename = "Ws_GenericFeesResponse", default)]
         pub body: ports::WsGenericFeesSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17625,28 +17273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGenericFeesSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGenericFeesSoapOut,
     }
 
     impl WsGenericFeesSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGenericFeesSoapOut) -> Self {
             WsGenericFeesSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17666,28 +17313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardBalEnqSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardBalEnqSoapIn,
     }
 
     impl WsCardBalEnqSoapInSoapEnvelope {
         pub fn new(body: SoapWsCardBalEnqSoapIn) -> Self {
             WsCardBalEnqSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17699,7 +17345,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardBalEnqSoapOut {
-        #[yaserde(rename = "WsCardBalEnqSoapOut", default)]
+        #[yaserde(rename = "Ws_CardBalEnqResponse", default)]
         pub body: ports::WsCardBalEnqSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17707,28 +17353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardBalEnqSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardBalEnqSoapOut,
     }
 
     impl WsCardBalEnqSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardBalEnqSoapOut) -> Self {
             WsCardBalEnqSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17748,28 +17393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPinControlSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPinControlSoapIn,
     }
 
     impl WsPinControlSoapInSoapEnvelope {
         pub fn new(body: SoapWsPinControlSoapIn) -> Self {
             WsPinControlSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17781,7 +17425,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsPinControlSoapOut {
-        #[yaserde(rename = "WsPinControlSoapOut", default)]
+        #[yaserde(rename = "Ws_PinControlResponse", default)]
         pub body: ports::WsPinControlSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17789,28 +17433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPinControlSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPinControlSoapOut,
     }
 
     impl WsPinControlSoapOutSoapEnvelope {
         pub fn new(body: SoapWsPinControlSoapOut) -> Self {
             WsPinControlSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17830,28 +17473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCreateCardSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCreateCardSoapIn,
     }
 
     impl WsCreateCardSoapInSoapEnvelope {
         pub fn new(body: SoapWsCreateCardSoapIn) -> Self {
             WsCreateCardSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17863,7 +17505,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCreateCardSoapOut {
-        #[yaserde(rename = "WsCreateCardSoapOut", default)]
+        #[yaserde(rename = "Ws_CreateCardResponse", default)]
         pub body: ports::WsCreateCardSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17871,28 +17513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCreateCardSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCreateCardSoapOut,
     }
 
     impl WsCreateCardSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCreateCardSoapOut) -> Self {
             WsCreateCardSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17912,28 +17553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCreateWalletSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCreateWalletSoapIn,
     }
 
     impl WsCreateWalletSoapInSoapEnvelope {
         pub fn new(body: SoapWsCreateWalletSoapIn) -> Self {
             WsCreateWalletSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17945,7 +17585,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCreateWalletSoapOut {
-        #[yaserde(rename = "WsCreateWalletSoapOut", default)]
+        #[yaserde(rename = "Ws_CreateWalletResponse", default)]
         pub body: ports::WsCreateWalletSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -17953,28 +17593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCreateWalletSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCreateWalletSoapOut,
     }
 
     impl WsCreateWalletSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCreateWalletSoapOut) -> Self {
             WsCreateWalletSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -17994,28 +17633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsRegenerateSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsRegenerateSoapIn,
     }
 
     impl WsRegenerateSoapInSoapEnvelope {
         pub fn new(body: SoapWsRegenerateSoapIn) -> Self {
             WsRegenerateSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18027,7 +17665,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsRegenerateSoapOut {
-        #[yaserde(rename = "WsRegenerateSoapOut", default)]
+        #[yaserde(rename = "Ws_RegenerateResponse", default)]
         pub body: ports::WsRegenerateSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18035,28 +17673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsRegenerateSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsRegenerateSoapOut,
     }
 
     impl WsRegenerateSoapOutSoapEnvelope {
         pub fn new(body: SoapWsRegenerateSoapOut) -> Self {
             WsRegenerateSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18076,28 +17713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsConvertCardSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsConvertCardSoapIn,
     }
 
     impl WsConvertCardSoapInSoapEnvelope {
         pub fn new(body: SoapWsConvertCardSoapIn) -> Self {
             WsConvertCardSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18109,7 +17745,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsConvertCardSoapOut {
-        #[yaserde(rename = "WsConvertCardSoapOut", default)]
+        #[yaserde(rename = "Ws_ConvertCardResponse", default)]
         pub body: ports::WsConvertCardSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18117,28 +17753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsConvertCardSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsConvertCardSoapOut,
     }
 
     impl WsConvertCardSoapOutSoapEnvelope {
         pub fn new(body: SoapWsConvertCardSoapOut) -> Self {
             WsConvertCardSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18158,28 +17793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsChangeGroupsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsChangeGroupsSoapIn,
     }
 
     impl WsChangeGroupsSoapInSoapEnvelope {
         pub fn new(body: SoapWsChangeGroupsSoapIn) -> Self {
             WsChangeGroupsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18191,7 +17825,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsChangeGroupsSoapOut {
-        #[yaserde(rename = "WsChangeGroupsSoapOut", default)]
+        #[yaserde(rename = "Ws_ChangeGroupsResponse", default)]
         pub body: ports::WsChangeGroupsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18199,28 +17833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsChangeGroupsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsChangeGroupsSoapOut,
     }
 
     impl WsChangeGroupsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsChangeGroupsSoapOut) -> Self {
             WsChangeGroupsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18240,28 +17873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCheckSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCheckSoapIn,
     }
 
     impl WsCheckSoapInSoapEnvelope {
         pub fn new(body: SoapWsCheckSoapIn) -> Self {
             WsCheckSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18273,7 +17905,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCheckSoapOut {
-        #[yaserde(rename = "WsCheckSoapOut", default)]
+        #[yaserde(rename = "Ws_CheckResponse", default)]
         pub body: ports::WsCheckSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18281,28 +17913,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCheckSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCheckSoapOut,
     }
 
     impl WsCheckSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCheckSoapOut) -> Self {
             WsCheckSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18322,28 +17953,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSimpleCheckSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSimpleCheckSoapIn,
     }
 
     impl WsSimpleCheckSoapInSoapEnvelope {
         pub fn new(body: SoapWsSimpleCheckSoapIn) -> Self {
             WsSimpleCheckSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18355,7 +17985,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsSimpleCheckSoapOut {
-        #[yaserde(rename = "WsSimpleCheckSoapOut", default)]
+        #[yaserde(rename = "Ws_SimpleCheckResponse", default)]
         pub body: ports::WsSimpleCheckSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18363,28 +17993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSimpleCheckSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSimpleCheckSoapOut,
     }
 
     impl WsSimpleCheckSoapOutSoapEnvelope {
         pub fn new(body: SoapWsSimpleCheckSoapOut) -> Self {
             WsSimpleCheckSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18404,28 +18033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsClientFxSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsClientFxSoapIn,
     }
 
     impl WsClientFxSoapInSoapEnvelope {
         pub fn new(body: SoapWsClientFxSoapIn) -> Self {
             WsClientFxSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18437,7 +18065,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsClientFxSoapOut {
-        #[yaserde(rename = "WsClientFxSoapOut", default)]
+        #[yaserde(rename = "Ws_ClientFxResponse", default)]
         pub body: ports::WsClientFxSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18445,28 +18073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsClientFxSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsClientFxSoapOut,
     }
 
     impl WsClientFxSoapOutSoapEnvelope {
         pub fn new(body: SoapWsClientFxSoapOut) -> Self {
             WsClientFxSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18486,28 +18113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsLinkCardsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsLinkCardsSoapIn,
     }
 
     impl WsLinkCardsSoapInSoapEnvelope {
         pub fn new(body: SoapWsLinkCardsSoapIn) -> Self {
             WsLinkCardsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18519,7 +18145,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsLinkCardsSoapOut {
-        #[yaserde(rename = "WsLinkCardsSoapOut", default)]
+        #[yaserde(rename = "Ws_LinkCardsResponse", default)]
         pub body: ports::WsLinkCardsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18527,28 +18153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsLinkCardsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsLinkCardsSoapOut,
     }
 
     impl WsLinkCardsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsLinkCardsSoapOut) -> Self {
             WsLinkCardsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18568,28 +18193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListGroupSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListGroupSoapIn,
     }
 
     impl WsListGroupSoapInSoapEnvelope {
         pub fn new(body: SoapWsListGroupSoapIn) -> Self {
             WsListGroupSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18601,7 +18225,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsListGroupSoapOut {
-        #[yaserde(rename = "WsListGroupSoapOut", default)]
+        #[yaserde(rename = "Ws_ListGroupResponse", default)]
         pub body: ports::WsListGroupSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18609,28 +18233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListGroupSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListGroupSoapOut,
     }
 
     impl WsListGroupSoapOutSoapEnvelope {
         pub fn new(body: SoapWsListGroupSoapOut) -> Self {
             WsListGroupSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18650,28 +18273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListProductsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListProductsSoapIn,
     }
 
     impl WsListProductsSoapInSoapEnvelope {
         pub fn new(body: SoapWsListProductsSoapIn) -> Self {
             WsListProductsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18683,7 +18305,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsListProductsSoapOut {
-        #[yaserde(rename = "WsListProductsSoapOut", default)]
+        #[yaserde(rename = "Ws_ListProductsResponse", default)]
         pub body: ports::WsListProductsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18691,28 +18313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListProductsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListProductsSoapOut,
     }
 
     impl WsListProductsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsListProductsSoapOut) -> Self {
             WsListProductsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18732,28 +18353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGetCardRequestSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGetCardRequestSoapIn,
     }
 
     impl WsGetCardRequestSoapInSoapEnvelope {
         pub fn new(body: SoapWsGetCardRequestSoapIn) -> Self {
             WsGetCardRequestSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18765,7 +18385,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGetCardRequestSoapOut {
-        #[yaserde(rename = "WsGetCardRequestSoapOut", default)]
+        #[yaserde(rename = "Ws_GetCardRequestResponse", default)]
         pub body: ports::WsGetCardRequestSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18773,28 +18393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGetCardRequestSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGetCardRequestSoapOut,
     }
 
     impl WsGetCardRequestSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGetCardRequestSoapOut) -> Self {
             WsGetCardRequestSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18814,28 +18433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGetCardRequestStatusSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGetCardRequestStatusSoapIn,
     }
 
     impl WsGetCardRequestStatusSoapInSoapEnvelope {
         pub fn new(body: SoapWsGetCardRequestStatusSoapIn) -> Self {
             WsGetCardRequestStatusSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18847,7 +18465,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGetCardRequestStatusSoapOut {
-        #[yaserde(rename = "WsGetCardRequestStatusSoapOut", default)]
+        #[yaserde(rename = "Ws_GetCardRequestStatusResponse", default)]
         pub body: ports::WsGetCardRequestStatusSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18855,28 +18473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGetCardRequestStatusSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGetCardRequestStatusSoapOut,
     }
 
     impl WsGetCardRequestStatusSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGetCardRequestStatusSoapOut) -> Self {
             WsGetCardRequestStatusSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18896,28 +18513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardAcceptorWhiteListSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardAcceptorWhiteListSoapIn,
     }
 
     impl WsCardAcceptorWhiteListSoapInSoapEnvelope {
         pub fn new(body: SoapWsCardAcceptorWhiteListSoapIn) -> Self {
             WsCardAcceptorWhiteListSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18929,7 +18545,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardAcceptorWhiteListSoapOut {
-        #[yaserde(rename = "WsCardAcceptorWhiteListSoapOut", default)]
+        #[yaserde(rename = "Ws_CardAcceptorWhiteListResponse", default)]
         pub body: ports::WsCardAcceptorWhiteListSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -18937,28 +18553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardAcceptorWhiteListSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardAcceptorWhiteListSoapOut,
     }
 
     impl WsCardAcceptorWhiteListSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardAcceptorWhiteListSoapOut) -> Self {
             WsCardAcceptorWhiteListSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -18978,28 +18593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardAcceptorBlackListSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardAcceptorBlackListSoapIn,
     }
 
     impl WsCardAcceptorBlackListSoapInSoapEnvelope {
         pub fn new(body: SoapWsCardAcceptorBlackListSoapIn) -> Self {
             WsCardAcceptorBlackListSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19011,7 +18625,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardAcceptorBlackListSoapOut {
-        #[yaserde(rename = "WsCardAcceptorBlackListSoapOut", default)]
+        #[yaserde(rename = "Ws_CardAcceptorBlackListResponse", default)]
         pub body: ports::WsCardAcceptorBlackListSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19019,28 +18633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardAcceptorBlackListSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardAcceptorBlackListSoapOut,
     }
 
     impl WsCardAcceptorBlackListSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardAcceptorBlackListSoapOut) -> Self {
             WsCardAcceptorBlackListSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19060,28 +18673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSendMessageSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSendMessageSoapIn,
     }
 
     impl WsSendMessageSoapInSoapEnvelope {
         pub fn new(body: SoapWsSendMessageSoapIn) -> Self {
             WsSendMessageSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19093,7 +18705,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsSendMessageSoapOut {
-        #[yaserde(rename = "WsSendMessageSoapOut", default)]
+        #[yaserde(rename = "Ws_SendMessageResponse", default)]
         pub body: ports::WsSendMessageSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19101,28 +18713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSendMessageSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSendMessageSoapOut,
     }
 
     impl WsSendMessageSoapOutSoapEnvelope {
         pub fn new(body: SoapWsSendMessageSoapOut) -> Self {
             WsSendMessageSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19142,28 +18753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsMVCLoadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsMVCLoadSoapIn,
     }
 
     impl WsMVCLoadSoapInSoapEnvelope {
         pub fn new(body: SoapWsMVCLoadSoapIn) -> Self {
             WsMVCLoadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19175,7 +18785,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsMVCLoadSoapOut {
-        #[yaserde(rename = "WsMVCLoadSoapOut", default)]
+        #[yaserde(rename = "Ws_MVCLoadResponse", default)]
         pub body: ports::WsMVCLoadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19183,28 +18793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsMVCLoadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsMVCLoadSoapOut,
     }
 
     impl WsMVCLoadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsMVCLoadSoapOut) -> Self {
             WsMVCLoadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19224,28 +18833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListPendingFeesSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListPendingFeesSoapIn,
     }
 
     impl WsListPendingFeesSoapInSoapEnvelope {
         pub fn new(body: SoapWsListPendingFeesSoapIn) -> Self {
             WsListPendingFeesSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19257,7 +18865,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsListPendingFeesSoapOut {
-        #[yaserde(rename = "WsListPendingFeesSoapOut", default)]
+        #[yaserde(rename = "Ws_ListPendingFeesResponse", default)]
         pub body: ports::WsListPendingFeesSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19265,28 +18873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListPendingFeesSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListPendingFeesSoapOut,
     }
 
     impl WsListPendingFeesSoapOutSoapEnvelope {
         pub fn new(body: SoapWsListPendingFeesSoapOut) -> Self {
             WsListPendingFeesSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19306,28 +18913,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsWebServiceResultV2SoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsWebServiceResultV2SoapIn,
     }
 
     impl WsWebServiceResultV2SoapInSoapEnvelope {
         pub fn new(body: SoapWsWebServiceResultV2SoapIn) -> Self {
             WsWebServiceResultV2SoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19339,7 +18945,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsWebServiceResultV2SoapOut {
-        #[yaserde(rename = "WsWebServiceResultV2SoapOut", default)]
+        #[yaserde(rename = "Ws_WebServiceResultV2Response", default)]
         pub body: ports::WsWebServiceResultV2SoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19347,28 +18953,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsWebServiceResultV2SoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsWebServiceResultV2SoapOut,
     }
 
     impl WsWebServiceResultV2SoapOutSoapEnvelope {
         pub fn new(body: SoapWsWebServiceResultV2SoapOut) -> Self {
             WsWebServiceResultV2SoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19388,28 +18993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGetPasscodeSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGetPasscodeSoapIn,
     }
 
     impl WsGetPasscodeSoapInSoapEnvelope {
         pub fn new(body: SoapWsGetPasscodeSoapIn) -> Self {
             WsGetPasscodeSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19421,7 +19025,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGetPasscodeSoapOut {
-        #[yaserde(rename = "WsGetPasscodeSoapOut", default)]
+        #[yaserde(rename = "Ws_GetPasscodeResponse", default)]
         pub body: ports::WsGetPasscodeSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19429,28 +19033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGetPasscodeSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGetPasscodeSoapOut,
     }
 
     impl WsGetPasscodeSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGetPasscodeSoapOut) -> Self {
             WsGetPasscodeSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19470,28 +19073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGetCardExpireSoonSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGetCardExpireSoonSoapIn,
     }
 
     impl WsGetCardExpireSoonSoapInSoapEnvelope {
         pub fn new(body: SoapWsGetCardExpireSoonSoapIn) -> Self {
             WsGetCardExpireSoonSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19503,7 +19105,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGetCardExpireSoonSoapOut {
-        #[yaserde(rename = "WsGetCardExpireSoonSoapOut", default)]
+        #[yaserde(rename = "Ws_GetCardExpireSoonResponse", default)]
         pub body: ports::WsGetCardExpireSoonSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19511,28 +19113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGetCardExpireSoonSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGetCardExpireSoonSoapOut,
     }
 
     impl WsGetCardExpireSoonSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGetCardExpireSoonSoapOut) -> Self {
             WsGetCardExpireSoonSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19552,28 +19153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSendCardFilesSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSendCardFilesSoapIn,
     }
 
     impl WsSendCardFilesSoapInSoapEnvelope {
         pub fn new(body: SoapWsSendCardFilesSoapIn) -> Self {
             WsSendCardFilesSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19585,7 +19185,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsSendCardFilesSoapOut {
-        #[yaserde(rename = "WsSendCardFilesSoapOut", default)]
+        #[yaserde(rename = "Ws_SendCardFilesResponse", default)]
         pub body: ports::WsSendCardFilesSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19593,28 +19193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSendCardFilesSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSendCardFilesSoapOut,
     }
 
     impl WsSendCardFilesSoapOutSoapEnvelope {
         pub fn new(body: SoapWsSendCardFilesSoapOut) -> Self {
             WsSendCardFilesSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19634,28 +19233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSafeReportsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSafeReportsSoapIn,
     }
 
     impl WsSafeReportsSoapInSoapEnvelope {
         pub fn new(body: SoapWsSafeReportsSoapIn) -> Self {
             WsSafeReportsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19667,7 +19265,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsSafeReportsSoapOut {
-        #[yaserde(rename = "WsSafeReportsSoapOut", default)]
+        #[yaserde(rename = "Ws_SafeReportsResponse", default)]
         pub body: ports::WsSafeReportsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19675,28 +19273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSafeReportsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSafeReportsSoapOut,
     }
 
     impl WsSafeReportsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsSafeReportsSoapOut) -> Self {
             WsSafeReportsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19716,28 +19313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsRegenerateWalletSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsRegenerateWalletSoapIn,
     }
 
     impl WsRegenerateWalletSoapInSoapEnvelope {
         pub fn new(body: SoapWsRegenerateWalletSoapIn) -> Self {
             WsRegenerateWalletSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19749,7 +19345,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsRegenerateWalletSoapOut {
-        #[yaserde(rename = "WsRegenerateWalletSoapOut", default)]
+        #[yaserde(rename = "Ws_RegenerateWalletResponse", default)]
         pub body: ports::WsRegenerateWalletSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19757,28 +19353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsRegenerateWalletSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsRegenerateWalletSoapOut,
     }
 
     impl WsRegenerateWalletSoapOutSoapEnvelope {
         pub fn new(body: SoapWsRegenerateWalletSoapOut) -> Self {
             WsRegenerateWalletSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19798,28 +19393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdateLoadSourceSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdateLoadSourceSoapIn,
     }
 
     impl WsUpdateLoadSourceSoapInSoapEnvelope {
         pub fn new(body: SoapWsUpdateLoadSourceSoapIn) -> Self {
             WsUpdateLoadSourceSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19831,7 +19425,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsUpdateLoadSourceSoapOut {
-        #[yaserde(rename = "WsUpdateLoadSourceSoapOut", default)]
+        #[yaserde(rename = "Ws_UpdateLoadSourceResponse", default)]
         pub body: ports::WsUpdateLoadSourceSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19839,28 +19433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdateLoadSourceSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdateLoadSourceSoapOut,
     }
 
     impl WsUpdateLoadSourceSoapOutSoapEnvelope {
         pub fn new(body: SoapWsUpdateLoadSourceSoapOut) -> Self {
             WsUpdateLoadSourceSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19880,28 +19473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsMVCUnloadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsMVCUnloadSoapIn,
     }
 
     impl WsMVCUnloadSoapInSoapEnvelope {
         pub fn new(body: SoapWsMVCUnloadSoapIn) -> Self {
             WsMVCUnloadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19913,7 +19505,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsMVCUnloadSoapOut {
-        #[yaserde(rename = "WsMVCUnloadSoapOut", default)]
+        #[yaserde(rename = "Ws_MVCUnloadResponse", default)]
         pub body: ports::WsMVCUnloadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -19921,28 +19513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsMVCUnloadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsMVCUnloadSoapOut,
     }
 
     impl WsMVCUnloadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsMVCUnloadSoapOut) -> Self {
             WsMVCUnloadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19962,28 +19553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsActivateMVCLoadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsActivateMVCLoadSoapIn,
     }
 
     impl WsActivateMVCLoadSoapInSoapEnvelope {
         pub fn new(body: SoapWsActivateMVCLoadSoapIn) -> Self {
             WsActivateMVCLoadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -19995,7 +19585,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsActivateMVCLoadSoapOut {
-        #[yaserde(rename = "WsActivateMVCLoadSoapOut", default)]
+        #[yaserde(rename = "Ws_ActivateMVCLoadResponse", default)]
         pub body: ports::WsActivateMVCLoadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20003,28 +19593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsActivateMVCLoadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsActivateMVCLoadSoapOut,
     }
 
     impl WsActivateMVCLoadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsActivateMVCLoadSoapOut) -> Self {
             WsActivateMVCLoadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20044,28 +19633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsRenewCardSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsRenewCardSoapIn,
     }
 
     impl WsRenewCardSoapInSoapEnvelope {
         pub fn new(body: SoapWsRenewCardSoapIn) -> Self {
             WsRenewCardSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20077,7 +19665,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsRenewCardSoapOut {
-        #[yaserde(rename = "WsRenewCardSoapOut", default)]
+        #[yaserde(rename = "Ws_RenewCardResponse", default)]
         pub body: ports::WsRenewCardSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20085,28 +19673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsRenewCardSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsRenewCardSoapOut,
     }
 
     impl WsRenewCardSoapOutSoapEnvelope {
         pub fn new(body: SoapWsRenewCardSoapOut) -> Self {
             WsRenewCardSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20126,28 +19713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsResetAccumulatorSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsResetAccumulatorSoapIn,
     }
 
     impl WsResetAccumulatorSoapInSoapEnvelope {
         pub fn new(body: SoapWsResetAccumulatorSoapIn) -> Self {
             WsResetAccumulatorSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20159,7 +19745,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsResetAccumulatorSoapOut {
-        #[yaserde(rename = "WsResetAccumulatorSoapOut", default)]
+        #[yaserde(rename = "Ws_ResetAccumulatorResponse", default)]
         pub body: ports::WsResetAccumulatorSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20167,28 +19753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsResetAccumulatorSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsResetAccumulatorSoapOut,
     }
 
     impl WsResetAccumulatorSoapOutSoapEnvelope {
         pub fn new(body: SoapWsResetAccumulatorSoapOut) -> Self {
             WsResetAccumulatorSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20208,28 +19793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsEnrolSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsEnrolSoapIn,
     }
 
     impl WsEnrolSoapInSoapEnvelope {
         pub fn new(body: SoapWsEnrolSoapIn) -> Self {
             WsEnrolSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20241,7 +19825,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsEnrolSoapOut {
-        #[yaserde(rename = "WsEnrolSoapOut", default)]
+        #[yaserde(rename = "Ws_EnrolResponse", default)]
         pub body: ports::WsEnrolSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20249,28 +19833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsEnrolSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsEnrolSoapOut,
     }
 
     impl WsEnrolSoapOutSoapEnvelope {
         pub fn new(body: SoapWsEnrolSoapOut) -> Self {
             WsEnrolSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20290,28 +19873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardActivateSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardActivateSoapIn,
     }
 
     impl WsGiftCardActivateSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardActivateSoapIn) -> Self {
             WsGiftCardActivateSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20323,7 +19905,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardActivateSoapOut {
-        #[yaserde(rename = "WsGiftCardActivateSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardActivateResponse", default)]
         pub body: ports::WsGiftCardActivateSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20331,28 +19913,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardActivateSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardActivateSoapOut,
     }
 
     impl WsGiftCardActivateSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardActivateSoapOut) -> Self {
             WsGiftCardActivateSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20372,28 +19953,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardLoadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardLoadSoapIn,
     }
 
     impl WsGiftCardLoadSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardLoadSoapIn) -> Self {
             WsGiftCardLoadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20405,7 +19985,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardLoadSoapOut {
-        #[yaserde(rename = "WsGiftCardLoadSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardLoadResponse", default)]
         pub body: ports::WsGiftCardLoadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20413,28 +19993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardLoadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardLoadSoapOut,
     }
 
     impl WsGiftCardLoadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardLoadSoapOut) -> Self {
             WsGiftCardLoadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20454,28 +20033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardUnLoadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardUnLoadSoapIn,
     }
 
     impl WsGiftCardUnLoadSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardUnLoadSoapIn) -> Self {
             WsGiftCardUnLoadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20487,7 +20065,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardUnLoadSoapOut {
-        #[yaserde(rename = "WsGiftCardUnLoadSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardUnLoadResponse", default)]
         pub body: ports::WsGiftCardUnLoadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20495,28 +20073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardUnLoadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardUnLoadSoapOut,
     }
 
     impl WsGiftCardUnLoadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardUnLoadSoapOut) -> Self {
             WsGiftCardUnLoadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20536,28 +20113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardStatusChangeSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardStatusChangeSoapIn,
     }
 
     impl WsGiftCardStatusChangeSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardStatusChangeSoapIn) -> Self {
             WsGiftCardStatusChangeSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20569,7 +20145,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardStatusChangeSoapOut {
-        #[yaserde(rename = "WsGiftCardStatusChangeSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardStatusChangeResponse", default)]
         pub body: ports::WsGiftCardStatusChangeSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20577,28 +20153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardStatusChangeSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardStatusChangeSoapOut,
     }
 
     impl WsGiftCardStatusChangeSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardStatusChangeSoapOut) -> Self {
             WsGiftCardStatusChangeSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20618,28 +20193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardEnquirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardEnquirySoapIn,
     }
 
     impl WsGiftCardEnquirySoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardEnquirySoapIn) -> Self {
             WsGiftCardEnquirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20651,7 +20225,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardEnquirySoapOut {
-        #[yaserde(rename = "WsGiftCardEnquirySoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardEnquiryResponse", default)]
         pub body: ports::WsGiftCardEnquirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20659,28 +20233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardEnquirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardEnquirySoapOut,
     }
 
     impl WsGiftCardEnquirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardEnquirySoapOut) -> Self {
             WsGiftCardEnquirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20700,28 +20273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardBalanceTransferSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardBalanceTransferSoapIn,
     }
 
     impl WsGiftCardBalanceTransferSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardBalanceTransferSoapIn) -> Self {
             WsGiftCardBalanceTransferSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20733,7 +20305,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardBalanceTransferSoapOut {
-        #[yaserde(rename = "WsGiftCardBalanceTransferSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardBalanceTransferResponse", default)]
         pub body: ports::WsGiftCardBalanceTransferSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20741,28 +20313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardBalanceTransferSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardBalanceTransferSoapOut,
     }
 
     impl WsGiftCardBalanceTransferSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardBalanceTransferSoapOut) -> Self {
             WsGiftCardBalanceTransferSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20782,28 +20353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardBalanceEnquirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardBalanceEnquirySoapIn,
     }
 
     impl WsGiftCardBalanceEnquirySoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardBalanceEnquirySoapIn) -> Self {
             WsGiftCardBalanceEnquirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20815,7 +20385,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardBalanceEnquirySoapOut {
-        #[yaserde(rename = "WsGiftCardBalanceEnquirySoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardBalanceEnquiryResponse", default)]
         pub body: ports::WsGiftCardBalanceEnquirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20823,28 +20393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardBalanceEnquirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardBalanceEnquirySoapOut,
     }
 
     impl WsGiftCardBalanceEnquirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardBalanceEnquirySoapOut) -> Self {
             WsGiftCardBalanceEnquirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20864,28 +20433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardCardStatementSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardCardStatementSoapIn,
     }
 
     impl WsGiftCardCardStatementSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardCardStatementSoapIn) -> Self {
             WsGiftCardCardStatementSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20897,7 +20465,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardCardStatementSoapOut {
-        #[yaserde(rename = "WsGiftCardCardStatementSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardCardStatementResponse", default)]
         pub body: ports::WsGiftCardCardStatementSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20905,28 +20473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardCardStatementSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardCardStatementSoapOut,
     }
 
     impl WsGiftCardCardStatementSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardCardStatementSoapOut) -> Self {
             WsGiftCardCardStatementSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20946,28 +20513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardUpdateCardholderDetailsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardUpdateCardholderDetailsSoapIn,
     }
 
     impl WsGiftCardUpdateCardholderDetailsSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardUpdateCardholderDetailsSoapIn) -> Self {
             WsGiftCardUpdateCardholderDetailsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -20979,7 +20545,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardUpdateCardholderDetailsSoapOut {
-        #[yaserde(rename = "WsGiftCardUpdateCardholderDetailsSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardUpdateCardholderDetailsResponse", default)]
         pub body: ports::WsGiftCardUpdateCardholderDetailsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -20987,28 +20553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardUpdateCardholderDetailsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardUpdateCardholderDetailsSoapOut,
     }
 
     impl WsGiftCardUpdateCardholderDetailsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardUpdateCardholderDetailsSoapOut) -> Self {
             WsGiftCardUpdateCardholderDetailsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21028,28 +20593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardUnLoadStatusChangeSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardUnLoadStatusChangeSoapIn,
     }
 
     impl WsGiftCardUnLoadStatusChangeSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardUnLoadStatusChangeSoapIn) -> Self {
             WsGiftCardUnLoadStatusChangeSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21061,7 +20625,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardUnLoadStatusChangeSoapOut {
-        #[yaserde(rename = "WsGiftCardUnLoadStatusChangeSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardUnLoadStatusChangeResponse", default)]
         pub body: ports::WsGiftCardUnLoadStatusChangeSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21069,28 +20633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardUnLoadStatusChangeSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardUnLoadStatusChangeSoapOut,
     }
 
     impl WsGiftCardUnLoadStatusChangeSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardUnLoadStatusChangeSoapOut) -> Self {
             WsGiftCardUnLoadStatusChangeSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21110,28 +20673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardActivateLoadSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardActivateLoadSoapIn,
     }
 
     impl WsGiftCardActivateLoadSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardActivateLoadSoapIn) -> Self {
             WsGiftCardActivateLoadSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21143,7 +20705,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardActivateLoadSoapOut {
-        #[yaserde(rename = "WsGiftCardActivateLoadSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardActivateLoadResponse", default)]
         pub body: ports::WsGiftCardActivateLoadSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21151,28 +20713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardActivateLoadSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardActivateLoadSoapOut,
     }
 
     impl WsGiftCardActivateLoadSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardActivateLoadSoapOut) -> Self {
             WsGiftCardActivateLoadSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21192,28 +20753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardBalanceAdjustmentSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardBalanceAdjustmentSoapIn,
     }
 
     impl WsGiftCardBalanceAdjustmentSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardBalanceAdjustmentSoapIn) -> Self {
             WsGiftCardBalanceAdjustmentSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21225,7 +20785,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardBalanceAdjustmentSoapOut {
-        #[yaserde(rename = "WsGiftCardBalanceAdjustmentSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardBalanceAdjustmentResponse", default)]
         pub body: ports::WsGiftCardBalanceAdjustmentSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21233,28 +20793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardBalanceAdjustmentSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardBalanceAdjustmentSoapOut,
     }
 
     impl WsGiftCardBalanceAdjustmentSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardBalanceAdjustmentSoapOut) -> Self {
             WsGiftCardBalanceAdjustmentSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21274,28 +20833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardExtendExpirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardExtendExpirySoapIn,
     }
 
     impl WsGiftCardExtendExpirySoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardExtendExpirySoapIn) -> Self {
             WsGiftCardExtendExpirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21307,7 +20865,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardExtendExpirySoapOut {
-        #[yaserde(rename = "WsGiftCardExtendExpirySoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardExtendExpiryResponse", default)]
         pub body: ports::WsGiftCardExtendExpirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21315,28 +20873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardExtendExpirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardExtendExpirySoapOut,
     }
 
     impl WsGiftCardExtendExpirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardExtendExpirySoapOut) -> Self {
             WsGiftCardExtendExpirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21356,28 +20913,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardTransactionVoidSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardTransactionVoidSoapIn,
     }
 
     impl WsGiftCardTransactionVoidSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardTransactionVoidSoapIn) -> Self {
             WsGiftCardTransactionVoidSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21389,7 +20945,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardTransactionVoidSoapOut {
-        #[yaserde(rename = "WsGiftCardTransactionVoidSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardTransactionVoidResponse", default)]
         pub body: ports::WsGiftCardTransactionVoidSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21397,28 +20953,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardTransactionVoidSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardTransactionVoidSoapOut,
     }
 
     impl WsGiftCardTransactionVoidSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardTransactionVoidSoapOut) -> Self {
             WsGiftCardTransactionVoidSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21438,28 +20993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardCardHolderDetailsEnquirySoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardCardHolderDetailsEnquirySoapIn,
     }
 
     impl WsGiftCardCardHolderDetailsEnquirySoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardCardHolderDetailsEnquirySoapIn) -> Self {
             WsGiftCardCardHolderDetailsEnquirySoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21471,7 +21025,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardCardHolderDetailsEnquirySoapOut {
-        #[yaserde(rename = "WsGiftCardCardHolderDetailsEnquirySoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardCardHolderDetailsEnquiryResponse", default)]
         pub body: ports::WsGiftCardCardHolderDetailsEnquirySoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21479,28 +21033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardCardHolderDetailsEnquirySoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardCardHolderDetailsEnquirySoapOut,
     }
 
     impl WsGiftCardCardHolderDetailsEnquirySoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardCardHolderDetailsEnquirySoapOut) -> Self {
             WsGiftCardCardHolderDetailsEnquirySoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21520,28 +21073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardPhoneActivationSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardPhoneActivationSoapIn,
     }
 
     impl WsGiftCardPhoneActivationSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardPhoneActivationSoapIn) -> Self {
             WsGiftCardPhoneActivationSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21553,7 +21105,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardPhoneActivationSoapOut {
-        #[yaserde(rename = "WsGiftCardPhoneActivationSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardPhoneActivationResponse", default)]
         pub body: ports::WsGiftCardPhoneActivationSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21561,28 +21113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardPhoneActivationSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardPhoneActivationSoapOut,
     }
 
     impl WsGiftCardPhoneActivationSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardPhoneActivationSoapOut) -> Self {
             WsGiftCardPhoneActivationSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21602,28 +21153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardBulkCreationSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardBulkCreationSoapIn,
     }
 
     impl WsGiftCardBulkCreationSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardBulkCreationSoapIn) -> Self {
             WsGiftCardBulkCreationSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21635,7 +21185,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardBulkCreationSoapOut {
-        #[yaserde(rename = "WsGiftCardBulkCreationSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardBulkCreationResponse", default)]
         pub body: ports::WsGiftCardBulkCreationSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21643,28 +21193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardBulkCreationSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardBulkCreationSoapOut,
     }
 
     impl WsGiftCardBulkCreationSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardBulkCreationSoapOut) -> Self {
             WsGiftCardBulkCreationSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21684,28 +21233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardWebServiceResultSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardWebServiceResultSoapIn,
     }
 
     impl WsGiftCardWebServiceResultSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardWebServiceResultSoapIn) -> Self {
             WsGiftCardWebServiceResultSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21717,7 +21265,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardWebServiceResultSoapOut {
-        #[yaserde(rename = "WsGiftCardWebServiceResultSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardWebServiceResultResponse", default)]
         pub body: ports::WsGiftCardWebServiceResultSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21725,28 +21273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardWebServiceResultSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardWebServiceResultSoapOut,
     }
 
     impl WsGiftCardWebServiceResultSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardWebServiceResultSoapOut) -> Self {
             WsGiftCardWebServiceResultSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21766,28 +21313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardGenericFeesSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardGenericFeesSoapIn,
     }
 
     impl WsGiftCardGenericFeesSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardGenericFeesSoapIn) -> Self {
             WsGiftCardGenericFeesSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21799,7 +21345,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardGenericFeesSoapOut {
-        #[yaserde(rename = "WsGiftCardGenericFeesSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardGenericFeesResponse", default)]
         pub body: ports::WsGiftCardGenericFeesSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21807,28 +21353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardGenericFeesSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardGenericFeesSoapOut,
     }
 
     impl WsGiftCardGenericFeesSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardGenericFeesSoapOut) -> Self {
             WsGiftCardGenericFeesSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21848,28 +21393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardPinControlSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardPinControlSoapIn,
     }
 
     impl WsGiftCardPinControlSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardPinControlSoapIn) -> Self {
             WsGiftCardPinControlSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21881,7 +21425,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardPinControlSoapOut {
-        #[yaserde(rename = "WsGiftCardPinControlSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardPinControlResponse", default)]
         pub body: ports::WsGiftCardPinControlSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21889,28 +21433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardPinControlSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardPinControlSoapOut,
     }
 
     impl WsGiftCardPinControlSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardPinControlSoapOut) -> Self {
             WsGiftCardPinControlSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21930,28 +21473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardUpdateLoadSourceSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardUpdateLoadSourceSoapIn,
     }
 
     impl WsGiftCardUpdateLoadSourceSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardUpdateLoadSourceSoapIn) -> Self {
             WsGiftCardUpdateLoadSourceSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -21963,7 +21505,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardUpdateLoadSourceSoapOut {
-        #[yaserde(rename = "WsGiftCardUpdateLoadSourceSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardUpdateLoadSourceResponse", default)]
         pub body: ports::WsGiftCardUpdateLoadSourceSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -21971,28 +21513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardUpdateLoadSourceSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardUpdateLoadSourceSoapOut,
     }
 
     impl WsGiftCardUpdateLoadSourceSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardUpdateLoadSourceSoapOut) -> Self {
             WsGiftCardUpdateLoadSourceSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22012,28 +21553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardActivateLoadProductTpyeCPSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardActivateLoadProductTpyeCPSoapIn,
     }
 
     impl WsGiftCardActivateLoadProductTpyeCPSoapInSoapEnvelope {
         pub fn new(body: SoapWsGiftCardActivateLoadProductTpyeCPSoapIn) -> Self {
             WsGiftCardActivateLoadProductTpyeCPSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22045,7 +21585,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsGiftCardActivateLoadProductTpyeCPSoapOut {
-        #[yaserde(rename = "WsGiftCardActivateLoadProductTpyeCPSoapOut", default)]
+        #[yaserde(rename = "Ws_GiftCardActivateLoadProductTpyeCPResponse", default)]
         pub body: ports::WsGiftCardActivateLoadProductTpyeCPSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22053,28 +21593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsGiftCardActivateLoadProductTpyeCPSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsGiftCardActivateLoadProductTpyeCPSoapOut,
     }
 
     impl WsGiftCardActivateLoadProductTpyeCPSoapOutSoapEnvelope {
         pub fn new(body: SoapWsGiftCardActivateLoadProductTpyeCPSoapOut) -> Self {
             WsGiftCardActivateLoadProductTpyeCPSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22094,28 +21633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardTransactionXMLSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardTransactionXMLSoapIn,
     }
 
     impl WsCardTransactionXMLSoapInSoapEnvelope {
         pub fn new(body: SoapWsCardTransactionXMLSoapIn) -> Self {
             WsCardTransactionXMLSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22127,7 +21665,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardTransactionXMLSoapOut {
-        #[yaserde(rename = "WsCardTransactionXMLSoapOut", default)]
+        #[yaserde(rename = "Ws_CardTransactionXMLResponse", default)]
         pub body: ports::WsCardTransactionXMLSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22135,28 +21673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardTransactionXMLSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardTransactionXMLSoapOut,
     }
 
     impl WsCardTransactionXMLSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardTransactionXMLSoapOut) -> Self {
             WsCardTransactionXMLSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22176,28 +21713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardChangeGroupsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardChangeGroupsSoapIn,
     }
 
     impl WsCardChangeGroupsSoapInSoapEnvelope {
         pub fn new(body: SoapWsCardChangeGroupsSoapIn) -> Self {
             WsCardChangeGroupsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22209,7 +21745,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardChangeGroupsSoapOut {
-        #[yaserde(rename = "WsCardChangeGroupsSoapOut", default)]
+        #[yaserde(rename = "Ws_CardChangeGroupsResponse", default)]
         pub body: ports::WsCardChangeGroupsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22217,28 +21753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardChangeGroupsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardChangeGroupsSoapOut,
     }
 
     impl WsCardChangeGroupsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardChangeGroupsSoapOut) -> Self {
             WsCardChangeGroupsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22258,28 +21793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardChangeCardacceptorListSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardChangeCardacceptorListSoapIn,
     }
 
     impl WsCardChangeCardacceptorListSoapInSoapEnvelope {
         pub fn new(body: SoapWsCardChangeCardacceptorListSoapIn) -> Self {
             WsCardChangeCardacceptorListSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22291,7 +21825,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCardChangeCardacceptorListSoapOut {
-        #[yaserde(rename = "WsCardChangeCardacceptorListSoapOut", default)]
+        #[yaserde(rename = "Ws_CardChangeCardacceptorListResponse", default)]
         pub body: ports::WsCardChangeCardacceptorListSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22299,28 +21833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCardChangeCardacceptorListSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCardChangeCardacceptorListSoapOut,
     }
 
     impl WsCardChangeCardacceptorListSoapOutSoapEnvelope {
         pub fn new(body: SoapWsCardChangeCardacceptorListSoapOut) -> Self {
             WsCardChangeCardacceptorListSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22340,28 +21873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsChangeCardacceptorListSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsChangeCardacceptorListSoapIn,
     }
 
     impl WsChangeCardacceptorListSoapInSoapEnvelope {
         pub fn new(body: SoapWsChangeCardacceptorListSoapIn) -> Self {
             WsChangeCardacceptorListSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22373,7 +21905,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsChangeCardacceptorListSoapOut {
-        #[yaserde(rename = "WsChangeCardacceptorListSoapOut", default)]
+        #[yaserde(rename = "Ws_ChangeCardacceptorListResponse", default)]
         pub body: ports::WsChangeCardacceptorListSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22381,28 +21913,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsChangeCardacceptorListSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsChangeCardacceptorListSoapOut,
     }
 
     impl WsChangeCardacceptorListSoapOutSoapEnvelope {
         pub fn new(body: SoapWsChangeCardacceptorListSoapOut) -> Self {
             WsChangeCardacceptorListSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22422,28 +21953,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsAddressMatchCheckingSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsAddressMatchCheckingSoapIn,
     }
 
     impl WsAddressMatchCheckingSoapInSoapEnvelope {
         pub fn new(body: SoapWsAddressMatchCheckingSoapIn) -> Self {
             WsAddressMatchCheckingSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22455,7 +21985,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsAddressMatchCheckingSoapOut {
-        #[yaserde(rename = "WsAddressMatchCheckingSoapOut", default)]
+        #[yaserde(rename = "Ws_AddressMatchCheckingResponse", default)]
         pub body: ports::WsAddressMatchCheckingSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22463,28 +21993,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsAddressMatchCheckingSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsAddressMatchCheckingSoapOut,
     }
 
     impl WsAddressMatchCheckingSoapOutSoapEnvelope {
         pub fn new(body: SoapWsAddressMatchCheckingSoapOut) -> Self {
             WsAddressMatchCheckingSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22504,28 +22033,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsLicenseVerificationSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsLicenseVerificationSoapIn,
     }
 
     impl WsLicenseVerificationSoapInSoapEnvelope {
         pub fn new(body: SoapWsLicenseVerificationSoapIn) -> Self {
             WsLicenseVerificationSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22537,7 +22065,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsLicenseVerificationSoapOut {
-        #[yaserde(rename = "WsLicenseVerificationSoapOut", default)]
+        #[yaserde(rename = "Ws_LicenseVerificationResponse", default)]
         pub body: ports::WsLicenseVerificationSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22545,28 +22073,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsLicenseVerificationSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsLicenseVerificationSoapOut,
     }
 
     impl WsLicenseVerificationSoapOutSoapEnvelope {
         pub fn new(body: SoapWsLicenseVerificationSoapOut) -> Self {
             WsLicenseVerificationSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22586,28 +22113,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPassportVerificationSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPassportVerificationSoapIn,
     }
 
     impl WsPassportVerificationSoapInSoapEnvelope {
         pub fn new(body: SoapWsPassportVerificationSoapIn) -> Self {
             WsPassportVerificationSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22619,7 +22145,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsPassportVerificationSoapOut {
-        #[yaserde(rename = "WsPassportVerificationSoapOut", default)]
+        #[yaserde(rename = "Ws_PassportVerificationResponse", default)]
         pub body: ports::WsPassportVerificationSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22627,28 +22153,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsPassportVerificationSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsPassportVerificationSoapOut,
     }
 
     impl WsPassportVerificationSoapOutSoapEnvelope {
         pub fn new(body: SoapWsPassportVerificationSoapOut) -> Self {
             WsPassportVerificationSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22668,28 +22193,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSanctionsPEPCheckSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSanctionsPEPCheckSoapIn,
     }
 
     impl WsSanctionsPEPCheckSoapInSoapEnvelope {
         pub fn new(body: SoapWsSanctionsPEPCheckSoapIn) -> Self {
             WsSanctionsPEPCheckSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22701,7 +22225,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsSanctionsPEPCheckSoapOut {
-        #[yaserde(rename = "WsSanctionsPEPCheckSoapOut", default)]
+        #[yaserde(rename = "Ws_SanctionsPEPCheckResponse", default)]
         pub body: ports::WsSanctionsPEPCheckSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22709,28 +22233,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSanctionsPEPCheckSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSanctionsPEPCheckSoapOut,
     }
 
     impl WsSanctionsPEPCheckSoapOutSoapEnvelope {
         pub fn new(body: SoapWsSanctionsPEPCheckSoapOut) -> Self {
             WsSanctionsPEPCheckSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22750,28 +22273,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSanctionsPEPCheckV2SoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSanctionsPEPCheckV2SoapIn,
     }
 
     impl WsSanctionsPEPCheckV2SoapInSoapEnvelope {
         pub fn new(body: SoapWsSanctionsPEPCheckV2SoapIn) -> Self {
             WsSanctionsPEPCheckV2SoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22783,7 +22305,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsSanctionsPEPCheckV2SoapOut {
-        #[yaserde(rename = "WsSanctionsPEPCheckV2SoapOut", default)]
+        #[yaserde(rename = "Ws_SanctionsPEPCheckV2Response", default)]
         pub body: ports::WsSanctionsPEPCheckV2SoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22791,28 +22313,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsSanctionsPEPCheckV2SoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsSanctionsPEPCheckV2SoapOut,
     }
 
     impl WsSanctionsPEPCheckV2SoapOutSoapEnvelope {
         pub fn new(body: SoapWsSanctionsPEPCheckV2SoapOut) -> Self {
             WsSanctionsPEPCheckV2SoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22832,28 +22353,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListSanctionsPEPSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListSanctionsPEPSoapIn,
     }
 
     impl WsListSanctionsPEPSoapInSoapEnvelope {
         pub fn new(body: SoapWsListSanctionsPEPSoapIn) -> Self {
             WsListSanctionsPEPSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22865,7 +22385,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsListSanctionsPEPSoapOut {
-        #[yaserde(rename = "WsListSanctionsPEPSoapOut", default)]
+        #[yaserde(rename = "Ws_ListSanctionsPEPResponse", default)]
         pub body: ports::WsListSanctionsPEPSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22873,28 +22393,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListSanctionsPEPSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListSanctionsPEPSoapOut,
     }
 
     impl WsListSanctionsPEPSoapOutSoapEnvelope {
         pub fn new(body: SoapWsListSanctionsPEPSoapOut) -> Self {
             WsListSanctionsPEPSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22914,28 +22433,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListSanctionsPEPMatchesSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListSanctionsPEPMatchesSoapIn,
     }
 
     impl WsListSanctionsPEPMatchesSoapInSoapEnvelope {
         pub fn new(body: SoapWsListSanctionsPEPMatchesSoapIn) -> Self {
             WsListSanctionsPEPMatchesSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22947,7 +22465,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsListSanctionsPEPMatchesSoapOut {
-        #[yaserde(rename = "WsListSanctionsPEPMatchesSoapOut", default)]
+        #[yaserde(rename = "Ws_ListSanctionsPEPMatchesResponse", default)]
         pub body: ports::WsListSanctionsPEPMatchesSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22955,28 +22473,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsListSanctionsPEPMatchesSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsListSanctionsPEPMatchesSoapOut,
     }
 
     impl WsListSanctionsPEPMatchesSoapOutSoapEnvelope {
         pub fn new(body: SoapWsListSanctionsPEPMatchesSoapOut) -> Self {
             WsListSanctionsPEPMatchesSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -22996,28 +22513,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdateSanctionsPEPMatchesSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdateSanctionsPEPMatchesSoapIn,
     }
 
     impl WsUpdateSanctionsPEPMatchesSoapInSoapEnvelope {
         pub fn new(body: SoapWsUpdateSanctionsPEPMatchesSoapIn) -> Self {
             WsUpdateSanctionsPEPMatchesSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23029,7 +22545,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsUpdateSanctionsPEPMatchesSoapOut {
-        #[yaserde(rename = "WsUpdateSanctionsPEPMatchesSoapOut", default)]
+        #[yaserde(rename = "Ws_UpdateSanctionsPEPMatchesResponse", default)]
         pub body: ports::WsUpdateSanctionsPEPMatchesSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -23037,28 +22553,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsUpdateSanctionsPEPMatchesSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsUpdateSanctionsPEPMatchesSoapOut,
     }
 
     impl WsUpdateSanctionsPEPMatchesSoapOutSoapEnvelope {
         pub fn new(body: SoapWsUpdateSanctionsPEPMatchesSoapOut) -> Self {
             WsUpdateSanctionsPEPMatchesSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23078,28 +22593,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCreateCardV2SoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCreateCardV2SoapIn,
     }
 
     impl WsCreateCardV2SoapInSoapEnvelope {
         pub fn new(body: SoapWsCreateCardV2SoapIn) -> Self {
             WsCreateCardV2SoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23111,7 +22625,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsCreateCardV2SoapOut {
-        #[yaserde(rename = "WsCreateCardV2SoapOut", default)]
+        #[yaserde(rename = "Ws_CreateCardV2Response", default)]
         pub body: ports::WsCreateCardV2SoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -23119,28 +22633,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsCreateCardV2SoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsCreateCardV2SoapOut,
     }
 
     impl WsCreateCardV2SoapOutSoapEnvelope {
         pub fn new(body: SoapWsCreateCardV2SoapOut) -> Self {
             WsCreateCardV2SoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23160,28 +22673,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingReturnBankDetailsFromTokenSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingReturnBankDetailsFromTokenSoapIn,
     }
 
     impl WsBankingReturnBankDetailsFromTokenSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingReturnBankDetailsFromTokenSoapIn) -> Self {
             WsBankingReturnBankDetailsFromTokenSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23193,7 +22705,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingReturnBankDetailsFromTokenSoapOut {
-        #[yaserde(rename = "WsBankingReturnBankDetailsFromTokenSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingReturnBankDetailsFromTokenResponse", default)]
         pub body: ports::WsBankingReturnBankDetailsFromTokenSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -23201,28 +22713,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingReturnBankDetailsFromTokenSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingReturnBankDetailsFromTokenSoapOut,
     }
 
     impl WsBankingReturnBankDetailsFromTokenSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingReturnBankDetailsFromTokenSoapOut) -> Self {
             WsBankingReturnBankDetailsFromTokenSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23242,28 +22753,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingChangeAccountBankingFeaturesStatusSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingChangeAccountBankingFeaturesStatusSoapIn,
     }
 
     impl WsBankingChangeAccountBankingFeaturesStatusSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingChangeAccountBankingFeaturesStatusSoapIn) -> Self {
             WsBankingChangeAccountBankingFeaturesStatusSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23275,7 +22785,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingChangeAccountBankingFeaturesStatusSoapOut {
-        #[yaserde(rename = "WsBankingChangeAccountBankingFeaturesStatusSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingChangeAccountBankingFeaturesStatusResponse", default)]
         pub body: ports::WsBankingChangeAccountBankingFeaturesStatusSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -23283,28 +22793,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingChangeAccountBankingFeaturesStatusSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingChangeAccountBankingFeaturesStatusSoapOut,
     }
 
     impl WsBankingChangeAccountBankingFeaturesStatusSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingChangeAccountBankingFeaturesStatusSoapOut) -> Self {
             WsBankingChangeAccountBankingFeaturesStatusSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23324,28 +22833,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingTransferFundsSoapInSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingTransferFundsSoapIn,
     }
 
     impl WsBankingTransferFundsSoapInSoapEnvelope {
         pub fn new(body: SoapWsBankingTransferFundsSoapIn) -> Self {
             WsBankingTransferFundsSoapInSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
@@ -23357,7 +22865,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingTransferFundsSoapOut {
-        #[yaserde(rename = "WsBankingTransferFundsSoapOut", default)]
+        #[yaserde(rename = "Ws_BankingTransferFundsResponse", default)]
         pub body: ports::WsBankingTransferFundsSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -23365,28 +22873,27 @@ pub mod bindings {
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     #[yaserde(
         rename = "Envelope",
-        namespace = "soapenv: http://www.w3.org/2003/05/soap-envelope",
-        prefix = "soapenv"
+        namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
+        namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
+    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        prefix = "soap"
     )]
     pub struct WsBankingTransferFundsSoapOutSoapEnvelope {
-        #[yaserde(rename = "encodingStyle", prefix = "soapenv", attribute)]
-        pub encoding_style: String,
         #[yaserde(rename = "tns", prefix = "xmlns", attribute)]
         pub tnsattr: Option<String>,
         #[yaserde(rename = "urn", prefix = "xmlns", attribute)]
         pub urnattr: Option<String>,
         #[yaserde(rename = "xsi", prefix = "xmlns", attribute)]
         pub xsiattr: Option<String>,
-        #[yaserde(rename = "Header", prefix = "soapenv")]
+        #[yaserde(rename = "Header", prefix = "soap")]
         pub header: Option<Header>,
-        #[yaserde(rename = "Body", prefix = "soapenv")]
+        #[yaserde(rename = "Body", prefix = "soap")]
         pub body: SoapWsBankingTransferFundsSoapOut,
     }
 
     impl WsBankingTransferFundsSoapOutSoapEnvelope {
         pub fn new(body: SoapWsBankingTransferFundsSoapOut) -> Self {
             WsBankingTransferFundsSoapOutSoapEnvelope {
-                encoding_style: SOAP_ENCODING.to_string(),
                 tnsattr: Option::Some("http://microsoft.com/wsdl/types/".to_string()),
                 body,
                 urnattr: None,
