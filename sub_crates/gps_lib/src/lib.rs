@@ -3345,7 +3345,7 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "CardStatement2",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct CardStatement2 {
         #[yaserde(rename = "WSID", default)]
@@ -4400,7 +4400,7 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_ActivateResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsActivateResponse {
         #[yaserde(rename = "Ws_ActivateResult", default)]
@@ -4499,16 +4499,14 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_LoadResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsLoadResponse {
         #[yaserde(rename = "Ws_LoadResult", default)]
         pub ws_load_result: LoadCard,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "LoadCard",
-    )]
+    #[yaserde(rename = "LoadCard")]
     pub struct LoadCard {
         #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
@@ -4590,7 +4588,7 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_UnLoadResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsUnLoadResponse {
         #[yaserde(rename = "Ws_UnLoadResult", default)]
@@ -4687,16 +4685,14 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_StatusChangeResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsStatusChangeResponse {
         #[yaserde(rename = "Ws_StatusChangeResult", default)]
         pub ws_status_change_result: StatusChange,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "StatusChange",
-    )]
+    #[yaserde(rename = "StatusChange")]
     pub struct StatusChange {
         #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
@@ -4766,7 +4762,7 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_EnquiryResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsEnquiryResponse {
         #[yaserde(rename = "Ws_EnquiryResult", default)]
@@ -5011,16 +5007,14 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Balance_EnquiryResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsBalanceEnquiryResponse {
         #[yaserde(rename = "Ws_Balance_EnquiryResult", default)]
         pub ws_balance_enquiry_result: BalanceEnquire,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "BalanceEnquire",
-    )]
+    #[yaserde(rename = "BalanceEnquire")]
     pub struct BalanceEnquire {
         #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
@@ -5182,7 +5176,7 @@ pub mod types {
         rename = "Ws_Balance_Enquiry_V2",
         namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
         prefix = "tns",
-        default_namespace = "tns",
+        default_namespace = "tns"
     )]
     pub struct WsBalanceEnquiryV2 {
         #[yaserde(rename = "WSID", prefix = "tns", default)]
@@ -5223,7 +5217,7 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Balance_Enquiry_V2Response",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsBalanceEnquiryV2Response {
         #[yaserde(rename = "Ws_Balance_Enquiry_V2Result", default)]
@@ -5239,7 +5233,7 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "BalanceEnquire2",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct BalanceEnquire2 {
         #[yaserde(rename = "WSID", default)]
@@ -5415,7 +5409,7 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Card_StatementResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsCardStatementResponse {
         #[yaserde(rename = "Ws_Card_StatementResult", default)]
@@ -6258,16 +6252,14 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_BalanceAdjustmentResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsBalanceAdjustmentResponse {
         #[yaserde(rename = "Ws_BalanceAdjustmentResult", default)]
         pub ws_balance_adjustment_result: BalanceAdjust,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "BalanceAdjust",
-    )]
+    #[yaserde(rename = "BalanceAdjust")]
     pub struct BalanceAdjust {
         #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
@@ -7529,16 +7521,14 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_CreateCardResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsCreateCardResponse {
         #[yaserde(rename = "Ws_CreateCardResult", default)]
         pub ws_create_card_result: VirtualCards,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "VirtualCards",
-    )]
+    #[yaserde(rename = "VirtualCards")]
     pub struct VirtualCards {
         #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
@@ -8913,7 +8903,7 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_WebServiceResult_V2Response",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsWebServiceResultV2Response {
         #[yaserde(rename = "Ws_WebServiceResult_V2Result", default)]
@@ -11441,16 +11431,14 @@ pub mod types {
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Card_Change_GroupsResponse",
-        namespace = "http://www.globalprocessing.ae/HyperionWeb",
+        namespace = "http://www.globalprocessing.ae/HyperionWeb"
     )]
     pub struct WsCardChangeGroupsResponse {
         #[yaserde(rename = "Ws_Card_Change_GroupsResult", default)]
         pub ws_card_change_groups_result: ChangeGroup,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "ChangeGroup",
-    )]
+    #[yaserde(rename = "ChangeGroup")]
     pub struct ChangeGroup {
         #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
@@ -13506,7 +13494,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingUpdateBankingEnabledCardSoapOutSoapEnvelope {
@@ -13546,7 +13534,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingStatusQueryBankingEnabledCardSoapInSoapEnvelope {
@@ -13586,7 +13574,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingStatusQueryBankingEnabledCardSoapOutSoapEnvelope {
@@ -13626,7 +13614,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingCreateCustomerSoapInSoapEnvelope {
@@ -13666,7 +13654,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingCreateCustomerSoapOutSoapEnvelope {
@@ -13706,7 +13694,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingRegisterNotificationSoapInSoapEnvelope {
@@ -13746,7 +13734,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingRegisterNotificationSoapOutSoapEnvelope {
@@ -13786,7 +13774,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingAccountModulusCheckSoapInSoapEnvelope {
@@ -13826,7 +13814,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingAccountModulusCheckSoapOutSoapEnvelope {
@@ -13869,7 +13857,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapInSoapEnvelope {
@@ -13912,7 +13900,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingGetDirectDebitInstructionsBankingEnabledCardSoapOutSoapEnvelope {
@@ -13952,7 +13940,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingCancelDirectDebitBankingEnabledCardSoapInSoapEnvelope {
@@ -13995,7 +13983,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingCancelDirectDebitBankingEnabledCardSoapOutSoapEnvelope {
@@ -14035,7 +14023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingGetPendingDirectDebitsSoapInSoapEnvelope {
@@ -14075,7 +14063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingGetPendingDirectDebitsSoapOutSoapEnvelope {
@@ -14115,7 +14103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingCardStatementV2SoapInSoapEnvelope {
@@ -14155,7 +14143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingCardStatementV2SoapOutSoapEnvelope {
@@ -14195,7 +14183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsInsert3DSecureDetailsSoapInSoapEnvelope {
@@ -14235,7 +14223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsInsert3DSecureDetailsSoapOutSoapEnvelope {
@@ -14275,7 +14263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdate3DSecureDetailsSoapInSoapEnvelope {
@@ -14315,7 +14303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdate3DSecureDetailsSoapOutSoapEnvelope {
@@ -14355,7 +14343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdateLastModifiedTypeSoapInSoapEnvelope {
@@ -14395,7 +14383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdateLastModifiedTypeSoapOutSoapEnvelope {
@@ -14435,7 +14423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsDelete3DSecureDetailsSoapInSoapEnvelope {
@@ -14475,7 +14463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsDelete3DSecureDetailsSoapOutSoapEnvelope {
@@ -14515,7 +14503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsQuery3DSecureDetailsSoapInSoapEnvelope {
@@ -14555,7 +14543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsQuery3DSecureDetailsSoapOutSoapEnvelope {
@@ -14595,7 +14583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGPSLockUnlockSoapInSoapEnvelope {
@@ -14635,7 +14623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGPSLockUnlockSoapOutSoapEnvelope {
@@ -14675,7 +14663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsVerificationRequestSoapInSoapEnvelope {
@@ -14715,7 +14703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsVerificationRequestSoapOutSoapEnvelope {
@@ -14755,7 +14743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsAddUpDelCredentialsSoapInSoapEnvelope {
@@ -14795,7 +14783,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsAddUpDelCredentialsSoapOutSoapEnvelope {
@@ -14835,7 +14823,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct Ws3DSAddUpDelDetailsSoapInSoapEnvelope {
@@ -14875,7 +14863,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct Ws3DSAddUpDelDetailsSoapOutSoapEnvelope {
@@ -14915,7 +14903,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceUpdateSoapInSoapEnvelope {
@@ -14955,7 +14943,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceUpdateSoapOutSoapEnvelope {
@@ -14995,7 +14983,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPaymentTokenGetSoapInSoapEnvelope {
@@ -15035,7 +15023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPaymentTokenGetSoapOutSoapEnvelope {
@@ -15075,7 +15063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPaymentTokenStatusChangeSoapInSoapEnvelope {
@@ -15115,7 +15103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPaymentTokenStatusChangeSoapOutSoapEnvelope {
@@ -15155,7 +15143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsActivateSoapInSoapEnvelope {
@@ -15195,7 +15183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsActivateSoapOutSoapEnvelope {
@@ -15235,7 +15223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsLoadSoapInSoapEnvelope {
@@ -15275,7 +15263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsLoadSoapOutSoapEnvelope {
@@ -15315,7 +15303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUnLoadSoapInSoapEnvelope {
@@ -15355,7 +15343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUnLoadSoapOutSoapEnvelope {
@@ -15395,7 +15383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsStatusChangeSoapInSoapEnvelope {
@@ -15435,7 +15423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsStatusChangeSoapOutSoapEnvelope {
@@ -15475,7 +15463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsEnquirySoapInSoapEnvelope {
@@ -15515,7 +15503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsEnquirySoapOutSoapEnvelope {
@@ -15555,7 +15543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceTransferSoapInSoapEnvelope {
@@ -15595,7 +15583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceTransferSoapOutSoapEnvelope {
@@ -15635,7 +15623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceEnquirySoapInSoapEnvelope {
@@ -15675,7 +15663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceEnquirySoapOutSoapEnvelope {
@@ -15715,7 +15703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceEnquiryRepSoapInSoapEnvelope {
@@ -15755,7 +15743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceEnquiryRepSoapOutSoapEnvelope {
@@ -15795,7 +15783,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceEnquiryV2SoapInSoapEnvelope {
@@ -15835,7 +15823,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceEnquiryV2SoapOutSoapEnvelope {
@@ -15875,7 +15863,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceEnquiryWalletSoapInSoapEnvelope {
@@ -15915,7 +15903,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceEnquiryWalletSoapOutSoapEnvelope {
@@ -15955,7 +15943,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardStatementSoapInSoapEnvelope {
@@ -16035,7 +16023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardStatementRepSoapInSoapEnvelope {
@@ -16075,7 +16063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardStatementRepSoapOutSoapEnvelope {
@@ -16115,7 +16103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCustomerEnquirySoapInSoapEnvelope {
@@ -16155,7 +16143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCustomerEnquirySoapOutSoapEnvelope {
@@ -16195,7 +16183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCustomerEnquiryV2SoapInSoapEnvelope {
@@ -16235,7 +16223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCustomerEnquiryV2SoapOutSoapEnvelope {
@@ -16275,7 +16263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdateCardholderDetailsSoapInSoapEnvelope {
@@ -16315,7 +16303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdateCardholderDetailsSoapOutSoapEnvelope {
@@ -16355,7 +16343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUnLoadStatusChangeSoapInSoapEnvelope {
@@ -16395,7 +16383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUnLoadStatusChangeSoapOutSoapEnvelope {
@@ -16435,7 +16423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsActivateLoadSoapInSoapEnvelope {
@@ -16475,7 +16463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsActivateLoadSoapOutSoapEnvelope {
@@ -16515,7 +16503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceAdjustmentSoapInSoapEnvelope {
@@ -16555,7 +16543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBalanceAdjustmentSoapOutSoapEnvelope {
@@ -16595,7 +16583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsExtendExpirySoapInSoapEnvelope {
@@ -16635,7 +16623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsExtendExpirySoapOutSoapEnvelope {
@@ -16675,7 +16663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsTransactionVoidSoapInSoapEnvelope {
@@ -16715,7 +16703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsTransactionVoidSoapOutSoapEnvelope {
@@ -16755,7 +16743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardHolderDetailsEnquirySoapInSoapEnvelope {
@@ -16795,7 +16783,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardHolderDetailsEnquirySoapOutSoapEnvelope {
@@ -16835,7 +16823,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardHolderDetailsEnquiryV2SoapInSoapEnvelope {
@@ -16875,7 +16863,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardHolderDetailsEnquiryV2SoapOutSoapEnvelope {
@@ -16915,7 +16903,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPhoneActivationSoapInSoapEnvelope {
@@ -16955,7 +16943,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPhoneActivationSoapOutSoapEnvelope {
@@ -16995,7 +16983,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBulkCreationSoapInSoapEnvelope {
@@ -17035,7 +17023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBulkCreationSoapOutSoapEnvelope {
@@ -17075,7 +17063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBulkWalletCreationSoapInSoapEnvelope {
@@ -17115,7 +17103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBulkWalletCreationSoapOutSoapEnvelope {
@@ -17155,7 +17143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsWebServiceResultSoapInSoapEnvelope {
@@ -17195,7 +17183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsWebServiceResultSoapOutSoapEnvelope {
@@ -17235,7 +17223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGenericFeesSoapInSoapEnvelope {
@@ -17275,7 +17263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGenericFeesSoapOutSoapEnvelope {
@@ -17315,7 +17303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardBalEnqSoapInSoapEnvelope {
@@ -17355,7 +17343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardBalEnqSoapOutSoapEnvelope {
@@ -17395,7 +17383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPinControlSoapInSoapEnvelope {
@@ -17435,7 +17423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPinControlSoapOutSoapEnvelope {
@@ -17475,7 +17463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCreateCardSoapInSoapEnvelope {
@@ -17515,7 +17503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCreateCardSoapOutSoapEnvelope {
@@ -17555,7 +17543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCreateWalletSoapInSoapEnvelope {
@@ -17595,7 +17583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCreateWalletSoapOutSoapEnvelope {
@@ -17635,7 +17623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsRegenerateSoapInSoapEnvelope {
@@ -17675,7 +17663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsRegenerateSoapOutSoapEnvelope {
@@ -17715,7 +17703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsConvertCardSoapInSoapEnvelope {
@@ -17755,7 +17743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsConvertCardSoapOutSoapEnvelope {
@@ -17795,7 +17783,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsChangeGroupsSoapInSoapEnvelope {
@@ -17835,7 +17823,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsChangeGroupsSoapOutSoapEnvelope {
@@ -17875,7 +17863,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCheckSoapInSoapEnvelope {
@@ -17915,7 +17903,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCheckSoapOutSoapEnvelope {
@@ -17955,7 +17943,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSimpleCheckSoapInSoapEnvelope {
@@ -17995,7 +17983,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSimpleCheckSoapOutSoapEnvelope {
@@ -18035,7 +18023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsClientFxSoapInSoapEnvelope {
@@ -18075,7 +18063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsClientFxSoapOutSoapEnvelope {
@@ -18115,7 +18103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsLinkCardsSoapInSoapEnvelope {
@@ -18155,7 +18143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsLinkCardsSoapOutSoapEnvelope {
@@ -18195,7 +18183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListGroupSoapInSoapEnvelope {
@@ -18235,7 +18223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListGroupSoapOutSoapEnvelope {
@@ -18275,7 +18263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListProductsSoapInSoapEnvelope {
@@ -18315,7 +18303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListProductsSoapOutSoapEnvelope {
@@ -18355,7 +18343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGetCardRequestSoapInSoapEnvelope {
@@ -18395,7 +18383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGetCardRequestSoapOutSoapEnvelope {
@@ -18435,7 +18423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGetCardRequestStatusSoapInSoapEnvelope {
@@ -18475,7 +18463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGetCardRequestStatusSoapOutSoapEnvelope {
@@ -18515,7 +18503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardAcceptorWhiteListSoapInSoapEnvelope {
@@ -18555,7 +18543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardAcceptorWhiteListSoapOutSoapEnvelope {
@@ -18595,7 +18583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardAcceptorBlackListSoapInSoapEnvelope {
@@ -18635,7 +18623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardAcceptorBlackListSoapOutSoapEnvelope {
@@ -18675,7 +18663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSendMessageSoapInSoapEnvelope {
@@ -18715,7 +18703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSendMessageSoapOutSoapEnvelope {
@@ -18755,7 +18743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsMVCLoadSoapInSoapEnvelope {
@@ -18795,7 +18783,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsMVCLoadSoapOutSoapEnvelope {
@@ -18835,7 +18823,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListPendingFeesSoapInSoapEnvelope {
@@ -18875,7 +18863,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListPendingFeesSoapOutSoapEnvelope {
@@ -18915,7 +18903,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsWebServiceResultV2SoapInSoapEnvelope {
@@ -18955,7 +18943,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsWebServiceResultV2SoapOutSoapEnvelope {
@@ -18995,7 +18983,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGetPasscodeSoapInSoapEnvelope {
@@ -19035,7 +19023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGetPasscodeSoapOutSoapEnvelope {
@@ -19075,7 +19063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGetCardExpireSoonSoapInSoapEnvelope {
@@ -19115,7 +19103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGetCardExpireSoonSoapOutSoapEnvelope {
@@ -19155,7 +19143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSendCardFilesSoapInSoapEnvelope {
@@ -19195,7 +19183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSendCardFilesSoapOutSoapEnvelope {
@@ -19235,7 +19223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSafeReportsSoapInSoapEnvelope {
@@ -19275,7 +19263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSafeReportsSoapOutSoapEnvelope {
@@ -19315,7 +19303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsRegenerateWalletSoapInSoapEnvelope {
@@ -19355,7 +19343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsRegenerateWalletSoapOutSoapEnvelope {
@@ -19395,7 +19383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdateLoadSourceSoapInSoapEnvelope {
@@ -19435,7 +19423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdateLoadSourceSoapOutSoapEnvelope {
@@ -19475,7 +19463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsMVCUnloadSoapInSoapEnvelope {
@@ -19515,7 +19503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsMVCUnloadSoapOutSoapEnvelope {
@@ -19555,7 +19543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsActivateMVCLoadSoapInSoapEnvelope {
@@ -19595,7 +19583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsActivateMVCLoadSoapOutSoapEnvelope {
@@ -19635,7 +19623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsRenewCardSoapInSoapEnvelope {
@@ -19675,7 +19663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsRenewCardSoapOutSoapEnvelope {
@@ -19715,7 +19703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsResetAccumulatorSoapInSoapEnvelope {
@@ -19755,7 +19743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsResetAccumulatorSoapOutSoapEnvelope {
@@ -19795,7 +19783,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsEnrolSoapInSoapEnvelope {
@@ -19835,7 +19823,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsEnrolSoapOutSoapEnvelope {
@@ -19875,7 +19863,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardActivateSoapInSoapEnvelope {
@@ -19915,7 +19903,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardActivateSoapOutSoapEnvelope {
@@ -19955,7 +19943,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardLoadSoapInSoapEnvelope {
@@ -19995,7 +19983,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardLoadSoapOutSoapEnvelope {
@@ -20035,7 +20023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardUnLoadSoapInSoapEnvelope {
@@ -20075,7 +20063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardUnLoadSoapOutSoapEnvelope {
@@ -20115,7 +20103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardStatusChangeSoapInSoapEnvelope {
@@ -20155,7 +20143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardStatusChangeSoapOutSoapEnvelope {
@@ -20195,7 +20183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardEnquirySoapInSoapEnvelope {
@@ -20235,7 +20223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardEnquirySoapOutSoapEnvelope {
@@ -20275,7 +20263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardBalanceTransferSoapInSoapEnvelope {
@@ -20315,7 +20303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardBalanceTransferSoapOutSoapEnvelope {
@@ -20355,7 +20343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardBalanceEnquirySoapInSoapEnvelope {
@@ -20395,7 +20383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardBalanceEnquirySoapOutSoapEnvelope {
@@ -20435,7 +20423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardCardStatementSoapInSoapEnvelope {
@@ -20475,7 +20463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardCardStatementSoapOutSoapEnvelope {
@@ -20515,7 +20503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardUpdateCardholderDetailsSoapInSoapEnvelope {
@@ -20555,7 +20543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardUpdateCardholderDetailsSoapOutSoapEnvelope {
@@ -20595,7 +20583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardUnLoadStatusChangeSoapInSoapEnvelope {
@@ -20635,7 +20623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardUnLoadStatusChangeSoapOutSoapEnvelope {
@@ -20675,7 +20663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardActivateLoadSoapInSoapEnvelope {
@@ -20715,7 +20703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardActivateLoadSoapOutSoapEnvelope {
@@ -20755,7 +20743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardBalanceAdjustmentSoapInSoapEnvelope {
@@ -20795,7 +20783,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardBalanceAdjustmentSoapOutSoapEnvelope {
@@ -20835,7 +20823,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardExtendExpirySoapInSoapEnvelope {
@@ -20875,7 +20863,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardExtendExpirySoapOutSoapEnvelope {
@@ -20915,7 +20903,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardTransactionVoidSoapInSoapEnvelope {
@@ -20955,7 +20943,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardTransactionVoidSoapOutSoapEnvelope {
@@ -20995,7 +20983,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardCardHolderDetailsEnquirySoapInSoapEnvelope {
@@ -21035,7 +21023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardCardHolderDetailsEnquirySoapOutSoapEnvelope {
@@ -21075,7 +21063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardPhoneActivationSoapInSoapEnvelope {
@@ -21115,7 +21103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardPhoneActivationSoapOutSoapEnvelope {
@@ -21155,7 +21143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardBulkCreationSoapInSoapEnvelope {
@@ -21195,7 +21183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardBulkCreationSoapOutSoapEnvelope {
@@ -21235,7 +21223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardWebServiceResultSoapInSoapEnvelope {
@@ -21275,7 +21263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardWebServiceResultSoapOutSoapEnvelope {
@@ -21315,7 +21303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardGenericFeesSoapInSoapEnvelope {
@@ -21355,7 +21343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardGenericFeesSoapOutSoapEnvelope {
@@ -21395,7 +21383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardPinControlSoapInSoapEnvelope {
@@ -21435,7 +21423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardPinControlSoapOutSoapEnvelope {
@@ -21475,7 +21463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardUpdateLoadSourceSoapInSoapEnvelope {
@@ -21515,7 +21503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardUpdateLoadSourceSoapOutSoapEnvelope {
@@ -21555,7 +21543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardActivateLoadProductTpyeCPSoapInSoapEnvelope {
@@ -21595,7 +21583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsGiftCardActivateLoadProductTpyeCPSoapOutSoapEnvelope {
@@ -21635,7 +21623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardTransactionXMLSoapInSoapEnvelope {
@@ -21675,7 +21663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardTransactionXMLSoapOutSoapEnvelope {
@@ -21715,7 +21703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardChangeGroupsSoapInSoapEnvelope {
@@ -21755,7 +21743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardChangeGroupsSoapOutSoapEnvelope {
@@ -21795,7 +21783,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardChangeCardacceptorListSoapInSoapEnvelope {
@@ -21835,7 +21823,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCardChangeCardacceptorListSoapOutSoapEnvelope {
@@ -21875,7 +21863,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsChangeCardacceptorListSoapInSoapEnvelope {
@@ -21915,7 +21903,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsChangeCardacceptorListSoapOutSoapEnvelope {
@@ -21955,7 +21943,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsAddressMatchCheckingSoapInSoapEnvelope {
@@ -21995,7 +21983,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsAddressMatchCheckingSoapOutSoapEnvelope {
@@ -22035,7 +22023,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsLicenseVerificationSoapInSoapEnvelope {
@@ -22075,7 +22063,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsLicenseVerificationSoapOutSoapEnvelope {
@@ -22115,7 +22103,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPassportVerificationSoapInSoapEnvelope {
@@ -22155,7 +22143,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsPassportVerificationSoapOutSoapEnvelope {
@@ -22195,7 +22183,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSanctionsPEPCheckSoapInSoapEnvelope {
@@ -22235,7 +22223,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSanctionsPEPCheckSoapOutSoapEnvelope {
@@ -22275,7 +22263,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSanctionsPEPCheckV2SoapInSoapEnvelope {
@@ -22315,7 +22303,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsSanctionsPEPCheckV2SoapOutSoapEnvelope {
@@ -22355,7 +22343,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListSanctionsPEPSoapInSoapEnvelope {
@@ -22395,7 +22383,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListSanctionsPEPSoapOutSoapEnvelope {
@@ -22435,7 +22423,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListSanctionsPEPMatchesSoapInSoapEnvelope {
@@ -22475,7 +22463,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsListSanctionsPEPMatchesSoapOutSoapEnvelope {
@@ -22515,7 +22503,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdateSanctionsPEPMatchesSoapInSoapEnvelope {
@@ -22555,7 +22543,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsUpdateSanctionsPEPMatchesSoapOutSoapEnvelope {
@@ -22595,7 +22583,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCreateCardV2SoapInSoapEnvelope {
@@ -22635,7 +22623,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsCreateCardV2SoapOutSoapEnvelope {
@@ -22675,7 +22663,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingReturnBankDetailsFromTokenSoapInSoapEnvelope {
@@ -22715,7 +22703,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingReturnBankDetailsFromTokenSoapOutSoapEnvelope {
@@ -22755,7 +22743,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingChangeAccountBankingFeaturesStatusSoapInSoapEnvelope {
@@ -22785,7 +22773,10 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsBankingChangeAccountBankingFeaturesStatusSoapOut {
-        #[yaserde(rename = "Ws_BankingChangeAccountBankingFeaturesStatusResponse", default)]
+        #[yaserde(
+            rename = "Ws_BankingChangeAccountBankingFeaturesStatusResponse",
+            default
+        )]
         pub body: ports::WsBankingChangeAccountBankingFeaturesStatusSoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,
@@ -22795,7 +22786,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingChangeAccountBankingFeaturesStatusSoapOutSoapEnvelope {
@@ -22835,7 +22826,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingTransferFundsSoapInSoapEnvelope {
@@ -22875,7 +22866,7 @@ pub mod bindings {
         rename = "Envelope",
         namespace = "soap: http://www.w3.org/2003/05/soap-envelope",
         namespace = "xsi: http://www.w3.org/2001/XMLSchema-instance",
-    namespace = "xsd: http://www.w3.org/2001/XMLSchema",
+        namespace = "xsd: http://www.w3.org/2001/XMLSchema",
         prefix = "soap"
     )]
     pub struct WsBankingTransferFundsSoapOutSoapEnvelope {
