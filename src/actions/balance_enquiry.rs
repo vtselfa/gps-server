@@ -1,4 +1,4 @@
-use log::info;
+use log::{debug, info};
 use paste::paste;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
@@ -30,8 +30,12 @@ impl action::Action for BalanceEnquiry {
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
 
-        info!("Parameters: {:?}", parameters);
+        debug!("Parameters: {:?}", parameters);
         get_card!(self.parameters.public_token, state, card, cards_map);
+        info!(
+            "PublicToken {} balance is {}",
+            card.public_token, card.balance.amount
+        );
 
         let response = self.wrap_response(gps_lib::types::WsBalanceEnquiryResponse {
             ws_balance_enquiry_result: gps_lib::types::BalanceEnquire {
@@ -46,7 +50,7 @@ impl action::Action for BalanceEnquiry {
                 action_code: Some("000".to_string()),
                 avl_bal: format!("{}", card.balance.amount),
                 blk_amt: format!("{}", card.blocked_balance),
-                cur_code: Some(card.get_currency_info().iso_numeric_code),
+                cur_code: Some(card.get_currency_info().iso_alpha_code),
                 pin_status: 0,    // TODO: WTF is this?
                 limit_info: None, // TODO: WTF is this?
             },
@@ -91,9 +95,12 @@ impl action::Action for BalanceEnquiryV2 {
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
 
-        info!("Parameters: {:?}", parameters);
-
+        debug!("Parameters: {:?}", parameters);
         get_card!(self.parameters.public_token, state, card, cards_map);
+        info!(
+            "PublicToken {} balance is {}",
+            card.public_token, card.balance.amount
+        );
 
         let response = self.wrap_response(gps_lib::types::WsBalanceEnquiryV2Response {
             ws_balance_enquiry_v2_result: Some(gps_lib::types::BalanceEnquire2 {
@@ -108,7 +115,7 @@ impl action::Action for BalanceEnquiryV2 {
                 action_code: Some("000".to_string()),
                 avl_bal: format!("{}", card.balance.amount),
                 blk_amt: format!("{}", card.blocked_balance),
-                cur_code: Some(card.get_currency_info().iso_numeric_code),
+                cur_code: Some(card.get_currency_info().iso_alpha_code),
                 pin_status: 0,    // TODO: WTF is this?
                 limit_info: None, // TODO: WTF is this?
             }),

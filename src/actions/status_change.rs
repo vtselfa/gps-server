@@ -1,3 +1,4 @@
+use log::{debug, info};
 use num_traits::FromPrimitive;
 use paste::paste;
 use yaserde::de::from_str;
@@ -24,7 +25,9 @@ impl action::Action for StatusChange {
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
 
+        debug!("Parameters: {:?}", parameters);
         get_mut_card!(self.parameters.public_token, state, card, cards_map);
+        info!("PublicToken: {}", card.public_token);
 
         let new_status = self
             .parameters

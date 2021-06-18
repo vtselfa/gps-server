@@ -53,7 +53,7 @@ pub struct State {
     // This is a flag that indicates that we are replacing the state with a new one.
     // It is taken for writing when replacing the state with a new one, or when deleting it.
     // It is takes for reading in any other case.
-    #[serde(skip_serializing)]
+    #[serde(skip_serializing, skip_deserializing)]
     pub replacing_state: RwLock<bool>,
 
     pub next_public_token: AtomicUsize,
@@ -79,7 +79,7 @@ pub struct Card {
     pub exp_date: NaiveDate,
     pub balance: Money,
     pub blocked_balance: Decimal, // Amount blocked by outstanding authorisations
-    pub is_live: bool, // Indicates if the card has been activated or not
+    pub is_live: bool,            // Indicates if the card has been activated or not
     pub pan: String,
     pub cvv: String,
     pub status: CardStatus,

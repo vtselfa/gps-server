@@ -1,4 +1,4 @@
-use log::info;
+use log::{debug, info};
 use paste::paste;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
@@ -23,7 +23,8 @@ impl action::Action for ResultV2 {
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
 
-        info!("Parameters: {:?}", parameters);
+        debug!("Parameters: {:?}", parameters);
+        info!("Requested WSID: {}", parameters.wsid);
 
         let wsid_map = state.wsids.read().expect("Poisoned write lock");
 

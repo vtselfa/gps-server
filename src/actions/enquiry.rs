@@ -1,3 +1,4 @@
+use log::{debug, info};
 use paste::paste;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
@@ -23,7 +24,9 @@ impl action::Action for Enquiry {
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
 
+        debug!("Parameters: {:?}", parameters);
         get_card!(self.parameters.public_token, state, card, cards_map);
+        info!("PublicToken: {}", card.public_token);
 
         let response = self.wrap_response(gps_lib::types::WsEnquiryResponse {
             ws_enquiry_result: gps_lib::types::Card2 {

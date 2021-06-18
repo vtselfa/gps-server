@@ -27,10 +27,12 @@ mod utils;
 // mod action_codes;
 
 use chrono::prelude::*;
-use log::{error, warn};
+use log::{error, info, warn};
 use rocket::data::{self, FromDataSimple};
+use rocket::http::ContentType;
 use rocket::http::Status;
 use rocket::response;
+use rocket::response::content::Content;
 use rocket::{Data, Outcome::*, Request};
 use rocket_contrib::json::Json;
 use std::io::Read;
@@ -60,10 +62,13 @@ impl PostStr {
     fn response(&self, state: &types::State) -> Result<String, types::GpsError> {
         let (action_code, response_sent) = match self.action.execute(state) {
             Ok(res) => (format!("000"), res),
-            Err(error) => (
-                utils::error_to_action_code(&error),
-                self.action.report_not_successful(&error)?,
-            ),
+            Err(error) => {
+                warn!("Error {:?}", error);
+                (
+                    utils::error_to_action_code(&error),
+                    self.action.report_not_successful(&error)?,
+                )
+            }
         };
 
         // Register the WSID and its result to be able to i) ensure that it's not used again,
@@ -85,8 +90,6 @@ impl PostStr {
     }
 
     fn from_data_impl(req: &Request, data: Data) -> Result<Self, types::GpsError> {
-        println!("{:?}", req.headers());
-
         const MAX_SIZE: usize = 4096;
 
         match req.headers().get("Content-Length").next() {
@@ -132,8 +135,6 @@ impl PostStr {
             Some(a) => a,
         };
 
-        println!("Action: {}", action);
-
         match action::extract_name(action) {
             Ok(action_name) => match action_name {
                 "Ws_CreateCard" => Ok(PostStr {
@@ -145,7 +146,8 @@ impl PostStr {
                 "Ws_Load" => Ok(PostStr {
                     action: Box::new(Load::new(action_name, &contents)?),
                 }),
-                "Ws_Unload" => Ok(PostStr {
+                "Ws_UnLoad" => Ok(PostStr {
+                    // Yes, UnLoad, because GPS sucks
                     action: Box::new(Unload::new(action_name, &contents)?),
                 }),
                 "Ws_Balance_Enquiry" => Ok(PostStr {
@@ -197,16 +199,17 @@ impl FromDataSimple for PostStr {
 }
 
 #[post("/hello", data = "<input>")]
-fn server_post(input: PostStr, state: rocket::State<types::State>) -> String {
+fn server_post(input: PostStr, state: rocket::State<types::State>) -> Content<String> {
     let _guard = state.replacing_state.read().unwrap();
 
     let state: &types::State = state.inner();
+    let content_type = ContentType::parse_flexible("application/soap+xml; charset=utf-8").unwrap();
     match input.response(state) {
         Err(e) => {
             error!("{}", e);
-            e.to_string()
+            Content(content_type, e.to_string())
         }
-        Ok(v) => v,
+        Ok(v) => Content(content_type.clone(), v),
     }
 }
 
@@ -269,6 +272,22 @@ fn delete_state(state: rocket::State<types::State>) -> rocket::http::Status {
     Status::Ok
 }
 
+#[post("/state/card", format = "json", data = "<cards>")]
+fn post_cards(
+    cards: Json<Vec<types::Card>>,
+    state: rocket::State<types::State>,
+) -> rocket::http::Status {
+    for card in cards.iter() {
+        info!("Added card with public token: {}", card.public_token);
+        state
+            .public_tokens
+            .write()
+            .expect("Public tokens lock poisoned")
+            .insert(card.public_token.clone(), card.clone());
+    }
+    Status::Ok
+}
+
 fn main() {
     if let Err(err) = log4rs::init_file("log4rs.yml", Default::default()) {
         warn!("Unable to find log4rs.yml logging config: {}", err);
@@ -277,12 +296,13 @@ fn main() {
     rocket::ignite()
         .manage(types::State {
             next_item_id: AtomicUsize::new(1),
-            next_public_token: AtomicUsize::new(1),
+            next_public_token: AtomicUsize::new(100000000), // Public tokens are 9 digits, so better start with 1 than with 0
             ..Default::default()
         })
         .mount("/", routes![server_post])
         .mount("/", routes![get_state])
         .mount("/", routes![post_state])
         .mount("/", routes![delete_state])
+        .mount("/", routes![post_cards])
         .launch();
 }

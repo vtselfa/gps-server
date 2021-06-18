@@ -70,7 +70,19 @@ pub fn get_strictly_positive_amount(amount: &str) -> Result<Decimal, types::GpsE
     if amount.is_sign_negative() || amount.is_zero() {
         return Err(GpsError::ActionCode {
             num: 999,
-            msg: format!("Unload amount has to be greater than zero"),
+            msg: format!("The amount has to be greater than zero"),
+        });
+    }
+    Ok(amount)
+}
+
+pub fn get_positive_amount(amount: &str) -> Result<Decimal, types::GpsError> {
+    // GPS expect the amount to be >= 0, so we too
+    let amount = Decimal::from_str(amount)?;
+    if amount.is_sign_negative() {
+        return Err(GpsError::ActionCode {
+            num: 999,
+            msg: format!("The amount cannot be negative"),
         });
     }
     Ok(amount)

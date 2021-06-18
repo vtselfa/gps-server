@@ -1,4 +1,5 @@
 use chrono::prelude::*;
+use log::{debug, info};
 use paste::paste;
 use std::sync::atomic::Ordering;
 use yaserde::de::from_str;
@@ -27,12 +28,17 @@ impl action::Action for Load {
         let parameters = &self.parameters;
         let utc: DateTime<Utc> = Utc::now();
 
+        debug!("Parameters: {:?}", parameters);
         get_mut_card!(self.parameters.public_token, state, card, cards_map);
         utils::check_currency(&parameters.curr_code, card)?;
         let amount = utils::get_strictly_positive_amount(&parameters.load_value.to_string())?;
 
         // TODO: Use the tx_code to load or reload
         card.balance.amount += amount;
+        info!(
+            "PublicToken: {} loaded {}, balance is {}",
+            card.public_token, amount, card.balance.amount
+        );
 
         // Record the transaction in the card structure
         let item_id = state.next_item_id.fetch_add(1, Ordering::SeqCst);

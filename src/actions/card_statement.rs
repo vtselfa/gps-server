@@ -1,4 +1,5 @@
 use chrono::prelude::*;
+use log::{debug, info};
 use paste::paste;
 use superslice::*;
 use yaserde::de::from_str;
@@ -26,7 +27,9 @@ impl action::Action for CardStatement {
         let parameters = &self.parameters;
         println!("{:?}", parameters);
 
+        debug!("Parameters: {:?}", parameters);
         get_card!(self.parameters.public_token, state, card, cards_map);
+        info!("PublicToken: {}", card.public_token);
 
         let start_date = parameters
             .start_date

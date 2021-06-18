@@ -95,7 +95,6 @@ macro_rules! impl_wrap_response_internal {
                         urnattr: None,
                         xsiattr: None,
                         header: None,
-                        encoding_style: gps_lib::SOAP_ENCODING.to_string(),
                         body: gps_lib::bindings::[<SoapWs $gps_name SoapOut>] {
                             body: gps_lib::messages::[<Ws $gps_name SoapOut>] {
                                 parameters: contents,

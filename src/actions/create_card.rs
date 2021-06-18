@@ -1,4 +1,5 @@
 use chrono::prelude::*;
+use log::{debug, info};
 use paste::paste;
 use rand::Rng;
 use std::sync::atomic::Ordering;
@@ -30,6 +31,7 @@ impl action::Action for CreateCard {
         let public_token = state.next_public_token.fetch_add(1, Ordering::SeqCst);
         let public_token = format!("{:>09}", public_token);
 
+        debug!("Parameters: {:?}", parameters);
         // TODO: Groups
 
         // TODO: Currencies are usually taken from products, so we will not have proper currency support until
@@ -38,8 +40,10 @@ impl action::Action for CreateCard {
             parameters.cur_code.as_ref().map_or("EUR", |x| x.as_str()),
         )?;
 
+        info!("Created PublicToken: {}", public_token);
+
         // Create a transaction in the card if a load amount is provided
-        let amount = utils::get_strictly_positive_amount(&parameters.load_value.to_string())?;
+        let amount = utils::get_positive_amount(&parameters.load_value.to_string())?;
         let transactions = if !amount.is_sign_positive() {
             vec![]
         } else {
