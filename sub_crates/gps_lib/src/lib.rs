@@ -3390,99 +3390,91 @@ pub mod types {
         pub transactions: Option<ArrayOfTransaction2>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "ArrayOfTransaction2",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
-    )]
+    #[yaserde(rename = "ArrayOfTransaction2")]
     pub struct ArrayOfTransaction2 {
-        #[yaserde(rename = "Transaction2", prefix = "tns", default)]
+        #[yaserde(rename = "Transaction2", default)]
         pub transaction_2: Vec<Transaction2>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "Transaction2",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
-    )]
+    #[yaserde(rename = "Transaction2")]
     pub struct Transaction2 {
-        #[yaserde(rename = "TxnDate", prefix = "tns", default)]
+        #[yaserde(rename = "TxnDate", default)]
         pub txn_date: Option<String>,
-        #[yaserde(rename = "PostDate", prefix = "tns", default)]
+        #[yaserde(rename = "PostDate", default)]
         pub post_date: Option<String>,
-        #[yaserde(rename = "AmtBill", prefix = "tns", default)]
+        #[yaserde(rename = "AmtBill", default)]
         pub amt_bill: String,
-        #[yaserde(rename = "AmtTxn", prefix = "tns", default)]
+        #[yaserde(rename = "AmtTxn", default)]
         pub amt_txn: String,
-        #[yaserde(rename = "BillConvRate", prefix = "tns", default)]
+        #[yaserde(rename = "BillConvRate", default)]
         pub bill_conv_rate: String,
-        #[yaserde(rename = "DebOrCred", prefix = "tns", default)]
+        #[yaserde(rename = "DebOrCred", default)]
         pub deb_or_cred: i32,
-        #[yaserde(rename = "TerminalId", prefix = "tns", default)]
+        #[yaserde(rename = "TerminalId", default)]
         pub terminal_id: Option<String>,
-        #[yaserde(rename = "Description", prefix = "tns", default)]
+        #[yaserde(rename = "Description", default)]
         pub description: Option<String>,
-        #[yaserde(rename = "RRN", prefix = "tns", default)]
+        #[yaserde(rename = "RRN", default)]
         pub rrn: Option<String>,
-        #[yaserde(rename = "CurTxn", prefix = "tns", default)]
+        #[yaserde(rename = "CurTxn", default)]
         pub cur_txn: Option<String>,
-        #[yaserde(rename = "ItemId", prefix = "tns", default)]
+        #[yaserde(rename = "ItemId", default)]
         pub item_id: i64,
-        #[yaserde(rename = "AvlBal", prefix = "tns", default)]
+        #[yaserde(rename = "AvlBal", default)]
         pub avl_bal: String,
-        #[yaserde(rename = "BlkAmt", prefix = "tns", default)]
+        #[yaserde(rename = "BlkAmt", default)]
         pub blk_amt: String,
-        #[yaserde(rename = "TransactionType", prefix = "tns", default)]
+        #[yaserde(rename = "TransactionType", default)]
         pub transaction_type: Option<String>,
-        #[yaserde(rename = "StatusCode", prefix = "tns", default)]
+        #[yaserde(rename = "StatusCode", default)]
         pub status_code: Option<String>,
-        #[yaserde(rename = "StatusDesc", prefix = "tns", default)]
+        #[yaserde(rename = "StatusDesc", default)]
         pub status_desc: Option<String>,
-        #[yaserde(rename = "TxnTime", prefix = "tns", default)]
+        #[yaserde(rename = "TxnTime", default)]
         pub txn_time: Option<String>,
-        #[yaserde(rename = "LocDate", prefix = "tns", default)]
+        #[yaserde(rename = "LocDate", default)]
         pub loc_date: Option<String>,
-        #[yaserde(rename = "FeeId", prefix = "tns", default)]
+        #[yaserde(rename = "FeeId", default)]
         pub fee_id: i64,
-        #[yaserde(rename = "WSID", prefix = "tns", default)]
+        #[yaserde(rename = "WSID", default)]
         pub wsid: i64,
-        #[yaserde(rename = "FixedFee", prefix = "tns", default)]
+        #[yaserde(rename = "FixedFee", default)]
         pub fixed_fee: String,
-        #[yaserde(rename = "RateFee", prefix = "tns", default)]
+        #[yaserde(rename = "RateFee", default)]
         pub rate_fee: String,
-        #[yaserde(rename = "FxPdg", prefix = "tns", default)]
+        #[yaserde(rename = "FxPdg", default)]
         pub fx_pdg: String,
-        #[yaserde(rename = "MCCPdg", prefix = "tns", default)]
+        #[yaserde(rename = "MCCPdg", default)]
         pub mcc_pdg: String,
-        #[yaserde(rename = "LinkId", prefix = "tns", default)]
+        #[yaserde(rename = "LinkId", default)]
         pub link_id: Option<String>,
-        #[yaserde(rename = "MCC", prefix = "tns", default)]
+        #[yaserde(rename = "MCC", default)]
         pub mcc: Option<String>,
-        #[yaserde(rename = "OrigStan", prefix = "tns", default)]
+        #[yaserde(rename = "OrigStan", default)]
         pub orig_stan: Option<String>,
-        #[yaserde(rename = "ProcCode", prefix = "tns", default)]
+        #[yaserde(rename = "ProcCode", default)]
         pub proc_code: Option<String>,
-        #[yaserde(rename = "MCCDescription", prefix = "tns", default)]
+        #[yaserde(rename = "MCCDescription", default)]
         pub mcc_description: Option<String>,
-        #[yaserde(rename = "Dom_Fee_Fixed", prefix = "tns", default)]
+        #[yaserde(rename = "Dom_Fee_Fixed", default)]
         pub dom_fee_fixed: Option<String>,
-        #[yaserde(rename = "Dom_Fee_Rate", prefix = "tns", default)]
+        #[yaserde(rename = "Dom_Fee_Rate", default)]
         pub dom_fee_rate: Option<String>,
-        #[yaserde(rename = "Non_Dom_Fee_Fixed", prefix = "tns", default)]
+        #[yaserde(rename = "Non_Dom_Fee_Fixed", default)]
         pub non_dom_fee_fixed: Option<String>,
-        #[yaserde(rename = "Non_Dom_Fee_Rate", prefix = "tns", default)]
+        #[yaserde(rename = "Non_Dom_Fee_Rate", default)]
         pub non_dom_fee_rate: Option<String>,
-        #[yaserde(rename = "Fx_Fee_Fixed", prefix = "tns", default)]
+        #[yaserde(rename = "Fx_Fee_Fixed", default)]
         pub fx_fee_fixed: Option<String>,
-        #[yaserde(rename = "Fx_Fee_Rate", prefix = "tns", default)]
+        #[yaserde(rename = "Fx_Fee_Rate", default)]
         pub fx_fee_rate: Option<String>,
-        #[yaserde(rename = "Other_Fee_Desc", prefix = "tns", default)]
+        #[yaserde(rename = "Other_Fee_Desc", default)]
         pub other_fee_desc: Option<String>,
-        #[yaserde(rename = "Other_Fee_Amt", prefix = "tns", default)]
+        #[yaserde(rename = "Other_Fee_Amt", default)]
         pub other_fee_amt: Option<String>,
-        #[yaserde(rename = "TxnCodeType", prefix = "tns", default)]
+        #[yaserde(rename = "TxnCodeType", default)]
         pub txn_code_type: Option<String>,
-        #[yaserde(rename = "Note", prefix = "tns", default)]
+        #[yaserde(rename = "Note", default)]
         pub note: Option<String>,
     }
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]

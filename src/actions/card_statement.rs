@@ -25,7 +25,6 @@ impl action::Action for CardStatement {
 
     fn execute(&self, state: &types::State) -> Result<String, types::GpsError> {
         let parameters = &self.parameters;
-        println!("{:?}", parameters);
 
         debug!("Parameters: {:?}", parameters);
         get_card!(self.parameters.public_token, state, card, cards_map);
@@ -58,7 +57,6 @@ impl action::Action for CardStatement {
             .transactions
             .upper_bound_by(|x| x.txn_date.cmp(&end_date));
 
-        println!("{} {}", lb, ub);
         let start_bal = if card.transactions.is_empty() {
             format!("0.0")
         } else if lb < card.transactions.len() {
@@ -93,7 +91,11 @@ impl action::Action for CardStatement {
                 amt_bill: format!("{}", tx.amt_bill),
                 amt_txn: format!("{}", tx.amt_txn.amount),
                 bill_conv_rate: format!("{}", tx.amt_txn.amount / tx.amt_bill),
-                deb_or_cred: if tx.amt_bill.is_sign_negative() { 1 } else { 0 },
+                deb_or_cred: if tx.amt_bill.is_sign_negative() {
+                    -1
+                } else {
+                    1
+                },
                 terminal_id: None,
                 description: tx.description.clone(),
                 rrn: None,
@@ -151,7 +153,7 @@ impl action::Action for CardStatement {
                 txn_filter: parameters.txn_filter.clone(),
                 start_date: Some(start_date.format("%Y-%m-%d").to_string()),
                 end_date: Some(end_date.format("%Y-%m-%d").to_string()),
-                num_txn: parameters.num_txn,
+                num_txn: txs.transaction_2.len() as i32, // We report the number of transactions that we are returning
                 item_src: parameters.item_src,
                 cur_bill: Some(card.get_currency_info().iso_alpha_code),
                 avl_bal: format!("{}", card.balance.amount),
