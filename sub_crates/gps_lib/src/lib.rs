@@ -8888,6 +8888,7 @@ pub mod types {
         #[yaserde(rename = "PendingFeesEnabled", prefix = "tns", default)]
         pub pending_fees_enabled: bool,
     }
+
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_WebServiceResult_V2",
@@ -8900,6 +8901,7 @@ pub mod types {
         #[yaserde(rename = "IssCode", prefix = "tns", default)]
         pub iss_code: Option<String>,
     }
+
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_WebServiceResult_V2Response",
@@ -8911,22 +8913,21 @@ pub mod types {
     }
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "ResponseSent",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
-    )]
-    pub struct ResponseSent {
-        #[yaserde(rename = "Response", default)]
-        pub response: String,
+    pub struct Response {
+        #[yaserde(rename = "Placeholder")]
+        pub placeholder: String,
+        #[yaserde(attribute)]
+        pub xmlns: String,
     }
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
-    #[yaserde(
-        rename = "WSResult2",
-        namespace = "tns: http://www.globalprocessing.ae/HyperionWeb",
-        prefix = "tns"
-    )]
+    pub struct ResponseSent {
+        #[yaserde(rename = "Response", default)]
+        pub response: Response,
+    }
+
+    #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
+    #[yaserde(rename = "WSResult2")]
     pub struct Wsresult2 {
         #[yaserde(rename = "ActionCode", default)]
         pub action_code: Option<String>,
@@ -8935,6 +8936,7 @@ pub mod types {
         #[yaserde(rename = "ResponseSent", default)]
         pub response_sent: Option<ResponseSent>,
     }
+
     #[derive(Debug, Default, YaSerialize, YaDeserialize, Clone)]
     #[yaserde(
         rename = "Ws_Get_Passcode",
@@ -18933,7 +18935,7 @@ pub mod bindings {
 
     #[derive(Debug, Default, YaSerialize, YaDeserialize)]
     pub struct SoapWsWebServiceResultV2SoapOut {
-        #[yaserde(rename = "Ws_WebServiceResultV2Response", default)]
+        #[yaserde(rename = "Ws_WebServiceResult_V2Response", default)]
         pub body: ports::WsWebServiceResultV2SoapOut,
         #[yaserde(rename = "Fault", default)]
         pub fault: Option<SoapFault>,

@@ -7,6 +7,7 @@ use crate::action;
 use crate::impl_action_boilerplate;
 use crate::impl_wrap_response;
 use crate::types;
+use crate::types::ActionResult;
 use crate::types::GpsError;
 use crate::utils;
 
@@ -16,6 +17,45 @@ pub struct ResultV2 {
 }
 
 impl_wrap_response!(ResultV2, WebServiceResultV2);
+
+fn extract_prev_response(prev_action: &ActionResult) -> Result<&str, types::GpsError> {
+    // We get the old response and parse it, because we only want the nodes that strictly
+    // contain the response, i.e. the parent of the node <WSID>
+    let root = roxmltree::Document::parse(&prev_action.response_sent).unwrap();
+    let err_msg = format!("Could not parse the old response");
+    let prev_response = root
+        .descendants()
+        .find(|x| x.tag_name().name().to_lowercase() == "wsid")
+        .ok_or(GpsError::ActionCode {
+            num: 999,
+            msg: err_msg.clone(),
+        })?
+        .parent_element()
+        .ok_or(GpsError::ActionCode {
+            num: 999,
+            msg: err_msg.clone(),
+        })?;
+
+    // We need to know the position in the original string where the response starts and ends to
+    // copy it into the serialized response that we send back.
+    let first = prev_response
+        .first_child()
+        .ok_or(GpsError::ActionCode {
+            num: 999,
+            msg: err_msg.clone(),
+        })?
+        .range();
+    let last = prev_response
+        .last_child()
+        .ok_or(GpsError::ActionCode {
+            num: 999,
+            msg: err_msg.clone(),
+        })?
+        .range();
+
+    // The part of the previous response that we will insert in the new one
+    Ok(&prev_action.response_sent[first.start..last.end])
+}
 
 impl action::Action for ResultV2 {
     impl_action_boilerplate!(ResultV2, WebServiceResultV2);
@@ -35,63 +75,42 @@ impl action::Action for ResultV2 {
                 msg: format!("Invalid WSID"),
             })?;
 
-        // TODO: Do this better...
-        // We are puting a magic string in the response that we will later replace in the
-        // serialized XML. We cannot put the serialized data here because it will be escaped when
-        // serializing the struct.
-        let placeholder = format!("P.L.A.C.E.H.O.L.D.E.R");
+        // We cannot put the serialized previous response here because it will be escaped when
+        // serializing the struct. Therefore, we serialize it and manually manipulate the XML.
         let response = self.wrap_response(gps_lib::types::WsWebServiceResultV2Response {
             ws_web_service_result_v2_result: gps_lib::types::Wsresult2 {
                 action_code: Some("000".to_string()),
                 web_method: Some(prev_action.action_name.clone()),
                 response_sent: Some(gps_lib::types::ResponseSent {
-                    response: placeholder.clone(),
+                    response: gps_lib::types::Response {
+                        // This is the only way I found to force yaserde into putting the namespace
+                        // in this node
+                        xmlns: format!("http://www.globalprocessing.ae/HyperionWeb"),
+                        ..Default::default()
+                    },
                 }),
             },
         });
 
-        let root = roxmltree::Document::parse(&prev_action.response_sent).unwrap();
-        let err_msg = format!(
-            "Could not parse the old response associated to WSID {}",
-            parameters.wsid
-        );
-        let prev_response = root
-            .descendants()
-            .find(|x| x.tag_name().name().to_lowercase() == "wsid")
-            .ok_or(GpsError::ActionCode {
-                num: 999,
-                msg: err_msg.clone(),
-            })?
-            .parent_element()
-            .ok_or(GpsError::ActionCode {
-                num: 999,
-                msg: err_msg.clone(),
-            })?;
-        let first = prev_response
-            .first_child()
-            .ok_or(GpsError::ActionCode {
-                num: 999,
-                msg: err_msg.clone(),
-            })?
-            .range();
-        let last = prev_response
-            .last_child()
-            .ok_or(GpsError::ActionCode {
-                num: 999,
-                msg: err_msg.clone(),
-            })?
-            .range();
+        // Extract the part of the old response that we care about
+        let prev_response = extract_prev_response(prev_action)?;
 
-        match to_string(&response) {
-            Err(e) => Err(types::GpsError::Serialization(e)),
-            Ok(v) => {
-                let r = v.replace(
-                    &placeholder,
-                    &prev_action.response_sent[first.start..last.end],
-                );
-                Ok(r)
-            }
-        }
+        // Here we have our serialized output, but we need to patch it to include the old response
+        let serialized = to_string(&response).map_err(|e| types::GpsError::Serialization(e))?;
+        let placeholder_range = {
+            let root = roxmltree::Document::parse(&serialized).unwrap();
+            root.descendants()
+                .find(|x| x.tag_name().name() == "Placeholder")
+                .ok_or(GpsError::ActionCode {
+                    num: 999,
+                    msg: format!("Could not find the placeholder node in '{}'", serialized),
+                })?
+                .range()
+        };
+        let mut serialized = serialized;
+        serialized.replace_range(placeholder_range, prev_response);
+
+        Ok(serialized)
     }
 
     fn report_not_successful(&self, error: &types::GpsError) -> Result<String, types::GpsError> {
