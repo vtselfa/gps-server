@@ -35,8 +35,11 @@ impl action::Action for Unload {
 
         if card.balance.amount < amount {
             return Err(GpsError::ActionCode {
-                num: 999,
-                msg: format!("Unload amount is greater than the current balance"),
+                num: 116,
+                msg: format!(
+                    "The amount to unload ({}) is greater than the current balance ({})",
+                    amount, card.balance.amount
+                ),
             });
         }
         card.balance.amount -= amount;

@@ -1,6 +1,7 @@
 use chrono::prelude::*;
 use log::{debug, info};
 use paste::paste;
+use rust_decimal::Decimal;
 use std::sync::atomic::Ordering;
 use yaserde::de::from_str;
 use yaserde::ser::to_string;
@@ -47,6 +48,20 @@ impl action::Action for BalanceAdjustment {
                 })
             }
         };
+
+        if amount.is_sign_negative()
+            && card.balance.amount + amount < Decimal::new(0, 0)
+            && !parameters.force_post
+        {
+            return Err(GpsError::ActionCode {
+                num: 116,
+                msg: format!(
+                    "The amount to deduct ({}) is greater than the current balance ({}), \
+                    use force to override",
+                    amount, card.balance.amount
+                ),
+            });
+        }
 
         card.balance.amount += amount;
         info!(
@@ -103,7 +118,7 @@ impl action::Action for BalanceAdjustment {
                 sys_date: Some(utils::sys_date()),
                 action_code: Some("000".to_string()),
                 avl_bal: format!("{}", card.balance.amount),
-                cur_code: Some(card.get_currency_info().iso_numeric_code),
+                cur_code: Some(card.get_currency_info().iso_alpha_code),
             },
         });
 
